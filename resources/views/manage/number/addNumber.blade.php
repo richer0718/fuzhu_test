@@ -138,6 +138,19 @@
                 <div class="col-md-6">
                     <textarea style="width:100%;height:250px;" id="textarea"></textarea>
                     <button class="btn btn-lg btn-primary btn-block" type="button" id="daoru">导入</button>
+                    <p style="width:100%;height:250px;">
+                        <a style="font-size: 18px;font-weight: bolder;">示例：</a></br>
+                        订单：8123123123123</br>
+                        备注：11.17号交货</br>
+                        旺旺：xiaoming</br>
+                        QQ：972102275</br>
+                        账号：972102275</br>
+                        密码：123123123</br>
+                        大区：安卓QQ</br>
+                        小区：123</br>
+                        代刷：经验</br>
+                        QQ，旺旺，二选一，不用全填，也可全都不填。
+                    </p>
                 </div>
 
             </div>
