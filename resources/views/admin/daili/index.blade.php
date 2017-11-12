@@ -119,7 +119,7 @@
                     @foreach($res as $k => $vo)
                         <tr>
                             <td>{{ $k + 1 }}</td>
-                            <td>{{$vo -> username }}</td>
+                            <td>@if($vo -> is_kefu) <a style="color:red;">【客服】</a> @endif {{$vo -> username }}</td>
                             <td>{{$vo -> qq }}</td>
                             <td>{{$vo -> tel }}</td>
                             <td>{{$vo -> number_guaji }}</td>
