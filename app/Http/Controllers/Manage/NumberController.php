@@ -16,44 +16,20 @@ class NumberController extends Controller
         //var_dump($url_status);exit;
 
         //配置
-        $areas = [
-            'AZQQ' => '安卓QQ',
-            'AZVX' => '安卓微信',
-            'IOSQQ' => '苹果QQ',
-            'IOSVX' => '苹果微信',
-        ];
-        $maps = [
-            'PT' => '普通魔女的回忆',
-            'JY' => '精英魔女的回忆',
-            'DS' => '大师魔女的回忆',
-        ];
-        $modes = [
-            '关闭','模式一','模式二','模式三'
-        ];
-        $statuss = [
-            '0' => '正常刷完',
-            '1' => '排队等待',
-            '2' => '正在登陆',
-            '3' => '正常挂机',
-            '4' => '健康系统',
-            '5' => '成功登陆',
-            '6' => '领取奖励',
-            '13' => '选择好友',
-            '12' => '微信二维码',
-            '11' => '手机验证码',
-            '-1' => '手动停挂',
-            '-2' => '密码错误',
-            '-3' => '地图未过',
-            '-4' => '防沉迷',
-            '-5' => '账号冻结',
-            '-6' => '未关闭登陆保护',
-            '-7' => '新号',
-            '-8' => '授权超时',
-            '-9' => '刷图限制',
-            '21' => '内部错误',
-            '-20' => '验证失败',
-            '-21' => '点数不足',
-        ];
+        $areas = config('setting.areas');
+        $maps = config('setting.maps');
+        $modes = config('setting.modes');
+        $statuss = config('setting.statuss');
+
+        $status_name = '';
+        if($url_status == '1'){
+            $status_name = '完成订单';
+        }elseif($url_status == '3'){
+            $status_name = '问题订单';
+        }elseif($url_status == '2'){
+            $status_name = '长期账号';
+        }
+
         $res = DB::table('number') -> where(function($query) use($url_status,$request){
             $query -> where('add_user',session('username'));
             if($url_status == '1'){
@@ -110,6 +86,7 @@ class NumberController extends Controller
         ]) -> first();
 
 
+
         return view('manage/number/index') -> with([
             'res' => $res,
             'url_status' => $url_status,
@@ -117,7 +94,8 @@ class NumberController extends Controller
             'maps' => $maps,
             'statuss' => $statuss,
             'price_str' => $price_str,
-            'userinfo' => $userinfo
+            'userinfo' => $userinfo,
+            'status_name' => $status_name
         ]);
     }
 
@@ -136,6 +114,10 @@ class NumberController extends Controller
     }
 
     public function addNumberRes(Request $request){
+        //判断必填
+        if(!$request -> input('number') || !$request -> input('pass') || !$request -> input('area') || !$request -> input('map') || !$request -> input('save_time')){
+            return false;
+        }
        //先判断下此账号是否存在与此系统中
         $isset = DB::table('number') -> where([
             'number' => $request -> input('number')
@@ -159,6 +141,9 @@ class NumberController extends Controller
         $point_user = intval($userinfo -> point);
         //要扣除的点数
         $point_cut = intval($xishu) * intval($request -> input('save_time'));
+        if($request -> input('jiaji')){
+            $point_cut = $point_cut * 1.5;
+        }
         if($point_user >= $point_cut){
             //他的余额够支付
             //调他的接口
@@ -169,10 +154,17 @@ class NumberController extends Controller
             //IOSWZRY-2  IOSWZRY-2
             $string = substr($request -> input('area'),0,2);
 
-            if($string == 'AZ'){
-                $youxi = 'AZWZRY-2';
+            if($request -> input('jiaji')){
+                $jiaji = 1;
+                $endstr = 3;
             }else{
-                $youxi = 'IOSWZRY-2';
+                $endstr = 2;
+                $jiaji = 0;
+            }
+            if($string == 'AZ'){
+                $youxi = 'AZWZRY-'.$endstr;
+            }else{
+                $youxi = 'IOSWZRY-'.$endstr;
             }
 
             //（当前时间+上号时间*60）*1000'
@@ -211,7 +203,17 @@ class NumberController extends Controller
                 ]) -> delete();
             }
             //不存在 直接新增
+            if($request -> input('mark')){
+                $mark = 1;
+            }else{
+                $mark = 0;
+            }
             $res = DB::table('number') -> insert([
+                'is_jiaji' => $jiaji,
+                'is_mark' => $mark,
+                'order_id' => $request -> input('order_id'),
+                'wangwang' => $request -> input('wangwang'),
+                'xiaoqu' => $request -> input('xiaoqu'),
                 'number' => $request -> input('number'),
                 'pass' => $request -> input('pass'),
                 'area' => $request -> input('area'),
@@ -221,6 +223,8 @@ class NumberController extends Controller
                 'mode' => $request -> input('mode'),
                 'shanghao_time' => $request -> input('shanghao_time'),
                 'end_date' => $request -> input('end_date'),
+                'wangwang_type' => $request -> input('wangwang_type'),
+                'remark' => $request -> input('remark'),
                 'created_time' => time(),
                 'updated_time' => time(),
                 'add_user' => session('username'),
@@ -501,6 +505,17 @@ class NumberController extends Controller
             return redirect('manage/number') -> with('yanzhengma','error');
         }
 
-
     }
+
+    //客服列表
+    public function kefu(){
+        $res = DB::table('kefu') -> paginate(100);
+        return view('manage/kefu') -> with([
+            'res' => $res
+        ]);
+    }
+
 }
+
+
+

@@ -1,4 +1,4 @@
-@extends('layouts.manage_common')
+@extends('layouts.kefu_common')
 @section('right-box')
     <style>
         #mytable tr td{
@@ -8,56 +8,28 @@
     <script src="{{ asset('js/laydate/laydate.js') }}"></script>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main" style="width:90%;margin-left:10%;overflow: scroll;" >
         <h1 style="text-align: center">{{ $status_name }}</h1>
-        <h1 class="page-header">总点数：{{ $userinfo -> point_all }}<br>剩余点数：{{ $userinfo -> point }}</h1>
 
-            <h1 class="page-header"> 代挂费用：{{ $price_str }}</h1>
 
         <form method="post">
-        <table class="table">
+        <table class="table" style="width: 700px;">
             <tr>
                 <td>游戏账号：</td>
-                <td>
+                <td colspan="2">
                     <input type="text" name="number"  class="form-control" value="@if(!empty($_POST['number'])){{ $_POST['number'] }}@endif"/>
                 </td>
 
-
-                <td>大区：</td>
-                <td>
-                    <select name="area">
-                        <option value="">请选择</option>
-                        @foreach($areas as $k => $vo)
-                        <option value="{{ $k }}">{{ $vo }}</option>
-                        @endforeach
-                    </select>
+                <td>订单编号：</td>
+                <td colspan="2">
+                    <input type="text" name="order_id"  class="form-control" value="@if(!empty($_POST['order_id'])){{ $_POST['order_id'] }}@endif"/>
                 </td>
 
-                <td>代挂地图：</td>
-                <td>
-                    <select name="map">
-                        <option value="">请选择</option>
-                        @foreach($maps as $k => $vo)
-                            <option value="{{ $k }}">{{ $vo }}</option>
-                        @endforeach
-
-                    </select>
-                </td>
-
-                <td>挂机状态：</td>
-                <td>
-                    <select name="status">
-                        <option value="">请选择</option>
-                    @foreach($statuss as $k => $vo)
-                        <option value="{{ $k }}">{{ $vo }}</option>
-                    @endforeach
-                    </select>
-                </td>
 
 
 
             </tr>
 
             <tr>
-                <td colspan="7">
+                <td colspan="6">
                     <button class="btn btn-default" type="submit">搜索</button>
                     <button class="btn btn-default" type="button" onclick="location.href='{{Request::getRequestUri()}}' ">重置</button>
                     <!--<button class="btn btn-default" type="button">导出</button>-->
@@ -67,21 +39,17 @@
             {{ csrf_field() }}
         </form>
 
-        <ol class="breadcrumb">
-            <li><a data-toggle="modal" href="{{ url('manage/addNumber') }}">新增账号</a></li>
-            <li><a data-toggle="modal" data-target="#recharge">充值</a></li>
-        </ol>
+
 
         <h1 class="page-header">基本信息 <span class="badge"></span></h1>
         <div class="table-responsive"  >
             <table class="table table-striped table-hover" id="mytable">
                 <thead>
-                <tr style="height:40px;">
+                <tr>
                     <th><span class="glyphicon glyphicon-th-large"></span> <span class="visible-lg">ID</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">订单编号</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">旺旺/QQ</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">游戏账号</span></th>
-                    <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">游戏密码</span></th>
                     <th><span class="glyphicon glyphicon-signal"></span> <span class="visible-lg">大区</span></th>
                     <th><span class="glyphicon glyphicon-camera"></span> <span class="visible-lg">代挂次数</span></th>
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">剩余次数</span></th>
@@ -94,7 +62,6 @@
                     @endif
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">检测时间</span></th>
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">操作账号</span></th>
-                    <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">操作时间</span></th>
                     <th><span class="glyphicon glyphicon-pencil"></span> <span class="visible-lg">操作</span></th>
                 </tr>
                 </thead>
@@ -105,21 +72,12 @@
                             <td>{{ $k + 1  }}</td>
                             <td>@if($vo -> is_jiaji == 1)<a style="color:red;">【急】</a>@endif@if($vo -> is_mark == 1)<a style="color:green;">【标】</a>@endif<a>{{$vo -> order_id }}</a></td>
 
-                            <td>
-                                @if($vo -> wangwang)
-                                    @if($vo -> wangwang_type == 1)
-                                        <a href="http://sighttp.qq.com/msgrd?v=1&uin={{ $vo -> wangwang }}" target="_blank">{{$vo -> wangwang }}</a>
-                                    @else
-                                        <a target="_blank" href="http://amos.alicdn.com/getcid.aw?v=2&uid={{ $vo -> wangwang }}&site=cntaobao&s=1&groupid=0&charset=utf-8"><img border="0" src="http://amos.alicdn.com/online.aw?v=2&uid=tb_4194202_2012&site=cntaobao&s=1&charset=utf-8" alt="" title="" /></a>
-                                    @endif
-                                @endif
-                            </td>
+                            <td>{{$vo -> wangwang }}</td>
                             <td>{{$vo -> number }}</td>
-                            <td>{{$vo -> pass }}</td>
                             <td>{{$vo -> area_name }}</td>
                             <td>{{$vo -> use_time}}</td>
                             <td>{{$vo -> save_time}}</td>
-                            <td>{{mb_substr($vo -> map,0,4,'utf-8')}}</td>
+                            <td>{{$vo -> map}}</td>
                             <td>{{$vo -> mode}}</td>
                             <td>
                                 @if($vo -> status == '微信二维码') <a href="{{ 'http://feifeifuzhu.com/jietu/'.$vo->area.'-'.$vo->number.'.jpg' }}" target="_blank" style="color:red;">扫描微信二维码</a>
@@ -132,31 +90,24 @@
                             @if($url_status == 2)
                                 <td>{{$vo -> end_date}}</td>
                             @endif
-                            <td>{{ date('m-d H:i',$vo -> updated_time) }}</td>
+                            <td>{{ date('Y-m-d H:i',$vo -> updated_time) }}</td>
                             <td>{{ $vo -> add_user }}@if($vo -> kefu_name){{ ':'.$vo -> kefu_name }}@endif</td>
-                            <td>{{ date('m-d H:i',$vo -> created_time) }}</td>
                             <td>
-                                @if($url_status == 0)
+                                @if($vo -> save_time != 0)
                                     <a id="stopNumberButton" number="{{ $vo -> id }}"  data="{{$vo -> save_time}}" onclick="tinggua(this)" >停挂</a>
-                                @endif
-                                @if($url_status == 1)
-                                    <a class="delete_number" data = "{{ $vo -> id }}">删除</a> ／ <a href="{{ url('manage/uploadNumber').'/'.$vo -> id }}">上传</a>
-                                @endif
-                                @if($url_status == 2)
-                                        <a class="delete_number" data = "{{ $vo -> id }}">删除</a>
                                 @endif
                             </td>
                         </tr>
                     @endforeach
                 @endunless
                 </tbody>
-                @if(count($res))
-                <tfoot>
+                @if(count($res) && !isset($nolink))
+                    <tfoot>
                     <tr>
 
                         <td colspan="@if($url_status == 2) 17 @else 16 @endif">{{ $res -> links() }}</td>
                     </tr>
-                </tfoot>
+                    </tfoot>
                 @endif
             </table>
         </div>
@@ -280,7 +231,7 @@
     <!-- 停挂 -->
     <div class="modal fade " id="stopnumber" tabindex="-1" role="dialog"  >
         <div class="modal-dialog" role="document" style="width:400px;">
-            <form action="{{ url('manage/stopNumber') }}" method="post" autocomplete="off" draggable="false" id="myForm">
+            <form action="{{ url('kefu/stopNumber') }}" method="post" autocomplete="off" draggable="false" id="myForm">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -320,6 +271,9 @@
         @endif
         @if (session('rechargeres') && session('rechargeres') == 'error')
             alert('请核对后，再提交，如有疑问，联系QQ：972102275！');
+        @endif
+        @if(session('stop_number'))
+            alert('停挂成功');
         @endif
 
     </script>
@@ -363,9 +317,6 @@
                     location.href="{{ url('manage/delete_number') }}"+'/'+id;
                 }
             })
-
-
-
 
         })
 

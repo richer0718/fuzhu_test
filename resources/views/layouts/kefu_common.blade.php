@@ -11,10 +11,10 @@
 </style>
 <body >
 <section class="container-fluid">
-    @include('layouts.admin_header')
+    @include('layouts.kefu_header')
 
     <div class="row">
-        @include('layouts.admin_left')
+        @include('layouts.kefu_left')
         @section('right-box')
 
         @show

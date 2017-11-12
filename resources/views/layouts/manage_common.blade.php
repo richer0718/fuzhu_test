@@ -3,6 +3,13 @@
 <head>
     @include('layouts.common_admin')
 </head>
+<style>
+    #main{
+        width:90%;
+        margin-left:10%;
+    }
+
+</style>
 <body >
 <section class="container-fluid">
     @include('layouts.manage_header')

@@ -30,6 +30,8 @@ Route::any('/admin/loginout', 'Admin\IndexController@loginout');
 Route::get('/captcha', 'CodeController@index');
 
 
+
+
 Route::group(['as' => 'admin_number','middleware' => ['checkadminlogin']], function () {
     Route::any('/admin/number', 'Admin\NumberController@index');
 });
@@ -70,12 +72,27 @@ Route::group(['prefix' => 'api'], function () {
 
 
 //代理
+
+
+
 Route::get('/manage/login', 'Manage\IndexController@login');
 Route::any('/manage/loginRes', 'Manage\IndexController@loginRes');
 Route::any('/manage/loginout', 'Manage\IndexController@loginout');
 Route::any('/manage/regRes', 'Manage\IndexController@regRes');
 Route::any('/manage/findPass', 'Manage\IndexController@findPass');
 Route::any('/manage/topdetail', 'Manage\IndexController@topdetail');
+
+//二级账号 - 代理端
+Route::group(['as' => 'kefu','middleware' => ['checklogin']], function () {
+    Route::any('/manage/kefu', 'Manage\KefuController@index');
+    Route::any('/manage/addKefu', 'Manage\KefuController@addKefu');
+    Route::any('/manage/addKefuRes', 'Manage\KefuController@addKefuRes');
+    Route::any('/manage/editKefu/{id}', 'Manage\KefuController@editKefu');
+    Route::any('/manage/deleteKefu/{id}', 'Manage\KefuController@deleteKefu');
+    Route::any('/manage/editKefuRes', 'Manage\KefuController@editKefuRes');
+
+});
+
 
 //挂机账号
 Route::group(['as' => 'number_guaji','middleware' => ['checklogin']], function () {
@@ -92,7 +109,7 @@ Route::group(['as' => 'number_guaji','middleware' => ['checklogin']], function (
 //历史账号
 Route::group(['as' => 'number_history','middleware' => ['checklogin']], function () {
     Route::any('/manage/number/{url_statuss}', 'Manage\NumberController@index') -> where('url_statuss','1');
-    Route::any('/manage/number/{url_statusss}', 'Manage\NumberController@index') -> where('url_statuss','3');
+    Route::any('/manage/number/{url_statusss}', 'Manage\NumberController@index') -> where('url_statusss','3');
     Route::any('/manage/uploadNumber/{id}', 'Manage\NumberController@uploadNumber');
 });
 //长期账号
@@ -110,6 +127,36 @@ Route::group(['as' => 'number_log','middleware' => ['checklogin']], function () 
     Route::any('/manage/log', 'Manage\NumberController@log');
 });
 
+
+//客服
+Route::get('/kefu/login', 'Kefu\IndexController@login');
+Route::any('/kefu/loginRes', 'Kefu\IndexController@loginRes');
+Route::any('/kefu/loginout', 'Kefu\IndexController@loginout');
+
+Route::group(['as' => 'number','middleware' => ['checkkefulogin']], function () {
+
+    Route::any('/kefu/number', 'Kefu\NumberController@addNumber');
+    Route::any('/kefu/addNumberRes', 'Kefu\NumberController@addNumberRes');
+
+});
+
+//账号查询
+Route::group(['as'=>'search','middleware'=>['checkkefulogin']],function(){
+    Route::any('/kefu/searchOrder','Kefu\NumberController@searchOrder');
+});
+
+
+//完成订单
+Route::group(['as' => 'wancheng_order','middleware'=>['checkkefulogin']],function(){
+    Route::any('/kefu/number/{url_statuss}', 'Kefu\NumberController@index') -> where('url_statuss','1');
+});
+
+
+//问题订单
+Route::group(['as' => 'wenti_order','middleware'=>['checkkefulogin']],function(){
+    Route::any('/kefu/number/{url_statusss}', 'Kefu\NumberController@index2') -> where('url_statuss','3');
+});
+Route::any('/kefu/stopNumber','Kefu\NumberController@stopNumber');
 
 
 

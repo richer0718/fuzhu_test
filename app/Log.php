@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Log extends Model
 {
     protected $table = 'recharge_log';
-    protected $fillable = ['id','username','log_type','point','zhanghao','zhucema'];
+    protected $fillable = ['id','username','log_type','point','zhanghao','zhucema','kefu_name'];
 
     public $timestamps = true;
 
@@ -20,7 +20,7 @@ class Log extends Model
     }
 
     //记录日志
-    public function write($username = '',$type = '' ,$point = 0,$zhanghao = '',$zhucema = '',$remark = ''){
+    public function write($username = '',$type = '' ,$point = 0,$zhanghao = '',$zhucema = '',$remark = '',$kefu_name = ''){
 
         $this -> username = $username;
         $this -> log_type = $type;
@@ -28,6 +28,7 @@ class Log extends Model
         $this -> zhanghao = $zhanghao;
         $this -> zhucema = $zhucema;
         $this -> remark = $remark;
+        $this -> kefu_name = $kefu_name;
         $this -> save();
     }
 }

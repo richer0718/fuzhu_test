@@ -14,7 +14,8 @@
         <input type="text" id="userName" name="username" class="form-control" placeholder="请输入用户名" required autofocus autocomplete="off" maxlength="10">
         <label for="userPwd" class="sr-only">密码</label>
         <input type="password" id="userPwd" name="password" class="form-control" placeholder="请输入密码" required autocomplete="off" maxlength="18">
-
+        <input type="text" name="code" class="form-control" placeholder="请输入验证码" required autofocus autocomplete="off" maxlength="10">
+        <img src="{{ url('captcha') }}" onclick="this.src='{{ url('captcha/mews') }}?r='+Math.random();" alt="">
         <!--
         <select name="type" class="form-control" style="margin-bottom:10px;">
             <option value="0">平台管理员</option>

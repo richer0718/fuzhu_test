@@ -23,6 +23,7 @@ class ApiController extends Controller
             'mode',
             'status',
             'device',
+            'is_jiaji',
             'updated_time'
         ) -> where([
             'number' => $number,

@@ -1,4 +1,4 @@
-@extends('layouts.manage_common')
+@extends('layouts.kefu_common')
 @section('right-box')
 
     <style>
@@ -10,13 +10,12 @@
         }
     </style>
     <script src="{{ asset('js/laydate/laydate.js') }}"></script>
-    <form id="myForm" method="post" action="{{ url('manage/addNumberRes') }}" onsubmit="return chekform()">
+    <form id="myForm" method="post" action="{{ url('kefu/addNumberRes') }}" onsubmit="return chekform()" >
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main" >
         <div class="row">
             <div class="col-md-12">
                 <h1 class="page-header">添加账号</h1>
                 <div class="col-md-6">
-
                     <table class="table table-striped table-bordered" style="width:450px;">
                         <tr>
                             <td style="width:120px;">订单号：</td>
@@ -40,9 +39,8 @@
                         </tr>
                         <tr>
                             <td style="width:120px;">旺旺/QQ：</td>
-                            <td><input type="text"  class="form-control"  name="wangwang" @if(isset($info) || old('wangwang') ) value="{{ $info -> wangwang or old('wangwang')  }}" @endif /></td>
+                            <td><input type="text"  class="form-control"  name="wangwang" @if(isset($info) || old('number') ) value="{{ $info -> number or old('number')  }}" @endif /></td>
                         </tr>
-
                         <tr>
                             <td style="width:120px;">游戏账号：</td>
                             <td><input type="text"  class="form-control"  name="number" @if(isset($info) || old('number') ) value="{{ $info -> number or old('number')  }}" @endif required  onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')"/></td>
@@ -128,7 +126,7 @@
 
                         <tr>
                             <td colspan="2">
-                                <button class="btn btn-success" type="submit" id="addButton">添加</button>
+                                <button class="btn btn-success" type="submit" id="addButton" >添加</button>
                                 <button class="btn btn-default" type="button" id="rest">重置</button>
                             </td>
                         </tr>
@@ -139,7 +137,6 @@
                     <textarea style="width:100%;height:250px;" id="textarea"></textarea>
                     <button class="btn btn-lg btn-primary btn-block" type="button" id="daoru">导入</button>
                 </div>
-
             </div>
 
 
@@ -171,6 +168,7 @@
                                 <td style="width:120px;">备注：</td>
                                 <td><input type="text"  class="form-control"  id="show_remark" /></td>
                             </tr>
+
                             <tr>
                                 <td style="width:120px;">旺旺/QQ：</td>
                                 <td><input type="text"  class="form-control"  id="show_wangwang" required  /></td>
@@ -186,6 +184,10 @@
                             <tr>
                                 <td>大区：</td>
                                 <td><input type="text"  class="form-control" id="show_area" disabled/></td>
+                            </tr>
+                            <tr>
+                                <td>小区：</td>
+                                <td><input type="text"  class="form-control" id="show_xiaoqu"   disabled /></td>
                             </tr>
                             <tr>
                                 <td>刷图选择：</td>
@@ -259,6 +261,7 @@
 
     <script>
         $(function(){
+
             $('#daoru').click(function(){
                 var text = $("#textarea").val();//获取id为ta的textarea的全部内容
                 var arr = text.split("\n");//以换行符为分隔符将内容分割成数组
@@ -266,7 +269,7 @@
                 var string = '';
                 var value = '';
                 arr.map(function(vo,key){
-                    //识别
+                   //识别
                     vo = $.trim(vo);
                     pre = vo.substr(0,2);
                     //截取后边的字符串
@@ -314,6 +317,7 @@
 
             })
 
+
             //上号时间
             $('#mode_select').change(function(){
                 if($('#mode_select').val() != 0){
@@ -332,21 +336,29 @@
                 $('#myForm').submit();
             })
 
+            @if(old('number'))
+                alert('您的点数，不足以支付本次代刷的费用，请充值后，再上传！');
+            @endif
             @if(session('pointerror'))
                 alert('您的点数，不足以支付本次代刷的费用，请充值后，再上传！');
             @endif
+
             @if(session('isset'))
                 alert('上传失败，请联系代理');
             @endif
-
+            @if(session('stop_number'))
+            alert('停挂成功');
+            @endif
 
         })
         function chekform(){
+
             //如果是第二次确认，则返回true
             var is_true = $('#queren').css('display');
             if(is_true == 'block'){
                 return true;
             }
+
 
             if($('#mode_select').val() != 0  && $('#end_date').val() == ''){
                 //如果开启养号模式 截止时间必填
@@ -377,9 +389,11 @@
             $('#show_wangwang').val($('input[name=wangwang]').val());
             $('#show_xiaoqu').val($('input[name=xiaoqu]').val());
             $('#show_remark').val($('input[name=remark]').val());
+
             if($('#checkbox_mark').is(":checked")){
                 $('#mark_input').attr('checked',true);
             }
+
             if($('#checkbox_ji').is(":checked")){
                 $('#jiaji_input').attr('checked',true);
             }
@@ -391,12 +405,13 @@
 
             var cishu = parseInt($('input[name=save_time]').val());
             var xishu = parseInt($('#'+area_val).val());
+
             $('#show_zong').val(cishu*xishu);
 
 
+            //alert(1);return false;
 
-
-            $('#queren').modal('show')
+            $('#queren').modal('show');
             //弹框让他确认
             return false;
         }

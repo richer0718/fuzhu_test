@@ -20,7 +20,9 @@ class IndexController extends Controller
     }
 
     public function loginRes(Request $request){
-
+        if(!Captcha::check($request -> input('code'))){
+            return redirect('manage/login')->with('code', 'error')->withInput( $request->flash() );
+        }
         $username = $request -> input('username');
         $password = $request -> input('password');
         $res = DB::table('daili') -> where([

@@ -50,20 +50,18 @@
         })
     </script>
     <ul class="nav nav-sidebar">
-
-        <li @if(Route::currentRouteName() == 'kefu' )class="active" @endif ><a href="{{ url('manage/kefu') }}"   >二级账号</a></li>
-        <li @if(Route::currentRouteName() == 'number_guaji' )class="active" @endif ><a href="{{ url('manage/number') }}"   >挂机账号</a></li>
-        <li @if(Route::currentRouteName() == 'number_history' )class="active" @endif ><a>历史账号</a>
-            <ul class="dropdown-menu-new  show "  >
-                <li><a href="{{url('manage/number/1')}}">完成订单</a></li>
-                <li><a href="{{url('manage/number/3')}}">问题订单</a></li>
-            </ul>
-        </li>
-        <li @if(Route::currentRouteName() == 'number_long' ) class="active" @endif ><a href="{{ url('manage/number/2') }}"   >长期账号</a></li>
-        <li @if(Route::currentRouteName() == 'manage_notice' )class="active" @endif ><a href="{{ url('manage/manage_notice') }}"   >公告列表</a></li>
-        <li @if(Route::currentRouteName() == 'number_log' )class="active" @endif ><a href="{{ url('manage/log') }}"   >日志</a></li>
-
-
+        @if(session('kefupower')['power1'])
+            <li @if(Route::currentRouteName() == 'number' )class="active" @endif ><a href="{{ url('kefu/number') }}"   >新增账号</a></li>
+        @endif
+        @if(session('kefupower')['power2'])
+            <li @if(Route::currentRouteName() == 'search' )class="active" @endif ><a  href="{{url('kefu/searchOrder')}}"  >账号查询</a></li>
+        @endif
+        @if(session('kefupower')['power3'])
+            <li @if(Route::currentRouteName() == 'wancheng_order' )class="active" @endif ><a   href="{{url('kefu/number/1')}}"   >完成订单</a></li>
+        @endif
+        @if(session('kefupower')['power4'])
+                <li @if(Route::currentRouteName() == 'wenti_order' )class="active" @endif ><a   href="{{url('kefu/number/3')}}" >问题订单</a></li>
+        @endif
     </ul>
 
 
