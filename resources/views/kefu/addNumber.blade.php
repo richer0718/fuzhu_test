@@ -279,8 +279,12 @@
                             //将这个字符串添加到对应位置
                             $('input[name=order_id]').val(string);
                             break;
+                        case 'QQ':
+                            $('input[name=wangwang_type]').eq(0).attr("checked","true");
+                            $('input[name=wangwang]').val(string);
+                            break;
                         case '旺旺':
-                            //将这个字符串添加到对应位置
+                            $('input[name=wangwang_type]').eq(0).attr("checked","true");
                             $('input[name=wangwang]').val(string);
                             break;
                         case '账号':
@@ -290,6 +294,14 @@
                         case '密码':
                             //将这个字符串添加到对应位置
                             $('input[name=pass]').val(string);
+                            break;
+                        case '小区':
+                            //将这个字符串添加到对应位置
+                            $('input[name=xiaoqu]').val(string);
+                            break;
+                        case '备注':
+                            //将这个字符串添加到对应位置
+                            $('input[name=remark]').val(string);
                             break;
                         case '大区':
                             //转换 将小写字母转换成大写
@@ -312,6 +324,7 @@
                                 $('input[name=save_time]').val(1220);
                             }
                             break;
+
                     }
                 })
 

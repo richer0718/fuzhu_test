@@ -219,6 +219,7 @@ class NumberController extends Controller
             if($url_status == '1'){
                 //历史账号 -> 完成订单 0
                 $query -> where('status','=',0);
+                $query -> orWhere('status','=',-1);
             }elseif($url_status == '3'){
                 //问题订单  -1
                 $query -> where('status','=',-1);
@@ -307,7 +308,7 @@ class NumberController extends Controller
 
             }elseif($url_status == '3'){
                 //问题订单  -1
-                $query -> where('status','=',-1);
+                $query -> where('status','<',-1);
             }
 
             if($request -> input('number')){
