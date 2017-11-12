@@ -20,4 +20,9 @@
         padding:3px;
         border-radius: 3px;
     }
+
+    #main{
+        width:90%;
+        margin-left:10%;
+    }
 </style>

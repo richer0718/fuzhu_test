@@ -176,6 +176,13 @@ class ApiController extends Controller
 
     }
 
+    public function autoGetData(){
+        $url1 = 'http://222.185.25.254:8088/jsp1/show11?name=&ck=2&info=IOSWZRY-2&mark=&time=';
+        $url2 = 'http://222.185.25.254:8088/jsp1/show11?name=&ck=2&info=AZWZRY-2&mark=&time=';
+        $data1 = file_get_contents($url1);
+        var_dump($data1);
+    }
+
 
 
 

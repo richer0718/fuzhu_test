@@ -1,4 +1,4 @@
-<aside class="col-sm-1 col-md-1 col-lg-2 sidebar">
+<aside class="col-sm-1 col-md-1 col-lg-2 sidebar" style="width:10%;">
     <ul class="nav nav-sidebar">
         <li><a></a></li>
     </ul>

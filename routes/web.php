@@ -67,6 +67,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::any('recoverPoint/{number}/{area}/{point}/{remark}', 'Admin\ApiController@recoverPoint');
     Route::any('getLongNumber/{daili}/{number}/{point}/{save_time}', 'Admin\ApiController@getLongNumber');
     Route::any('getXishuByCode/{code}', 'Admin\ApiController@getXishuByCode');
+    Route::any('autoGetData', 'Admin\ApiController@autoGetData');
 });
 
 
