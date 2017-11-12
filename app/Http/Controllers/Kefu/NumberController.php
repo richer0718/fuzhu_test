@@ -27,12 +27,22 @@ class NumberController extends Controller
         $note = DB::table('note') -> where([
             'id' => 1
         ]) -> first();
+
+        $note_res = '目前排队账号:';
+        $note_res .= '</br>';
         if($note -> url1 == '99999'){
-            $note_res = '服务器维护中，暂时不能挂机';
+            $note_res .= '苹果：服务器异常';
+            $note_res .= '<br>';
         }else{
-            $note_res = '现在有'.(intval($note -> url1) + intval($note -> url2)).'个账号在排队';
+            $note_res .= '苹果：'.$note -> url1.'个';
+            $note_res .= '<br>';
         }
 
+        if($note -> url2 == '99999'){
+            $note_res .= '安卓：服务器异常';
+        }else{
+            $note_res .= '安卓：'.$note -> url2.'个';
+        }
 
 
 

@@ -33,7 +33,12 @@ class IndexController extends Controller
         //dd($res);
         $res = (array)$res;
         if($res){
-
+            //看下他是否有添加客服的权限
+            if($res['is_kefu']){
+                session([
+                    'is_kefu' => $res['username']
+                ]);
+            }
             session([
                 'username' => $res['username'],
                 'type' => 'daili',

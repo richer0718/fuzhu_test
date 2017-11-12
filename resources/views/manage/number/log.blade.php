@@ -59,6 +59,7 @@
                         <tr>
                             <td>日期：</td>
                             <td>类型：</td>
+                            <td>代理账号：</td>
                             <td>涉及账号：</td>
                             <td>点数：</td>
                             <td>备注：</td>
@@ -67,6 +68,7 @@
                         <tr>
                             <td>{{ date('Y-m-d H:i',$vo -> created_at) }}</td>
                             <td>{{ $vo -> log_type }}</td>
+                            <td>{{ $vo -> kefu_name }}</td>
                             <td>{{ $vo -> zhanghao }}</td>
                             <td class="{{ $vo -> class_name }}">{{ $vo -> point }}</td>
 

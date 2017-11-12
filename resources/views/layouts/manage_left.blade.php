@@ -50,8 +50,9 @@
         })
     </script>
     <ul class="nav nav-sidebar">
-
+        @if(session('is_kefu') == session('username'))
         <li @if(Route::currentRouteName() == 'kefu' )class="active" @endif ><a href="{{ url('manage/kefu') }}"   >二级账号</a></li>
+        @endif
         <li @if(Route::currentRouteName() == 'number_guaji' )class="active" @endif ><a href="{{ url('manage/number') }}"   >挂机账号</a></li>
         <li @if(Route::currentRouteName() == 'number_history' )class="active" @endif ><a>历史账号</a>
             <ul class="dropdown-menu-new  show "  >
