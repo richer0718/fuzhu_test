@@ -103,7 +103,7 @@
                     @foreach($res as $k => $vo)
                         <tr>
                             <td>{{ $k + 1  }}</td>
-                            <td>@if($vo -> is_jiaji == 1)<a style="color:red;">【急】</a>@endif@if($vo -> is_mark == 1)<a style="color:green;">【标】</a>@endif<a>{{$vo -> order_id }}</a></td>
+                            <td>@if($vo -> is_jiaji == 1)<a style="color:red;">【急】</a>@endif @if($vo -> is_mark == 1)<a style="color:green;">【标】</a>@endif<a>{{$vo -> order_id }}</a></td>
 
                             <td>
                                 @if($vo -> wangwang)
