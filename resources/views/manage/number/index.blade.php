@@ -8,6 +8,7 @@
     <script src="{{ asset('js/laydate/laydate.js') }}"></script>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main" style="width:90%;margin-left:10%;overflow: scroll;" >
         <h1 style="text-align: center">{{ $status_name }}</h1>
+        <h1 >{{ $note_res }}</h1>
         <h1 class="page-header">总点数：{{ $userinfo -> point_all }}<br>剩余点数：{{ $userinfo -> point }}</h1>
 
             <h1 class="page-header"> 代挂费用：{{ $price_str }}</h1>

@@ -213,6 +213,17 @@
                                 <td><input type="text" value="" class="form-control" name="password" maxlength="" autocomplete="off" required/></td>
                             </tr>
                             <tr>
+                                <td width="15%">上传标记</td>
+                                <td width="85%"><input type="text"  class="form-control" name="upload" maxlength="" autocomplete="off" /></td>
+                            </tr>
+                            <tr>
+                                <td width="15%">上传客服</td>
+                                <td width="85%">
+                                    <label>是<input type="radio" name="is_kefu" value="1"  /></label>
+                                    <label>否<input type="radio" name="is_kefu" value="0" checked /></label>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>手机</td>
                                 <td><input type="text" value="" class="form-control" name="tel" maxlength="" autocomplete="off" required/></td>
                             </tr>
@@ -258,6 +269,17 @@
                             <tr>
                                 <td width="15%">账号</td>
                                 <td width="85%"><input type="text" value="{{ session('editdaili') -> username }}" class="form-control" name="username" maxlength="" autocomplete="off" disabled/></td>
+                            </tr>
+                            <tr>
+                                <td width="15%">上传标记</td>
+                                <td width="85%"><input type="text" value="{{ session('editdaili') -> upload }}" class="form-control" name="upload" maxlength="" autocomplete="off" /></td>
+                            </tr>
+                            <tr>
+                                <td width="15%">上传客服</td>
+                                <td width="85%">
+                                    <label>是<input type="radio" name="is_kefu" value="1" @if(session('editdaili') -> is_kefu == 1) checked @endif /></label>
+                                    <label>否<input type="radio" name="is_kefu" value="0" @if(session('editdaili') -> is_kefu == 0) checked @endif /></label>
+                                </td>
                             </tr>
                             <tr>
                                 <td>密码</td>

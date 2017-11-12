@@ -79,6 +79,8 @@ class DaiLiController extends Controller
         DB::table('daili') -> insert([
             'username' => $request -> input('username'),
             'password' => $request -> input('password'),
+            'upload' => $request -> input('upload'),
+            'is_kefu' => $request -> input('is_kefu'),
             'tel' => $request -> input('tel'),
             'qq' => $request -> input('qq'),
             'remark' => $request -> input('remark'),
@@ -106,6 +108,8 @@ class DaiLiController extends Controller
             'tel' => $request -> input('tel'),
             'qq' => $request -> input('qq'),
             'remark' => $request -> input('remark'),
+            'upload' => $request -> input('upload'),
+            'is_kefu' => $request -> input('is_kefu'),
         ]);
         return redirect('admin/daili') -> with('editRes',$res);
 

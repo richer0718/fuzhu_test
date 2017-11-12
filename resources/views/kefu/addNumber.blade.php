@@ -14,6 +14,7 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main" >
         <div class="row">
             <div class="col-md-12">
+                <h1 class="page-header">{{$note_res}}</h1>
                 <h1 class="page-header">添加账号</h1>
                 <div class="col-md-6">
                     <table class="table table-striped table-bordered" style="width:450px;">

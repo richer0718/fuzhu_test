@@ -22,9 +22,24 @@ class NumberController extends Controller
         if(session('info')){
             $info = session('info');
         }
+
+        //看服务器返回值
+        $note = DB::table('note') -> where([
+            'id' => 1
+        ]) -> first();
+        if($note -> url1 == '99999'){
+            $note_res = '服务器维护中，暂时不能挂机';
+        }else{
+            $note_res = '现在有'.(intval($note -> url1) + intval($note -> url2)).'个账号在排队';
+        }
+
+
+
+
         return view('kefu/addNumber') -> with([
             'info' => $info,
-            'xishus' => $xishus
+            'xishus' => $xishus,
+            'note_res' => $note_res
         ]);
     }
 
@@ -103,9 +118,9 @@ class NumberController extends Controller
                 $jiaji = 0;
             }
             if($string == 'AZ'){
-                $youxi = 'AZWZRY-'.$endstr;
+                $youxi = $userinfo -> upload.'AZWZRY-'.$endstr;
             }else{
-                $youxi = 'IOSWZRY-'.$endstr;
+                $youxi = $userinfo -> upload.'IOSWZRY-'.$endstr;
             }
 
             //（当前时间+上号时间*60）*1000'

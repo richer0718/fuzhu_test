@@ -2,8 +2,8 @@
 
 return [
 
-    //'characters' => '2346789abcdefghjmnpqrtuxyzABCDEFGHJMNPQRTUXYZ',
-    'characters' => '0123456789',
+    'characters' => '2346789abcdefghjmnpqrtuxyzABCDEFGHJMNPQRTUXYZ',
+    //'characters' => '0123456789',
 
     'default'   => [
         'length'    => 4,

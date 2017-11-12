@@ -179,8 +179,32 @@ class ApiController extends Controller
     public function autoGetData(){
         $url1 = 'http://222.185.25.254:8088/jsp1/show11?name=&ck=2&info=IOSWZRY-2&mark=&time=';
         $url2 = 'http://222.185.25.254:8088/jsp1/show11?name=&ck=2&info=AZWZRY-2&mark=&time=';
+
+
         $data1 = file_get_contents($url1);
-        var_dump($data1);
+        if(!strpos($data1,'数据总计为') || !$data1){
+            $res1 = '99999';
+        }else{
+            $count1 = substr_count($data1,'null');
+            $res1 = $count1;
+        }
+
+
+        $data2 = file_get_contents($url2);
+        if(!strpos($data2,'数据总计为') || !$data2){
+            $res2 = '99999';
+        }else{
+            $count2 = substr_count($data2,'null');
+            $res2 = $count2;
+        }
+
+        DB::table('note') -> where([
+            'id' => 1
+        ]) -> update([
+            'url1' => $res1,
+            'url2' => $res2,
+            'update_time' => time()
+        ]);
     }
 
 
