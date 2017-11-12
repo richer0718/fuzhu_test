@@ -64,7 +64,7 @@
                         </tr>
                         <tr>
                             <td>小区：</td>
-                            <td><input type="text"  class="form-control" name="xiaoqu"   onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')" /></td>
+                            <td><input type="number"  class="form-control" name="xiaoqu"   onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')" /></td>
                         </tr>
                         <tr>
                             <td>刷图选择：</td>
@@ -201,6 +201,10 @@
                                 <td><input type="text"  class="form-control" id="show_area" disabled/></td>
                             </tr>
                             <tr>
+                                <td>小区：</td>
+                                <td><input type="text"  class="form-control" id="show_xiaoqu"   disabled /></td>
+                            </tr>
+                            <tr>
                                 <td>刷图选择：</td>
                                 <td><input type="text"  class="form-control" id="show_map" disabled/></td>
                             </tr>
@@ -290,7 +294,7 @@
                             $('input[name=order_id]').val(string);
                             break;
                         case 'QQ':
-                            $('input[name=wangwang_type]').eq(0).attr("checked","true");
+                            $('input[name=wangwang_type]').eq(1).attr("checked","true");
                             $('input[name=wangwang]').val(string);
                             break;
                         case '旺旺':

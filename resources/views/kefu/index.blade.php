@@ -72,7 +72,15 @@
                             <td>{{ $k + 1  }}</td>
                             <td>@if($vo -> is_jiaji == 1)<a style="color:red;">【急】</a>@endif @if($vo -> is_mark == 1)<a style="color:green;">【标】</a>@endif<a>{{$vo -> order_id }}</a></td>
 
-                            <td>{{$vo -> wangwang }}</td>
+                            <td>
+                                @if($vo -> wangwang)
+                                    @if($vo -> wangwang_type == 1)
+                                        <img  style="cursor: pointer" onclick="javascript:window.open('http://sighttp.qq.com/msgrd?v=1&uin={{ $vo -> wangwang }}', '_blank', 'height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');"  border="0" SRC=http://wpa.qq.com/pa?p=1:{{ $vo -> wangwang }}:1 alt="点击这里给我发消息">
+                                    @else
+                                        <a target="_blank" href="http://amos.alicdn.com/getcid.aw?v=2&uid={{ $vo -> wangwang }}&site=cntaobao&s=1&groupid=0&charset=utf-8"><img border="0" src="http://amos.alicdn.com/online.aw?v=2&uid=tb_4194202_2012&site=cntaobao&s=1&charset=utf-8" alt="" title="" /></a>
+                                    @endif
+                                @endif
+                            </td>
                             <td>{{$vo -> number }}</td>
                             <td>{{$vo -> area_name }}</td>
                             <td>{{$vo -> use_time}}</td>
