@@ -140,7 +140,7 @@
                                 @if($url_status == 0)
                                     <a id="stopNumberButton" number="{{ $vo -> id }}"  data="{{$vo -> save_time}}" onclick="tinggua(this)" >停挂</a>
                                 @endif
-                                @if($url_status == 1)
+                                @if($url_status == 1 || $url_status == 3)
                                     <a class="delete_number" data = "{{ $vo -> id }}">删除</a> ／ <a href="{{ url('manage/uploadNumber').'/'.$vo -> id }}">上传</a>
                                 @endif
                                 @if($url_status == 2)
