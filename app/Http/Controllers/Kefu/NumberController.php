@@ -537,6 +537,54 @@ class NumberController extends Controller
 
     }
 
+    public function xiugaiRes(Request $request){
+        if(session('kefupower')['kefuusername'] != session('kefuusername')){
+            return redirect('kefu/login');
+        }
+        //查下此账号是不是他添加的
+        //得到代理的账号 $daili_info -> fname
+        $daili_info = DB::table('kefu') -> where([
+            'username' => session('kefuusername')
+        ]) -> first();
+
+        $number_info = DB::table('number') -> where([
+            'add_user' => $daili_info -> fname,
+            'number' => $request -> input('show_number')
+        ]) -> first();
+        if(!$number_info){
+            return false;
+        }
+
+        //开始修改
+        $res = DB::table('number') -> where([
+            'number' => $request -> input('show_number')
+        ]) -> update([
+            'order_id' => $request -> input('order_id'),
+            'wangwang_type' => $request -> input('wangwang_type'),
+            'wangwang' => $request -> input('wangwang'),
+        ]);
+
+        //通过权限判断他跳转到哪里
+        if(session('kefupower')['power1'] == 1){
+            return redirect('kefu/number')->with('update_status', 'success');
+        }
+        if(session('kefupower')['power2'] == 1){
+            return redirect('kefu/searchOrder')->with('update_status', 'success');
+        }
+
+        if(session('kefupower')['power3'] == 1){
+            return redirect('kefu/number/3')->with('update_status', 'success');
+        }
+
+        if(session('kefupower')['power4'] == 1){
+            return redirect('kefu/number/1')->with('update_status', 'success');
+        }else{
+            return redirect('kefu/login')->with('status', 'error');
+        }
+
+
+    }
+
 
 
 }

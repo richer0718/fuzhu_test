@@ -105,6 +105,7 @@ Route::group(['as' => 'number_guaji','middleware' => ['checklogin']], function (
     Route::any('/manage/rechargeConfirm', 'Manage\NumberController@rechargeConfirm');
     Route::any('/manage/stopNumber', 'Manage\NumberController@stopNumber');
     Route::any('/manage/yanzhengma', 'Manage\NumberController@yanzhengma');
+    Route::any('/manage/xiugaiRes', 'Manage\NumberController@xiugaiRes');
     Route::any('/manage/delete_number/{id}', 'Manage\NumberController@delete_number');
 });
 //历史账号
@@ -158,6 +159,7 @@ Route::group(['as' => 'wenti_order','middleware'=>['checkkefulogin']],function()
     Route::any('/kefu/number/{url_statusss}', 'Kefu\NumberController@index2') -> where('url_statuss','3');
 });
 Route::any('/kefu/stopNumber','Kefu\NumberController@stopNumber');
+Route::any('/kefu/xiugaiRes','Kefu\NumberController@xiugaiRes');
 
 
 

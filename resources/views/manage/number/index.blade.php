@@ -104,7 +104,7 @@
                     @foreach($res as $k => $vo)
                         <tr>
                             <td>{{ $k + 1  }}</td>
-                            <td>@if($vo -> is_jiaji == 1)<a style="color:red;">【急】</a>@endif @if($vo -> is_mark == 1)<a style="color:green;">【标】</a>@endif<a>{{$vo -> order_id }}</a></td>
+                            <td>@if($vo -> is_jiaji == 1)<a style="color:red;">【急】</a>@endif @if($vo -> is_mark == 1)<a style="color:green;">【标】</a>@endif<a>{{$vo -> order_id }}</a><a style="color:red;" class="gai" wangwang ="{{$vo -> wangwang}}" wangwang_type = "{{ $vo -> wangwang_type }}" order_id = "{{$vo -> order_id }}" number="{{ $vo -> number }}" > 【改】</a></td>
 
                             <td>
                                 @if($vo -> wangwang)
@@ -303,6 +303,68 @@
         </div>
     </div>
 
+    <!-- 修改 -->
+    <div class="modal fade " id="xiugai" tabindex="-1" role="dialog"  >
+        <div class="modal-dialog" role="document" style="width:900px;">
+            <form action="{{ url('manage/xiugaiRes') }}" method="post" autocomplete="off" draggable="false" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" >修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table" style="margin-bottom:0px;">
+                            <thead>
+                            <tr> </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                <td style="width:120px;">订单号：</td>
+                                <td>
+                                    <input type="text"  class="form-control"  id="show_order_id" name="order_id" />
+                                    <!--
+                                    <label style="line-height:34px;margin-left:20px;"><input type="checkbox" id="mark_input" disabled   />标记</label>
+                                    <label style="line-height:34px;margin-left:10px;"><input type="checkbox" id="jiaji_input" disabled   />加急</label>
+                                    <div style="clear:both;"></div>
+                                    -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:120px;">类型：</td>
+                                <td>
+                                    <label style="margin: 0;line-height: 30px;font-size: 18px;">旺旺<input type="radio" name="wangwang_type" value="0" /></label>
+                                    <label style="margin: 0;line-height: 30px;font-size: 18px;">QQ<input type="radio" name="wangwang_type" value="1"/></label>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="width:120px;">旺旺/QQ：</td>
+                                <td><input type="text"  class="form-control"  name="wangwang" id="show_wangwang" required  /></td>
+                            </tr>
+                            <input name="show_number" type="hidden" />
+                            <tr>
+                                <td style="width:120px;">游戏账号：</td>
+                                <td><input type="text"  class="form-control"  id="show_number"   disabled/></td>
+                            </tr>
+
+                            {{ csrf_field() }}
+                            </tbody>
+                            <tfoot>
+                            <tr></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary">确认</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
     <script>
         @if (session('insertres'))
             alert('添加成功！');
@@ -326,6 +388,21 @@
     </script>
     <script>
         $(function(){
+            //针对编号修改
+            $('.gai').click(function(){
+                var wangwang = $(this).attr('wangwang');
+                var wangwang_type = $(this).attr('wangwang_type');
+                var order_id = $(this).attr('order_id');
+                var number = $(this).attr('number');
+                $('#show_order_id').val(order_id);
+                $('#show_number').val(number);
+                $('input[name=show_number]').val(number);
+                $('#show_wangwang').val(wangwang);
+                $('input[name=wangwang_type]').eq(wangwang_type).attr('checked',true);
+
+                $('#xiugai').modal('show');
+            })
+
             //数据验证
             $('#myForm').submit(function(){
                 var length = $.trim( $('input[name=code]').val() ).length ;

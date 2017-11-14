@@ -535,6 +535,22 @@ class NumberController extends Controller
         ]);
     }
 
+
+    public function xiugaiRes(Request $request){
+        //开始修改
+        $res = DB::table('number') -> where([
+            'number' => $request -> input('show_number')
+        ]) -> update([
+            'order_id' => $request -> input('order_id'),
+            'wangwang_type' => $request -> input('wangwang_type'),
+            'wangwang' => $request -> input('wangwang'),
+        ]);
+
+        return redirect('manage/number/1');
+
+
+    }
+
 }
 
 

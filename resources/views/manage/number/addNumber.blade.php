@@ -15,9 +15,9 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="page-header">添加账号</h1>
-                <div class="col-md-6">
+                <div class="col-md-5">
 
-                    <table class="table table-striped table-bordered" style="width:450px;">
+                    <table class="table table-striped table-bordered" style="width:100%;">
                         <tr>
                             <td style="width:120px;">订单号：</td>
                             <td>
@@ -135,7 +135,7 @@
 
                     </table>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <textarea style="width:100%;height:250px;" id="textarea"></textarea>
                     <button class="btn btn-lg btn-primary btn-block" type="button" id="daoru">导入</button>
                     <p style="width:100%;height:250px;">
