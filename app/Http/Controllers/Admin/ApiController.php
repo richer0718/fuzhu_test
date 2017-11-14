@@ -14,16 +14,18 @@ class ApiController extends Controller
     public function getNumberData($number,$area){
         $res = DB::table('number') -> select(
             'add_user',
+            'is_jiaji',
             'number',
             'pass',
             'area',
+            'xiaoqu',
             'use_time',
             'save_time',
             'map',
             'mode',
             'status',
             'device',
-            'is_jiaji',
+
             'updated_time'
         ) -> where([
             'number' => $number,
