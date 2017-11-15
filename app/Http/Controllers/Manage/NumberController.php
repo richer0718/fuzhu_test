@@ -31,7 +31,7 @@ class NumberController extends Controller
         }
         $add_user = session('username');
         $res = DB::table('number') -> where(function($query) use($url_status,$add_user,$request){
-            $query -> where('add_user',$add_user);
+            $query -> where('add_user','=',$add_user);
             if($url_status == '1'){
                 //历史账号 -> 完成订单 0
                 $query -> where('status','=',0);
