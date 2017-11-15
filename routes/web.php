@@ -30,6 +30,10 @@ Route::any('/admin/loginout', 'Admin\IndexController@loginout');
 Route::get('/captcha', 'CodeController@index');
 
 
+Route::get('/clearSession', 'CodeController@clear');
+
+
+
 
 
 Route::group(['as' => 'admin_number','middleware' => ['checkadminlogin']], function () {

@@ -11,4 +11,7 @@ class CodeController extends Controller
     public function index(){
         return Captcha::create('default');
     }
+    public function clearSession (Request $request){
+        $request->session()->flush();
+    }
 }
