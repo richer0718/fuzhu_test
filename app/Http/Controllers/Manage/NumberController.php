@@ -29,9 +29,9 @@ class NumberController extends Controller
         }elseif($url_status == '2'){
             $status_name = '长期账号';
         }
-
-        $res = DB::table('number') -> where(function($query) use($url_status,$request){
-            $query -> where('add_user',session('username'));
+        $add_user = session('username');
+        $res = DB::table('number') -> where(function($query) use($url_status,$add_user,$request){
+            $query -> where('add_user',$add_user);
             if($url_status == '1'){
                 //历史账号 -> 完成订单 0
                 $query -> where('status','=',0);
@@ -45,6 +45,8 @@ class NumberController extends Controller
                 $query -> where('mode','>',0);
                 //$query -> where('status','>=',0);
             }else{
+                //挂机 检测时间 asc
+                $order1 = '';
                 //$query -> where('mode','=',0);
                 $query -> where('status','>',0);
             }
@@ -62,8 +64,6 @@ class NumberController extends Controller
             if($request -> input('status')){
                 $query -> where('status',trim($request -> input('status')));
             }
-
-
 
         })  -> orderBy('created_time','asc') -> orderBy('save_time','asc') -> paginate(1000);
         //dd($res);
