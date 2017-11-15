@@ -34,8 +34,7 @@ class NumberController extends Controller
             $query -> where('add_user','=',$add_user);
             if($url_status == '1'){
                 //历史账号 -> 完成订单 0
-                $query -> where('status','=',0);
-                $query -> orWhere('status','=',-1);
+                $query -> whereIn('status',[0,-1]);
 
             }elseif($url_status == '3'){
                 //问题订单  -1
