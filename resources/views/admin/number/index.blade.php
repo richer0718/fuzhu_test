@@ -73,14 +73,18 @@
 
         <ol class="breadcrumb">
             <li>正在挂机数量：{{$count_guaji}}个</li>
+            <!--
             <li>历史挂机数量：{{$count_lishi}}个</li>
             <li>总账号数量：{{$count_all}}个</li>
+            -->
         </ol>
+        <!--
         <ol class="breadcrumb">
             <li>挂机中：{{ $count_guaji }}个</li>
             <li> 排队中：{{ $count_paidui }}个</li>
 
         </ol>
+        -->
 
 
         <h1 class="page-header">账号信息 <span class="badge"></span></h1>
