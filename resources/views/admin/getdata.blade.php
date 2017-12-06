@@ -149,11 +149,13 @@
                             <td wdith="20%">验证码:</td>
                             <td width="80%"><input type="number" value="" class="form-control" name="yanzhengma" maxlength="" autocomplete="off" required/></td>
                         </tr>
+                        @if(session('res'))
                         <tr>
                             <td colspan="2">
-                                <img src="{{ 'http://img.feisushouyou.com/jietu/'.session('res')->area.'-'.session('res')->number.'.jpg' }}" style="width:100%;height:80px;"  />
+                                <img src="{{ 'http://img.feisushouyou.com/jietu/'.session('res') -> area .'-'.session('res') -> number.'.jpg' }}" style="width:100%;height:80px;"  />
                             </td>
                         </tr>
+                        @endif
 
                         <input type="hidden" name="yanzheng_id"  />
 
