@@ -84,9 +84,11 @@
                 @endif
 
             </li>
+            <!--
             <li>正在挂机数量：{{$count_guaji}}个</li>
             <li>历史挂机数量：{{$count_lishi}}个</li>
             <li>总账号数量：{{$count_all}}个</li>
+            -->
             <li>剩余点数：{{$count_point}}</li>
             <li>充值点数：{{$count_point_all}}</li>
         </ol>

@@ -218,7 +218,7 @@ $('[data-toggle="tooltip"]').tooltip();
         alert('找回密码成功！请重新登录');
     @endif
     @if(session('code'))
-        $('#reg-box').modal('show');
+        //$('#reg-box').modal('show');
         alert('验证码错误！');
     @endif
     @if(session('nameisset'))

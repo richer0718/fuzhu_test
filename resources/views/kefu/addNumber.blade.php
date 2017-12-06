@@ -36,19 +36,16 @@
                             <td>
                                 <label style="margin: 0;line-height: 30px;font-size: 18px;">旺旺<input type="radio" name="wangwang_type" value="0" /></label>
                                 <label style="margin: 0;line-height: 30px;font-size: 18px;">QQ<input type="radio" name="wangwang_type" value="1"/></label>
+                                <input type="text"  style="width: 50%;float:right;" class="form-control"  name="wangwang" @if(isset($info) || old('number') ) value="{{ $info -> number or old('number')  }}" @endif />
                             </td>
                         </tr>
                         <tr>
-                            <td style="width:120px;">旺旺/QQ：</td>
-                            <td><input type="text"  class="form-control"  name="wangwang" @if(isset($info) || old('number') ) value="{{ $info -> number or old('number')  }}" @endif /></td>
-                        </tr>
-                        <tr>
-                            <td style="width:120px;">游戏账号：</td>
+                            <td style="width:120px;"><a style="color:red;">*</a>游戏账号：</td>
                             <td><input type="text"  class="form-control"  name="number" @if(isset($info) || old('number') ) value="{{ $info -> number or old('number')  }}" @endif required  onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')"/></td>
                         </tr>
                         <tr>
-                            <td>游戏密码：</td>
-                            <td><input type="text"  class="form-control" name="pass" @if(isset($info) || old('pass') ) value="{{ $info -> pass or old('pass') }}" @endif required onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')" /></td>
+                            <td><a style="color:red;">*</a>游戏密码：</td>
+                            <td><input type="text"  placeholder="只能填写数字、字母、半角符号（半角逗号除外）"  class="form-control" name="pass" @if(isset($info) || old('pass') ) value="{{ $info -> pass or old('pass') }}" @endif required onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')" /></td>
                         </tr>
                         <tr>
                             <td>大区：</td>
@@ -63,7 +60,7 @@
                         </tr>
                         <tr>
                             <td>小区：</td>
-                            <td><input type="number"  class="form-control" name="xiaoqu"   onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')" /></td>
+                            <td><input type="number" placeholder="留空或者填0 表示刷默认大区" class="form-control" name="xiaoqu"   onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')" /></td>
                         </tr>
                         <tr>
                             <td>刷图选择：</td>
@@ -78,10 +75,10 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>刷图次数：</td>
+                            <td><a style="color:red;">*</a>刷图次数：</td>
                             <td>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" name="save_time" min="30" max="1300" @if(isset($info) || old('save_time')) value="{{ $info -> use_time or old('save_time') }}" @else value="30" @endif required/>
+                                    <input type="number" class="form-control" name="save_time" min="30" max="1300" @if(isset($info) || old('save_time')) value="{{ $info -> use_time or old('save_time') }}" @else value="250" @endif required/>
                                     <span class="input-group-addon">次(30~1300)</span>
                                 </div>
                             </td>
