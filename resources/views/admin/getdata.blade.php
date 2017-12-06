@@ -129,7 +129,7 @@
     </div>
 @endif
 
-<!-- 输入手机验证码 -->
+<!-- 输入手机   验证码 -->
 <div class="modal fade " id="yanzhengma_input" tabindex="-1" role="dialog"  >
     <div class="modal-dialog" role="document" style="width:80%;">
         <form action="{{ url('customer/yanzhengma') }}" method="post" autocomplete="off" draggable="false" id="myForm">
