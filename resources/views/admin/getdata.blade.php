@@ -87,7 +87,7 @@
                                 <td width="85%"><input type="text" value="{{ session('res') -> number }}" class="form-control" name="username" maxlength="" autocomplete="off" disabled/></td>
                             </tr>
                             <tr>
-                                <td>挂机次数</td>
+                                <td>代练次数</td>
                                 <td><input type="text" value="{{ session('res') -> use_time }}" class="form-control" name="password" maxlength="" autocomplete="off" disabled/></td>
                             </tr>
                             <tr>
@@ -95,7 +95,7 @@
                                 <td><input type="text" value="{{ session('res') -> save_time }}" class="form-control" name="tel" maxlength="" autocomplete="off" disabled/></td>
                             </tr>
                             <tr>
-                                <td>挂机设备</td>
+                                <td>代练设备</td>
                                 <td><input type="text" value="{{ session('res') -> device }}" class="form-control" name="qq" maxlength="" autocomplete="off" disabled/></td>
                             </tr>
                             <tr>

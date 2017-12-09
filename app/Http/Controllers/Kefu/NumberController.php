@@ -257,7 +257,7 @@ class NumberController extends Controller
 
 
 
-        })  -> orderBy('created_time','asc') -> orderBy('save_time','asc') -> paginate(1000);
+        })  -> orderBy('created_time','asc') -> orderBy('save_time','desc') -> paginate(1000);
         //dd($res);
         foreach($res as $k => $vo){
             $res[$k] -> area_name = $areas[$vo -> area];
@@ -346,7 +346,7 @@ class NumberController extends Controller
 
 
 
-        }) -> orderBy('created_time','asc') -> orderBy('save_time','asc') -> paginate(1000);
+        }) -> orderBy('created_time','asc') -> orderBy('save_time','desc') -> paginate(1000);
         //dd($res);
         foreach($res as $k => $vo){
             $res[$k] -> area_name = $areas[$vo -> area];

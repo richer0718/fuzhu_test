@@ -64,7 +64,7 @@ class NumberController extends Controller
                 $query -> where('status',trim($request -> input('status')));
             }
 
-        })  -> orderBy('created_time','asc') -> orderBy('save_time','asc') -> paginate(1000);
+        })  -> orderBy('created_time','asc') -> orderBy('save_time','desc') -> paginate(1000);
         //dd($res);
         foreach($res as $k => $vo){
             $res[$k] -> area_name = $areas[$vo -> area];
@@ -213,7 +213,7 @@ class NumberController extends Controller
 
             //记录扣除日志
             $log = new Log();
-            $log -> write(session('username'),'挂机',$point_cut,$request -> input('number'));
+            $log -> write(session('username'),'挂机',$point_cut,$request -> input('number'),'',$request -> input('area').$request -> input('xiaoqu').$request -> input('map').$request -> input('save_time').$request -> input('order_id'));
 
             if($isset){
                 //如果存在 则删除老数据
@@ -506,9 +506,9 @@ class NumberController extends Controller
                 'username' => session('username')
             ]) -> decrement('number_all');
 
-            return redirect('manage/number/1') -> with('delete_number','success');
+            return redirect('manage/number/3') -> with('delete_number','success');
         }else{
-            return redirect('manage/number/1') -> with('delete_number','error');
+            return redirect('manage/number/3') -> with('delete_number','error');
         }
     }
 

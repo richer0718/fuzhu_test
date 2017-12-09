@@ -84,6 +84,7 @@
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">游戏账号</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">游戏密码</span></th>
                     <th><span class="glyphicon glyphicon-signal"></span> <span class="visible-lg">大区</span></th>
+                    <th><span class="glyphicon glyphicon-signal"></span> <span class="visible-lg">小区</span></th>
                     <th><span class="glyphicon glyphicon-camera"></span> <span class="visible-lg">代挂次数</span></th>
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">剩余次数</span></th>
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">代挂地图</span></th>
@@ -118,6 +119,7 @@
                             <td>{{$vo -> number }}</td>
                             <td>{{$vo -> pass }}</td>
                             <td>{{$vo -> area_name }}</td>
+                            <td>{{$vo -> xiaoqu }}</td>
                             <td>{{$vo -> use_time}}</td>
                             <td>{{$vo -> save_time}}</td>
                             <td>{{mb_substr($vo -> map,0,4,'utf-8')}}</td>
@@ -125,7 +127,8 @@
                             <td>
                                 @if($vo -> status == '微信二维码') <a href="{{ 'http://img.feisushouyou.com/jietu/'.$vo->area.'-'.$vo->number.'.jpg' }}" target="_blank" style="color:red;">扫描微信二维码</a>
                                 @elseif($vo -> status == '手机验证码' )  <a class="yanzhengma" data="{{ $vo -> id }}" style="color:red;">输入验证码</a> <a href="{{ 'http://img.feisushouyou.com/jietu/'.$vo->area.'-'.$vo->number.'.jpg' }}" target="_blank" style="color:red;">查看图片</a>
-
+                                @elseif($vo -> status == '正常刷完' ) <a href="{{ 'http://img.feisushouyou.com/jietu/'.$vo->area.'-'.$vo->number.'-wc.jpg' }}" target="_blank" style="color:red;">正常刷完</a>
+                                @elseif($vo -> status == '区不存在' ) <a href="{{ 'http://img.feisushouyou.com/jietu/'.$vo->area.'-'.$vo->number.'-xq.jpg' }}" target="_blank" style="color:red;">区不存在</a>
                                 @else{{$vo -> status}}
                                 @endif
                             </td>

@@ -21,7 +21,7 @@
                         <tr>
                             <td style="width:120px;">订单号：</td>
                             <td>
-                                <input type="number"  class="form-control"  name="order_id" @if(isset($info) || old('number') ) value="{{ $info -> number or old('number')  }}" @endif  />
+                                <input type="number"  class="form-control"  name="order_id" @if(isset($info)) value="{{ $info -> order_id }}" @endif  />
                                 <label style="line-height:34px;margin-left:20px;"><input type="checkbox" name="mark" id="checkbox_mark" value="1"  />标记</label>
                                 <label style="line-height:34px;margin-left:10px;"><input type="checkbox" name="jiaji" id="checkbox_ji" value="1"  />加急</label>
                                 <div style="clear:both;"></div>
@@ -36,7 +36,7 @@
                             <td>
                                 <label style="margin: 0;line-height: 30px;font-size: 18px;">旺旺<input type="radio" name="wangwang_type" value="0" /></label>
                                 <label style="margin: 0;line-height: 30px;font-size: 18px;">QQ<input type="radio" name="wangwang_type" value="1"/></label>
-                                <input type="text"  style="width: 50%;float:right;" class="form-control"  name="wangwang" @if(isset($info) || old('number') ) value="{{ $info -> number or old('number')  }}" @endif />
+                                <input type="text"  style="width: 50%;float:right;" class="form-control"  name="wangwang" @if(isset($info)) value="{{ $info -> wangwang }}" @endif />
                             </td>
                         </tr>
 
@@ -61,7 +61,7 @@
                         </tr>
                         <tr>
                             <td>小区：</td>
-                            <td><input type="number" placeholder="留空或者填0 表示刷默认大区" class="form-control" name="xiaoqu"   onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')" /></td>
+                            <td><input type="number" placeholder="留空或者填0 表示刷默认大区" class="form-control" name="xiaoqu"  @if(isset($info)) value="{{ $info -> wangwang }}" @endif  onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')" /></td>
                         </tr>
                         <tr>
                             <td>刷图选择：</td>
