@@ -357,7 +357,6 @@
             });
             $('#querenbutton').click(function(){
                 $('#superdiv').css('z-index','9999');
-                return false;
                 $('#myForm').submit();
             })
 
