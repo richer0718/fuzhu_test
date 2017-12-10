@@ -8,7 +8,24 @@
     <script src="{{ asset('js/laydate/laydate.js') }}"></script>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main" style="max-height:800px;overflow: scroll;" >
 
-
+        <form method="post">
+            <table class="table" style="width:400px;">
+                <tr>
+                    <td>代理账号：</td>
+                    <td>
+                        <input type="text" name="username"  class="form-control" value="@if(!empty($_POST['username'])){{ $_POST['username'] }}@endif"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button class="btn btn-default" type="submit">搜索</button>
+                        <button class="btn btn-default" type="button" onclick="location.href='{{Request::getRequestUri()}}' ">重置</button>
+                        <!--<button class="btn btn-default" type="button">导出</button>-->
+                    </td>
+                </tr>
+            </table>
+            {{ csrf_field() }}
+        </form>
         <!--
         <form method="post">
         <table class="table">

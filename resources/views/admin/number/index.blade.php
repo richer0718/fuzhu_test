@@ -287,6 +287,7 @@
                 alert('该账号挂机信息已经变动，请刷新页面后重试！');
             @endif
 
+
             //删除数据
             $('.delete_number').click(function(){
                 var id  = $(this).attr('data');

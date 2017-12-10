@@ -158,7 +158,20 @@ class NumberController extends Controller
 
             //记录扣除日志
             $log = new Log();
-            $log -> write(session('username'),'挂机',$point_cut,$request -> input('number'),'','',session('kefuusername'));
+            //将字符串转换成中文
+            switch ($request -> input('area')){
+                case 'AZQQ':$temp_area = '安卓QQ';break;
+                case 'AZVX':$temp_area = '安卓微信';break;
+                case 'IOSQQ':$temp_area = '苹果QQ';break;
+                case 'IOSVX':$temp_area = '苹果微信';break;
+            }
+
+            switch ($request -> input('map')){
+                case 'DS':$temp_map = '大师';break;
+                case 'JY':$temp_map = '精英';break;
+                case 'PT':$temp_map = '普通';break;
+            }
+            $log -> write(session('username'),'挂机',$point_cut,$request -> input('number'),'',$temp_area.','.$request -> input('xiaoqu').','.$temp_map.','.$request -> input('save_time').'次,'.$request -> input('order_id'),session('kefuusername'));
 
             if($isset){
                 //如果存在 则删除老数据

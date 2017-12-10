@@ -10,8 +10,13 @@ use Illuminate\Support\Facades\DB;
 class DaiLiController extends Controller
 {
     //
-    public function index(){
-        $res = DB::table('daili') -> get();
+    public function index(Request $request) {
+        $res = DB::table('daili') -> where(function($query) use($request){
+            if( $request-> input('username')){
+                $query -> where('username','like','%'.trim($request -> input('username')).'%' );
+                //dd($request -> input('number'));
+            }
+        }) -> get();
 
         //$res_all = DB::table('daili') -> get();
         $count_guaji = 0;

@@ -71,6 +71,7 @@
         <ol class="breadcrumb">
             <li><a data-toggle="modal" href="{{ url('manage/addNumber') }}">新增账号</a></li>
             <li><a data-toggle="modal" data-target="#recharge">充值</a></li>
+            <li><a href="{{ url('kefu/login') }}" target="_blank">二级账号登录</a></li>
         </ol>
 
         <h1 class="page-header">基本信息 <span class="badge"></span></h1>
@@ -105,7 +106,7 @@
                     @foreach($res as $k => $vo)
                         <tr>
                             <td>{{ $k + 1  }}</td>
-                            <td>@if($vo -> is_jiaji == 1)<a style="color:red;">【急】</a>@endif @if($vo -> is_mark == 1)<a style="color:green;">【标】</a>@endif<a>{{$vo -> order_id }}</a><a style="color:red;" class="gai" wangwang ="{{$vo -> wangwang}}" wangwang_type = "{{ $vo -> wangwang_type }}" order_id = "{{$vo -> order_id }}" number="{{ $vo -> number }}" > 【改】</a></td>
+                            <td>@if($vo -> is_jiaji == 1)<a style="color:red;">【急】</a>@endif @if($vo -> is_mark == 1)<a style="color:green;">【标】</a>@endif<a>{{$vo -> order_id }}</a><a style="color:red;" class="gai" wangwang ="{{$vo -> wangwang}}" wangwang_type = "{{ $vo -> wangwang_type }}" order_id = "{{$vo -> order_id }}" number="{{ $vo -> number }}" is_mark="{{ $vo -> is_mark }}" > 【改】</a></td>
 
                             <td>
                                 @if($vo -> wangwang)
@@ -326,8 +327,9 @@
                                 <td style="width:120px;">订单号：</td>
                                 <td>
                                     <input type="text"  class="form-control"  id="show_order_id" name="order_id" />
+
+                                    <label style="line-height:34px;margin-left:20px;"><input type="checkbox" id="show_is_mark"  />标记</label>
                                     <!--
-                                    <label style="line-height:34px;margin-left:20px;"><input type="checkbox" id="mark_input" disabled   />标记</label>
                                     <label style="line-height:34px;margin-left:10px;"><input type="checkbox" id="jiaji_input" disabled   />加急</label>
                                     <div style="clear:both;"></div>
                                     -->
@@ -387,6 +389,9 @@
         @if (session('rechargeres') && session('rechargeres') == 'error')
             alert('请核对后，再提交，如有疑问，联系QQ：972102275！');
         @endif
+        @if(!count($res))
+                alert('您的账号不存在，请核对后再查！');
+        @endif
 
     </script>
     <script>
@@ -397,10 +402,18 @@
                 var wangwang_type = $(this).attr('wangwang_type');
                 var order_id = $(this).attr('order_id');
                 var number = $(this).attr('number');
+                var is_mark = $(this).attr('is_mark');
+                //alert(is_mark);return false;
                 $('#show_order_id').val(order_id);
                 $('#show_number').val(number);
                 $('input[name=show_number]').val(number);
                 $('#show_wangwang').val(wangwang);
+                if(is_mark == 1){
+                    $('#show_is_mark').attr("checked","true");
+                }else{
+                    $('#show_is_mark').removeAttr("checked");
+                }
+
                 $('input[name=wangwang_type]').eq(wangwang_type).attr('checked',true);
 
                 $('#xiugai').modal('show');

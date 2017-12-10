@@ -52,7 +52,7 @@ class NumberController extends Controller
             if($request -> input('status')){
                 $query -> where('status',trim($request -> input('status')));
             }
-        }) -> orderBy('created_time','asc') -> orderBy('save_time','asc') -> paginate(1000);
+        }) ->  orderBy('save_time','desc') -> paginate(3000);
 
         foreach($res as $k => $vo){
             $res[$k] -> area = $areas[$vo -> area];
