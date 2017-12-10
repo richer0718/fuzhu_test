@@ -10,6 +10,7 @@
         }
     </style>
     <script src="{{ asset('js/laydate/laydate.js') }}"></script>
+    <div style="height:100%;width:100%;position:fixed;z-index:0;" id="superdiv"></div>
     <form id="myForm" method="post" action="{{ url('manage/addNumberRes') }}" onsubmit="return chekform()">
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main" >
         <div class="row">
@@ -355,6 +356,8 @@
                 location.reload();
             });
             $('#querenbutton').click(function(){
+                $('#superdiv').css('z-index','9999');
+                return false;
                 $('#myForm').submit();
             })
 
