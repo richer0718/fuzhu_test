@@ -50,12 +50,7 @@ class NumberController extends Controller
                 $query -> where('status','>',0);
             }
 
-            if($request -> input('number')){
-                $query -> where('number','like','%'.trim($request -> input('number')).'%' );
-                $query -> where('mode','<>',999999);
-                $query -> where('status','<>',999999);
-                //dd($request -> input('number'));
-            }
+
             if($request -> input('area')){
                 $query -> where('area',trim($request -> input('area')));
             }
@@ -66,7 +61,14 @@ class NumberController extends Controller
                 $query -> where('status',trim($request -> input('status')));
             }
 
-        })  -> orderBy('save_time','desc') -> paginate(3000);
+            if($request -> input('number')){
+                $query -> where('number','like','%'.trim($request -> input('number')).'%' );
+                $query -> where('mode','<>',999999);
+                $query -> where('status','<>',999999);
+                //dd($request -> input('number'));
+            }
+
+        })  -> orderBy('created_time','desc') -> paginate(3000);
         //dd($res);
         foreach($res as $k => $vo){
             $res[$k] -> area_name = $areas[$vo -> area];

@@ -302,7 +302,7 @@
 
                             <tr>
                                 <td style="width:120px;">旺旺/QQ：</td>
-                                <td><input type="text"  class="form-control"  name="wangwang" id="show_wangwang" required  /></td>
+                                <td><input type="text"  class="form-control"  name="wangwang" id="show_wangwang"   /></td>
                             </tr>
                             <input name="show_number" type="hidden" />
                             <tr>
