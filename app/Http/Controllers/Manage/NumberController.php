@@ -32,41 +32,43 @@ class NumberController extends Controller
         $add_user = session('username');
         $res = DB::table('number') -> where(function($query) use($url_status,$add_user,$request){
             $query -> where('add_user','=',$add_user);
-            if($url_status == '1'){
-                //历史账号 -> 完成订单 0
-                $query -> whereIn('status',[0,-1]);
-
-            }elseif($url_status == '3'){
-                //问题订单  -1
-                $query -> where('status','<',-1);
-            }elseif($url_status == '2'){
-                //长期账号
-                $query -> where('mode','>',0);
-                //$query -> where('status','>=',0);
-            }else{
-                //挂机 检测时间 asc
-                $order1 = '';
-                //$query -> where('mode','=',0);
-                $query -> where('status','>',0);
-            }
-
-
-            if($request -> input('area')){
-                $query -> where('area',trim($request -> input('area')));
-            }
-            if($request -> input('map')){
-                $query -> where('map',trim($request -> input('map')));
-            }
-            if($request -> input('status')){
-                $query -> where('status',trim($request -> input('status')));
-            }
-
             if($request -> input('number')){
                 $query -> where('number','like','%'.trim($request -> input('number')).'%' );
-                $query -> where('mode','<>',999999);
-                $query -> where('status','<>',999999);
                 //dd($request -> input('number'));
+            }else{
+                if($url_status == '1'){
+                    //历史账号 -> 完成订单 0
+                    $query -> whereIn('status',[0,-1]);
+
+                }elseif($url_status == '3'){
+                    //问题订单  -1
+                    $query -> where('status','<',-1);
+                }elseif($url_status == '2'){
+                    //长期账号
+                    $query -> where('mode','>',0);
+                    //$query -> where('status','>=',0);
+                }else{
+                    //挂机 检测时间 asc
+                    $order1 = '';
+                    //$query -> where('mode','=',0);
+                    $query -> where('status','>',0);
+                }
+
+
+                if($request -> input('area')){
+                    $query -> where('area',trim($request -> input('area')));
+                }
+                if($request -> input('map')){
+                    $query -> where('map',trim($request -> input('map')));
+                }
+                if($request -> input('status')){
+                    $query -> where('status',trim($request -> input('status')));
+                }
             }
+
+
+
+
 
         })  -> orderBy('created_time','desc') -> paginate(3000);
         //dd($res);
@@ -555,6 +557,11 @@ class NumberController extends Controller
 
 
     public function xiugaiRes(Request $request){
+        if($request -> input('is_mark') == 'on'){
+            $is_mark = 1;
+        }else{
+            $is_mark = 0;
+        }
         //开始修改
         $res = DB::table('number') -> where([
             'number' => $request -> input('show_number')
@@ -562,6 +569,7 @@ class NumberController extends Controller
             'order_id' => $request -> input('order_id'),
             'wangwang_type' => $request -> input('wangwang_type'),
             'wangwang' => $request -> input('wangwang'),
+            'is_mark' => $is_mark
         ]);
 
         return redirect('manage/number/1');

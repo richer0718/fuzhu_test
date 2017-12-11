@@ -328,7 +328,7 @@
                                 <td>
                                     <input type="text"  class="form-control"  id="show_order_id" name="order_id" />
 
-                                    <label style="line-height:34px;margin-left:20px;"><input type="checkbox" id="show_is_mark"  />标记</label>
+                                    <label style="line-height:34px;margin-left:20px;"><input type="checkbox" id="show_is_mark" name="is_mark"  />标记</label>
                                     <!--
                                     <label style="line-height:34px;margin-left:10px;"><input type="checkbox" id="jiaji_input" disabled   />加急</label>
                                     <div style="clear:both;"></div>
