@@ -191,6 +191,10 @@
             $('input[name=yanzheng_id]').val(id);
             $('#yanzhengma_input').modal('show')
         })
+        @if(!session('res'))
+            alert('您的账号不存在，请核对后再查！');
+        @endif
+
 
     })
 

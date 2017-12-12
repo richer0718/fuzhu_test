@@ -89,7 +89,9 @@
                     <th><span class="glyphicon glyphicon-camera"></span> <span class="visible-lg">代挂次数</span></th>
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">剩余次数</span></th>
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">代挂地图</span></th>
+                    <!--
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">养号模式</span></th>
+                    -->
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">挂机状态</span></th>
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">挂机设备</span></th>
                     @if($url_status == 2)
@@ -105,7 +107,7 @@
                 @unless(!$res)
                     @foreach($res as $k => $vo)
                         <tr>
-                            <td>{{ $k + 1  }}</td>
+                            <td><label>{{ $k + 1  }}</label></td>
                             <td>@if($vo -> is_jiaji == 1)<a style="color:red;">【急】</a>@endif @if($vo -> is_mark == 1)<a style="color:green;">【标】</a>@endif<a>{{$vo -> order_id }}</a><a style="color:red;" class="gai" wangwang ="{{$vo -> wangwang}}" wangwang_type = "{{ $vo -> wangwang_type }}" order_id = "{{$vo -> order_id }}" number="{{ $vo -> number }}" is_mark="{{ $vo -> is_mark }}" > 【改】</a></td>
 
                             <td>
@@ -124,7 +126,9 @@
                             <td>{{$vo -> use_time}}</td>
                             <td>{{$vo -> save_time}}</td>
                             <td>{{mb_substr($vo -> map,0,4,'utf-8')}}</td>
+                            <!--
                             <td>{{$vo -> mode}}</td>
+                            -->
                             <td>
                                 @if($vo -> status == '微信二维码') <a href="{{ 'http://img.feisushouyou.com/jietu/'.$vo->area.'-'.$vo->number.'.jpg' }}" target="_blank" style="color:red;">扫描微信二维码</a>
                                 @elseif($vo -> status == '手机验证码' )  <a class="yanzhengma" data="{{ $vo -> id }}" style="color:red;">输入验证码</a> <a href="{{ 'http://img.feisushouyou.com/jietu/'.$vo->area.'-'.$vo->number.'.jpg' }}" target="_blank" style="color:red;">查看图片</a>
@@ -389,9 +393,7 @@
         @if (session('rechargeres') && session('rechargeres') == 'error')
             alert('请核对后，再提交，如有疑问，联系QQ：972102275！');
         @endif
-        @if(!count($res))
-                alert('您的账号不存在，请核对后再查！');
-        @endif
+
 
     </script>
     <script>
