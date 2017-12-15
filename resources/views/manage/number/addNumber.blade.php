@@ -62,7 +62,7 @@
                         </tr>
                         <tr>
                             <td>小区：</td>
-                            <td><input type="number" placeholder="留空或者填0 表示刷默认大区" class="form-control" name="xiaoqu"  @if(isset($info)) value="{{ $info -> wangwang }}" @endif  onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')" /></td>
+                            <td><input type="number" placeholder="留空或者填0 表示刷默认大区" class="form-control" name="xiaoqu"  @if(isset($info)) value="{{ $info -> xiaoqu }}" @endif  onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')" /></td>
                         </tr>
                         <tr>
                             <td>刷图选择：</td>

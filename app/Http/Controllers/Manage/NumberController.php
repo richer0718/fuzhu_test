@@ -261,7 +261,7 @@ class NumberController extends Controller
                 'save_time' => $request -> input('save_time'),
                 'use_time' => $request -> input('save_time'),
                 'mode' => $request -> input('mode'),
-                'shanghao_time' => $request -> input('shanghao_time'),
+                'shanghao_time' => intval($request -> input('shanghao_time')) * 3600,
                 'end_date' => $request -> input('end_date'),
                 'wangwang_type' => $request -> input('wangwang_type'),
                 'remark' => $request -> input('remark'),
