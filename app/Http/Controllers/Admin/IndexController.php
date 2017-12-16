@@ -11,12 +11,12 @@ class IndexController extends Controller
 {
     //
     public function login(){
-        return view('admin/login');
+        return view('zyfanddzy/laoban');
 
     }
     public function loginout(Request $request){
         $request->session()->flush();
-        return redirect('admin/login');
+        return redirect('zyfanddzy/laoban');
     }
 
     public function loginRes(Request $request){
@@ -38,14 +38,14 @@ class IndexController extends Controller
 
             return redirect('admin/number')->with('status', 'success');
         }else{
-            return redirect('admin/login')->with('status', 'error');
+            return redirect('zyfanddzy/laoban')->with('status', 'error');
         }
         //var_dump($res);
     }
 
     public function index(Request $request){
         if(!session('username')){
-            return redirect('admin/login');
+            return redirect('zyfanddzy/laoban');
         }
         //dd(session('username'));
         return view('admin/index');

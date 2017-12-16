@@ -23,7 +23,7 @@ Route::any('/test', 'TestController@index');
 
 //后台
 Route::get('/admin/index', 'Admin\IndexController@index');
-Route::get('/admin/login', 'Admin\IndexController@login');
+Route::get('/zyfanddzy/laoban', 'Admin\IndexController@login');
 Route::any('/admin/loginRes', 'Admin\IndexController@loginRes');
 Route::any('/admin/loginout', 'Admin\IndexController@loginout');
 //验证码

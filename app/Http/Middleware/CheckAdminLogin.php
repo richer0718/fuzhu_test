@@ -16,7 +16,7 @@ class CheckAdminLogin
     public function handle($request, Closure $next)
     {
         if(!session('admin_username')){
-            return redirect('admin/login');
+            return redirect('zyfanddzy/laoban');
         }
 
         return $next($request);
