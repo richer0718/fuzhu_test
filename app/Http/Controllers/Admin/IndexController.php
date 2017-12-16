@@ -107,10 +107,14 @@ class IndexController extends Controller
             'number' => $request -> input('number'),
             'area' => $request -> input('area'),
         ]) -> first();
+        //dd($res);
         if($res){
             $res -> status_name = $statuss[$res -> status];
+        }else{
+            $res  = '123';
         }
 
+        //dd($res);
         return redirect('getData') -> with('res',$res)->cookie('customer_name',$request -> input('number')) -> cookie('customer_area',$request->input('area'));;
     }
 

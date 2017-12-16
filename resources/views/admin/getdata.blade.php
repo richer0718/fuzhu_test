@@ -68,7 +68,7 @@
     -->
 </div>
 
-@if( session('res') )
+@if( session('res') && session('res') != '123' )
     <div class="modal fade " id="showres" tabindex="-1" role="dialog"  >
         <div class="modal-dialog" role="document" style="width:80%;">
             <form action="{{ url('admin/editDailiRes') }}" method="post" autocomplete="off" draggable="false" id="myForm">
@@ -149,7 +149,7 @@
                             <td wdith="20%">验证码:</td>
                             <td width="80%"><input type="number" value="" class="form-control" name="yanzhengma" maxlength="" autocomplete="off" required/></td>
                         </tr>
-                        @if(session('res'))
+                        @if(session('res') && session('res') != '123')
                         <tr>
                             <td colspan="2">
                                 <img src="{{ 'http://img.feisushouyou.com/jietu/'.session('res') -> area .'-'.session('res') -> number.'.jpg' }}" style="width:100%;height:80px;"  />
@@ -191,7 +191,9 @@
             $('input[name=yanzheng_id]').val(id);
             $('#yanzhengma_input').modal('show')
         })
-        @if(!session('res'))
+
+
+        @if(session('res') == '123')
             alert('您的账号不存在，请核对后再查！');
         @endif
 
