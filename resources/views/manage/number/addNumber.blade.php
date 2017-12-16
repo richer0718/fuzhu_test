@@ -389,7 +389,7 @@
             }
 
             if($('input[name=number]').val().indexOf('%')>=1 || $('input[name=number]').val().indexOf('#')>=1 || $('input[name=pass]').val().indexOf('%')>=1 || $('input[name=pass]').val().indexOf('#')>=1 ){
-                alert('输入不合法');return false;
+                //alert('输入不合法');return false;
             }
 
 
