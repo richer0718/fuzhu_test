@@ -99,6 +99,9 @@ class IndexController extends Controller
             '21' => '内部错误',
             '-20' => '验证失败',
             '-21' => '点数不足',
+            '-10' => '区不存在',
+            '-11' => '抢先服不能刷',
+            '22' => '更换设备挂机'
         ];
         $res = DB::table('number') -> where([
             'number' => $request -> input('number'),
