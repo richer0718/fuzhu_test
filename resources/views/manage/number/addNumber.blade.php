@@ -43,11 +43,11 @@
 
                         <tr>
                             <td style="width:120px;"><a style="color:red;">*</a>游戏账号：</td>
-                            <td><input type="text"  class="form-control"  name="number" @if(isset($info) || old('number') ) value="{{ $info -> number or old('number')  }}" @endif required  onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')"/></td>
+                            <td><input type="text"  class="form-control"  name="number" @if(isset($info) || old('number') ) value="{{ $info -> number or old('number')  }}" @endif required  /></td>
                         </tr>
                         <tr>
                             <td><a style="color:red;">*</a>游戏密码：</td>
-                            <td><input type="text"  placeholder="只能填写数字、字母、半角符号（半角逗号除外）"  class="form-control" name="pass" @if(isset($info) || old('pass') ) value="{{ $info -> pass or old('pass') }}" @endif required onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')" /></td>
+                            <td><input type="text"  placeholder="游戏密码"  class="form-control" name="pass" @if(isset($info) || old('pass') ) value="{{ $info -> pass or old('pass') }}" @endif required /></td>
                         </tr>
                         <tr>
                             <td>大区：</td>
@@ -62,7 +62,7 @@
                         </tr>
                         <tr>
                             <td>小区：</td>
-                            <td><input type="number" placeholder="留空或者填0 表示刷默认大区" class="form-control" name="xiaoqu"  @if(isset($info)) value="{{ $info -> xiaoqu }}" @endif  onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.\!\#\$\%\?]/g,'')" /></td>
+                            <td><input type="number" placeholder="留空或者填0 表示刷默认大区" class="form-control" name="xiaoqu"  @if(isset($info)) value="{{ $info -> xiaoqu }}" @endif   /></td>
                         </tr>
                         <tr>
                             <td>刷图选择：</td>
@@ -113,7 +113,7 @@
                             <td>
                                 <div class="input-group">
                                     <input type="number" class="form-control" name="shanghao_time" min="0" value="0" required/>
-                                    <span class="input-group-addon">分钟后开始排队！</span>
+                                    <span class="input-group-addon">小时后开始排队！</span>
                                 </div>
                             </td>
                         </tr>
