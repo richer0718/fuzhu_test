@@ -134,7 +134,7 @@ class NumberController extends Controller
             }
 
             //（当前时间+上号时间*60）*1000'
-            $jiange = intval(time() + intval($request -> input('shanghao_time'))*3600  );
+            $jiange = intval(time() + intval($request -> input('shanghao_time'))*3600  )* 1000;
 
             $url = 'http://222.185.25.254:8088/jsp1/input3.jsp?name='.$daqu.'-'.$number.'&passwd='.$pass.'&info='.$youxi.'&jiange='.$jiange;
             $url2 = 'http://222.185.25.254:8088/jsp1/delete3.jsp?name='.$daqu.'-'.$number;
