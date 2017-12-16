@@ -11,7 +11,7 @@ class IndexController extends Controller
 {
     //
     public function login(){
-        return view('zyfanddzy/laoban');
+        return view('admin/login');
 
     }
     public function loginout(Request $request){
