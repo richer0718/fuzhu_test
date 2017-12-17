@@ -402,11 +402,19 @@
             var number_input = $('input[name=number]').val();
             var pass_input = $('input[name=pass]').val();
 
-            if(number_input.indexOf('#')>=1 || number_input.indexOf('%')>=1 || number_input.indexOf(',')>=1 || number_input.indexOf('，')>=1 || number_input.indexOf('.')>=1 || number_input.indexOf('。')>=1){
+            if(number_input.indexOf('#')>=0 || number_input.indexOf('%')>=0 || number_input.indexOf(',')>=0 || number_input.indexOf('，')>=0 ||  number_input.indexOf('。')>=0){
                 alert('输入不合法');return false;
             }
 
-            if(pass_input.indexOf('#')>=1 || pass_input.indexOf('%')>=1 || pass_input.indexOf(',')>=1 || pass_input.indexOf('，')>=1 || pass_input.indexOf('.')>=1 || pass_input.indexOf('。')>=1){
+            if(pass_input.indexOf('#')>=0 || pass_input.indexOf('%')>=0 || pass_input.indexOf(',')>=0 || pass_input.indexOf('，')>=0 || pass_input.indexOf('。')>=0){
+                alert('输入不合法');return false;
+            }
+
+            var myReg = /^[\u4e00-\u9fa5]+$/;
+            if(myReg.test(number_input)){
+                alert('输入不合法');return false;
+            }
+            if(pass_input.test(number_input)){
                 alert('输入不合法');return false;
             }
 
