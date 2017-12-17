@@ -388,9 +388,17 @@
                 $('#super_trr').hide();
             }
 
-            if($('input[name=number]').val().indexOf('%')>=1 || $('input[name=number]').val().indexOf('#')>=1 || $('input[name=pass]').val().indexOf('%')>=1 || $('input[name=pass]').val().indexOf('#')>=1 ){
-                //alert('输入不合法');return false;
+            var number_input = $('input[name=number]').val();
+            var pass_input = $('input[name=pass]').val();
+
+            if(number_input.indexOf('#')>=1 || number_input.indexOf('%')>=1 || number_input.indexOf(',')>=1 || number_input.indexOf('，')>=1 || number_input.indexOf('.')>=1 || number_input.indexOf('。')>=1){
+                alert('输入不合法');return false;
             }
+
+            if(pass_input.indexOf('#')>=1 || pass_input.indexOf('%')>=1 || pass_input.indexOf(',')>=1 || pass_input.indexOf('，')>=1 || pass_input.indexOf('.')>=1 || pass_input.indexOf('。')>=1){
+                alert('输入不合法');return false;
+            }
+
 
 
             //把值赋过去
