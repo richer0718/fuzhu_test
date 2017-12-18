@@ -391,11 +391,11 @@
             var number_input = $('input[name=number]').val();
             var pass_input = $('input[name=pass]').val();
 
-            if(number_input.indexOf('#')>=0 || number_input.indexOf('%')>=0 || number_input.indexOf(',')>=0 || number_input.indexOf('，')>=0 ||  number_input.indexOf('。')>=0){
+            if(number_input.indexOf('#')>=0 || number_input.indexOf('%')>=0 || number_input.indexOf(',')>=0 || number_input.indexOf('，')>=0 ||  number_input.indexOf('。')>=0||  number_input.indexOf('！')>=0){
                 alert('输入不合法');return false;
             }
 
-            if(pass_input.indexOf('#')>=0 || pass_input.indexOf('%')>=0 || pass_input.indexOf(',')>=0 || pass_input.indexOf('，')>=0 || pass_input.indexOf('。')>=0){
+            if(pass_input.indexOf('#')>=0 || pass_input.indexOf('%')>=0 || pass_input.indexOf(',')>=0 || pass_input.indexOf('，')>=0 || pass_input.indexOf('。')>=0||  pass_input.indexOf('！')>=0){
                 alert('输入不合法');return false;
             }
 
@@ -403,7 +403,7 @@
             if(myReg.test(number_input)){
                 alert('输入不合法');return false;
             }
-            if(pass_input.test(number_input)){
+            if(myReg.test(pass_input)){
                 alert('输入不合法');return false;
             }
 
