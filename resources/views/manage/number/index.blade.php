@@ -79,6 +79,11 @@
             <table class="table table-striped table-hover" id="mytable">
                 <thead>
                 <tr style="height:40px;">
+                    <th><span class="glyphicon glyphicon-th-large"></span> <span class="visible-lg">
+                            <input type="button" value="全选" id="quanxuan"/><br>
+                            <input type="button" value="取消" id="quxiao"/><br>
+                            <input type="button" value="删除" id="shanchu" />
+                        </span></th>
                     <th><span class="glyphicon glyphicon-th-large"></span> <span class="visible-lg">ID</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">订单编号</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">旺旺/QQ</span></th>
@@ -107,6 +112,7 @@
                 @unless(!$res)
                     @foreach($res as $k => $vo)
                         <tr>
+                            <td><label><input type="checkbox"  name="numbers_check" class="numbers_check" value="{{ $vo -> id }}" /></label></td>
                             <td><label>{{ $k + 1  }}</label></td>
                             <td>@if($vo -> is_jiaji == 1)<a style="color:red;">【急】</a>@endif @if($vo -> is_mark == 1)<a style="color:green;">【标】</a>@endif<a>{{$vo -> order_id }}</a><a style="color:red;" class="gai" wangwang ="{{$vo -> wangwang}}" wangwang_type = "{{ $vo -> wangwang_type }}" order_id = "{{$vo -> order_id }}" number="{{ $vo -> number }}" is_mark="{{ $vo -> is_mark }}" > 【改】</a></td>
 
@@ -163,7 +169,7 @@
                 <tfoot>
                     <tr>
 
-                        <td colspan="@if($url_status == 2) 17 @else 16 @endif">{{ $res -> links() }}</td>
+                        <td colspan="@if($url_status == 2) 18 @else 17 @endif">{{ $res -> links() }}</td>
                     </tr>
                 </tfoot>
                 @endif
@@ -398,6 +404,68 @@
     </script>
     <script>
         $(function(){
+            //全选
+            $('#quanxuan').click(function(){
+
+                //全部勾选
+                var allCheckBoxs = document.getElementsByName("numbers_check");
+                for(var i = 0; i < allCheckBoxs.length;i++ ){
+                    allCheckBoxs[i].checked = true;
+                }
+
+
+            })
+            $('#quxiao').click(function(){
+
+                //全部勾选
+                var allCheckBoxs = document.getElementsByName("numbers_check");
+                for(var i = 0; i < allCheckBoxs.length;i++ ){
+                    allCheckBoxs[i].checked = false;
+                }
+
+            })
+            $('#shanchu').click(function(){
+                var length = $('input[name=numbers_check]:checked').length;
+                var data = '';
+                if(!length){
+                    alert('请至少选择一个');return false;
+                }
+                for(var i = 0 ; i < length;i++ ){
+                    data += $('input[name=numbers_check]:checked').eq(i).val()+',';
+                }
+
+                data = data.substr(0,data.length-1);
+
+                if(confirm('您确定要删除么')){
+                    alert('请等待');
+                    var url = '{{ url('manage/deleteAllData') }}';
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: {data:data},
+                        //dataType:'json',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(data){
+                            if(data == 'success'){
+                                alert('删除成功');
+                                location.reload();
+                            }
+                        },
+                        error: function(xhr, type){
+                            alert('Ajax error!')
+                        }
+                    });
+                }
+
+
+
+            })
+
+
+
+
             //针对编号修改
             $('.gai').click(function(){
                 var wangwang = $(this).attr('wangwang');

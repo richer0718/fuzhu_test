@@ -577,6 +577,20 @@ class NumberController extends Controller
 
     }
 
+    //删除所有
+    public function deleteAllData(Request $request){
+        $datas = $request -> input('data');
+        $arr = explode(',',$datas);
+        foreach($arr as $vo){
+            //删除每个id
+            $res = DB::table('number') -> where([
+                'id' => $vo,
+                'add_user' => session('username')
+            ]) -> delete();
+        }
+        echo 'success';
+    }
+
 }
 
 

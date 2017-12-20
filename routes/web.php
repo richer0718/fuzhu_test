@@ -111,6 +111,7 @@ Route::group(['as' => 'number_guaji','middleware' => ['checklogin']], function (
     Route::any('/manage/yanzhengma', 'Manage\NumberController@yanzhengma');
     Route::any('/manage/xiugaiRes', 'Manage\NumberController@xiugaiRes');
     Route::any('/manage/delete_number/{id}', 'Manage\NumberController@delete_number');
+    Route::any('/manage/deleteAllData', 'Manage\NumberController@deleteAllData');
 });
 //历史账号
 Route::group(['as' => 'number_history','middleware' => ['checklogin']], function () {
