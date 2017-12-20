@@ -518,7 +518,8 @@ class NumberController extends Controller
     public function delete_number($id){
         $res = DB::table('number') -> where([
             'id' => $id,
-            'add_user' => session('username')
+            'add_user' => session('username'),
+            'save_time' => 0
         ]) -> delete();
         if($res){
 
@@ -585,7 +586,8 @@ class NumberController extends Controller
             //删除每个id
             $res = DB::table('number') -> where([
                 'id' => $vo,
-                'add_user' => session('username')
+                'add_user' => session('username'),
+                'save_time' => 0
             ]) -> delete();
         }
         echo 'success';
