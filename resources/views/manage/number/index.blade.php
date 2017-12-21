@@ -6,6 +6,10 @@
         }
     </style>
     <script src="{{ asset('js/laydate/laydate.js') }}"></script>
+    <form method="post" action="{{ url('manage/exportFile') }}" id="myExportFileForm">
+        <input type="hidden" name="data" id="shuju" />
+        {{ csrf_field() }}
+    </form>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main" style="width:90%;margin-left:10%;overflow: scroll;" >
         <h1 style="text-align: center">{{ $status_name }}</h1>
         <h1 style="font-size:26px;color:purple;">{!! $note_res !!}</h1>
@@ -72,6 +76,9 @@
             <li><a data-toggle="modal" href="{{ url('manage/addNumber') }}">新增账号</a></li>
             <li><a data-toggle="modal" data-target="#recharge">充值</a></li>
             <li><a href="{{ url('kefu/login') }}" target="_blank">二级账号登录</a></li>
+            <!--
+            <li><a href="{{ url('manage/exportFile') }}" target="_blank">导出</a></li>
+            -->
         </ol>
 
         <h1 class="page-header">基本信息 <span class="badge"></span></h1>
@@ -82,7 +89,8 @@
                     <th><span class="glyphicon glyphicon-th-large"></span> <span class="visible-lg">
                             <input type="button" value="全选" id="quanxuan"/><br>
                             <input type="button" value="取消" id="quxiao"/><br>
-                            <input type="button" value="删除" id="shanchu" />
+                            <input type="button" value="删除" id="shanchu" /><br>
+                            <input type="button" value="导出" id="daochu"/>
                         </span></th>
                     <th><span class="glyphicon glyphicon-th-large"></span> <span class="visible-lg">ID</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">订单编号</span></th>
@@ -457,6 +465,28 @@
                             alert('Ajax error!')
                         }
                     });
+                }
+
+
+
+            })
+
+            //导出
+            $('#daochu').click(function(){
+                var length = $('input[name=numbers_check]:checked').length;
+                var data = '';
+                if(!length){
+                    alert('请至少选择一个');return false;
+                }
+                for(var i = 0 ; i < length;i++ ){
+                    data += $('input[name=numbers_check]:checked').eq(i).val()+',';
+                }
+
+                data = data.substr(0,data.length-1);
+
+                if(confirm('您确定要导出么')){
+                    $('#shuju').val(data);
+                    $('#myExportFileForm').submit();
                 }
 
 

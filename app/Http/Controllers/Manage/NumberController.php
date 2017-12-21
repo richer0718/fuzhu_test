@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Maatwebsite\Excel\Facades\Excel;
 
 class NumberController extends Controller
 {
@@ -591,6 +592,34 @@ class NumberController extends Controller
             ]) -> delete();
         }
         echo 'success';
+    }
+
+    //导出
+    public function exportFile(Request $request){
+        set_time_limit(0);
+        $data = $request -> input('data');
+        $data = explode(',',$data);
+        //大区
+        $areas = config('setting.areas');
+        //地图
+        $maps = config('setting.maps');
+
+        $res_arr[] = ['订单编号','旺旺/QQ','游戏账号','游戏密码','大区','小区','代挂次数','代挂地图','检测时间','操作时间'];
+        foreach($data as $k => $vo){
+            //查这个id的信息
+            $temp = DB::table('number') -> where([
+                'id' => $vo
+            ]) -> first();
+            $res_arr[] = [$temp -> order_id,$temp -> wangwang,$temp->number,$temp->pass,$areas[$temp->area],$temp->xiaoqu,$temp->use_time,$maps[$temp->map],date('Y-m-d H:i',$temp->updated_time),date('Y-m-d H:i',$temp->created_time)];
+
+        }
+
+        Excel::create('订单'.date('Y-m-d'),function($excel) use ($res_arr){
+            $excel->sheet('order', function($sheet) use ($res_arr){
+                $sheet->rows($res_arr);
+            });
+        })->export('xls');
+
     }
 
 }
