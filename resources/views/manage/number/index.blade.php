@@ -89,7 +89,7 @@
                     <th><span class="glyphicon glyphicon-th-large"></span> <span class="visible-lg">
                             <input type="button" value="全选" id="quanxuan"/><br>
                             <input type="button" value="取消" id="quxiao"/><br>
-                            <input type="button" value="删除" id="shanchu" /><br>
+                            @if($url_status)<input type="button" value="删除" id="shanchu" /><br>@endif
                             <input type="button" value="导出" id="daochu"/>
                         </span></th>
                     <th><span class="glyphicon glyphicon-th-large"></span> <span class="visible-lg">ID</span></th>
@@ -120,7 +120,7 @@
                 @unless(!$res)
                     @foreach($res as $k => $vo)
                         <tr>
-                            <td>@if($url_status)<label><input type="checkbox"  name="numbers_check" class="numbers_check" value="{{ $vo -> id }}" /></label>@endif</td>
+                            <td><label><input type="checkbox"  name="numbers_check" class="numbers_check" value="{{ $vo -> id }}" /></label></td>
                             <td><label>{{ $k + 1  }}</label></td>
                             <td>@if($vo -> is_jiaji == 1)<a style="color:red;">【急】</a>@endif @if($vo -> is_mark == 1)<a style="color:green;">【标】</a>@endif<a>{{$vo -> order_id }}</a><a style="color:red;" class="gai" wangwang ="{{$vo -> wangwang}}" wangwang_type = "{{ $vo -> wangwang_type }}" order_id = "{{$vo -> order_id }}" number="{{ $vo -> number }}" is_mark="{{ $vo -> is_mark }}" > 【改】</a></td>
 
