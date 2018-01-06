@@ -32,6 +32,23 @@ Route::get('/captcha', 'CodeController@index');
 
 Route::get('/clearSession', 'CodeController@clear');
 
+//api
+Route::group(['prefix' => 'api'], function () {
+    //table1
+    Route::get('/uploadNumber', 'ApiController@uploadNumber');
+    Route::get('/deleteNumber', 'ApiController@deleteNumber');
+
+    //table2
+    Route::get('/updateDeviceData', 'ApiController@updateDeviceData');
+    Route::get('/getDeviceData', 'ApiController@getDeviceData');
+
+    //table4
+    Route::get('/addNumberTable4', 'ApiController@addNumberTable4');
+    Route::get('/deleteNumberTable4', 'ApiController@deleteNumberTable4');
+    Route::get('/updateNumberTable4', 'ApiController@updateNumberTable4');
+    Route::get('/getNumberTable4', 'ApiController@getNumberTable4');
+});
+
 
 
 
