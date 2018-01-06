@@ -67,16 +67,17 @@ class ApiController extends Controller
                         'info2' => trim($_GET['info2'])
                     ]) -> update([
                         'info' => trim($_GET['info']),
-                        'name' => $isset -> name,
-                        'passwd' => $isset -> passwd,
+                        'name' => $number -> name,
+                        'passwd' => $number -> passwd,
                         'time' => time()
                     ]);
                 }else{
+                    //找一个
                     //插入
                     $res = DB::table('newtable2') -> insert([
                         'info' => trim($_GET['info']),
-                        'name' => $isset -> name,
-                        'passwd' => $isset -> passwd,
+                        'name' => $number -> name,
+                        'passwd' => $number -> passwd,
                         'info2' => trim($_GET['info2']),
                         'time' => time()
                     ]);
