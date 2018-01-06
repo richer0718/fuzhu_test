@@ -117,7 +117,7 @@ class ApiController extends Controller
 
     //表4
     public function addNumberTable4(){
-        if($_GET['name'] && $_GET['pwe'] && $_GET['wheree'] && $_GET['beizhu1'] && $_GET['beizhu2'] && $_GET['beizhu3'] && $_GET['beizhu4']){
+        if($_GET['name'] && $_GET['pwe'] ){
             $isset = DB::table('newtable4') -> where([
                 'name' => trim($_GET['name'])
             ])->first();
@@ -163,7 +163,7 @@ class ApiController extends Controller
 
     public function updateNumberTable4(){
         //替换：就是，不管存在不存在，直接覆盖。没有就上传，有就替换
-        if($_GET['name'] && $_GET['pwe'] && $_GET['wheree'] && $_GET['beizhu1'] && $_GET['beizhu2'] && $_GET['beizhu3'] && $_GET['beizhu4']){
+        if($_GET['name'] && $_GET['pwe'] ){
             $isset = DB::table('newtable4') -> where([
                 'name' => trim($_GET['name'])
             ])->first();
