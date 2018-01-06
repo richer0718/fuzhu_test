@@ -69,7 +69,7 @@ class ApiController extends Controller
                         'info' => trim($_GET['info']),
                         'name' => $number -> name,
                         'passwd' => $number -> passwd,
-                        'time' => time()
+                        'timee' => time()
                     ]);
                 }else{
                     //找一个
@@ -79,7 +79,7 @@ class ApiController extends Controller
                         'name' => $number -> name,
                         'passwd' => $number -> passwd,
                         'info2' => trim($_GET['info2']),
-                        'time' => time()
+                        'timeee' => time()
                     ]);
                 }
 
