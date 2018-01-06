@@ -85,7 +85,7 @@ class ApiController extends Controller
 
                 if($res){
                     DB::table('newtable') -> where([
-                        'id' => $number
+                        'id' => $number -> id
                     ]) -> update([
                         'mark' => 1
                     ]);
