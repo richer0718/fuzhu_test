@@ -216,7 +216,9 @@ class ApiController extends Controller
                 'name' => trim($_GET['name']),
             ])->first();
             if($res){
-                return response() -> json($res);
+                echo $res->name.','.$res->pwe.','.$res->wheree.','.$res->beizhu1.','.$res->beizhu2.','.$res->beizhu3.','.$res->beizhu4;
+
+                //return response() -> json($res);
             }
         }else{
             echo 'error';
