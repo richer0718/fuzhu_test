@@ -110,7 +110,7 @@ class ApiController extends Controller
                 'info2' => trim($_GET['info2'])
             ]) -> first();
             if($isset){
-                echo $isset -> name.','.$isset -> passwd.','.$isset -> info;
+                echo $isset -> name.','.$isset -> passwd;
             }else{
                 echo 'nodata';
             }
