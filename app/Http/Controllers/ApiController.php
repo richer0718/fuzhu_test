@@ -13,7 +13,7 @@ class ApiController extends Controller
             $repeat = DB::table('newtable') -> where([
                 'name' => trim($_GET['name'])
             ]) -> first();
-            if($repeat -> id){
+            if($repeat){
                 echo 'repeat';
             }else{
                 //插入
