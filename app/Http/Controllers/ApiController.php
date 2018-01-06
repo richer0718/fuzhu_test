@@ -163,7 +163,7 @@ class ApiController extends Controller
 
     public function updateNumberTable4(){
         //替换：就是，不管存在不存在，直接覆盖。没有就上传，有就替换
-        if($_GET['name'] && $_GET['pwe'] ){
+        if($_GET['name']){
             $isset = DB::table('newtable4') -> where([
                 'name' => trim($_GET['name'])
             ])->first();
