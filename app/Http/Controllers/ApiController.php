@@ -272,6 +272,7 @@ class ApiController extends Controller
                     ])->update([
                         'passwd' => $vo -> passwd,
                         'info' => $vo -> info,
+                        'mark' => NULL
                     ]);
                 }else{
                     //插入
@@ -292,7 +293,14 @@ class ApiController extends Controller
             echo 'nonumber';
         }
     }
-
+/*
+* * * * * /usr/bin/curl http://feifeifuzhu.com/fuzhu_test/public/api/autoRunTable3
+* * * * * sleep 10; /usr/bin/curl http://feifeifuzhu.com/fuzhu_test/public/api/autoRunTable3
+* * * * * sleep 20; /usr/bin/curl http://feifeifuzhu.com/fuzhu_test/public/api/autoRunTable3
+* * * * * sleep 30; /usr/bin/curl http://feifeifuzhu.com/fuzhu_test/public/api/autoRunTable3
+* * * * * sleep 40; /usr/bin/curl http://feifeifuzhu.com/fuzhu_test/public/api/autoRunTable3
+* * * * * sleep 50; /usr/bin/curl http://feifeifuzhu.com/fuzhu_test/public/api/autoRunTable3
+*/
 
 
 
