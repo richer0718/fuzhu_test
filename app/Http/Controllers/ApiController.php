@@ -84,7 +84,12 @@ class ApiController extends Controller
                 }
 
                 if($res){
-                    echo 'success';
+                    DB::table('newtable') -> where([
+                        'id' => $number
+                    ]) -> update([
+                        'mark' => 1
+                    ]);
+                    echo $number->name.','.$number -> passwd;
                 }else{
                     echo 'error';
                 }
