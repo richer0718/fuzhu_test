@@ -55,7 +55,7 @@ class ApiController extends Controller
         if($_GET['info'] && $_GET['info2']){
             $number = DB::table('newtable') -> where([
                 'info' => trim($_GET['info']),
-                'mark' => ''
+                'mark' => NULL
             ]) -> first();
             if($number){
                 $isset = DB::table('newtable2') -> where([
