@@ -299,6 +299,22 @@ class ApiController extends Controller
             echo 'nonumber';
         }
     }
+
+
+    public function getNumberTable5(){
+        if($_GET['info']){
+            $res = DB::table('newtable5') -> where([
+                'info' => trim($_GET['info'])
+            ]) -> first();
+            if($res){
+                echo $res -> tezhen;
+            }else{
+                echo 'nodata';
+            }
+        }else{
+            echo 'error';
+        }
+    }
 /*
 * * * * * /usr/bin/curl http://feifeifuzhu.com/fuzhu_test/public/api/autoRunTable3
 * * * * * sleep 10; /usr/bin/curl http://feifeifuzhu.com/fuzhu_test/public/api/autoRunTable3
