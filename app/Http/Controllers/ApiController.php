@@ -35,9 +35,14 @@ class ApiController extends Controller
 
     public function deleteNumber(){
         if($_GET['name']){
-            DB::table('newtable') -> where([
+            $res = DB::table('newtable') -> where([
                 'name' => trim($_GET['name'])
             ]) -> delete();
+            if($res){
+                echo 'success';
+            }else{
+                echo 'nosuccess';
+            }
         }else{
             echo 'error';
         }
