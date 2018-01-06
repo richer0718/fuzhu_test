@@ -79,7 +79,7 @@ class ApiController extends Controller
                         'name' => $number -> name,
                         'passwd' => $number -> passwd,
                         'info2' => trim($_GET['info2']),
-                        'timeee' => time()
+                        'timee' => time()
                     ]);
                 }
 
