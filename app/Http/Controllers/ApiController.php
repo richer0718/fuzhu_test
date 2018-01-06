@@ -226,6 +226,74 @@ class ApiController extends Controller
     }
 
 
+    public function addNumberTable3(){
+        if($_GET['name'] && $_GET['passwd'] && $_GET['info']&& $_GET['jiange2']){
+            $repeat = DB::table('newtable3') -> where([
+                'name' => trim($_GET['name'])
+            ]) -> first();
+            if($repeat){
+                echo 'repeat';
+            }else{
+                //插入
+                $res = DB::table('newtable3') -> insert([
+                    'name' => trim($_GET['name']),
+                    'passwd' => trim($_GET['passwd']),
+                    'info' => trim($_GET['info']),
+                    'jiange2' => trim($_GET['jiange2']),
+                ]);
+                if($res){
+                    echo 'success';
+                }else{
+                    echo 'error';
+                }
+            }
+        }else{
+            echo 'error';
+        }
+    }
+
+    //自动程序 从表3跑到表1中
+    public function autoRunTable3(){
+        $time = time();
+        $numbers = DB::table('newtable3')
+            -> where('jiange2', '<=', $time)
+            -> get();
+        //把这些号全放到1表
+        if($numbers){
+            foreach($numbers as $vo){
+
+                $repeat = DB::table('newtable') -> where([
+                    'name' => $vo -> name
+                ]) -> first();
+                if($repeat){
+                    //更新
+                    $res = DB::table('newtable') -> where([
+                        'name' => $vo -> name
+                    ])->update([
+                        'passwd' => $vo -> passwd,
+                        'info' => $vo -> info,
+                    ]);
+                }else{
+                    //插入
+                    $res = DB::table('newtable') -> insert([
+                        'name' => $vo -> name,
+                        'passwd' => $vo -> passwd,
+                        'info' => $vo -> info,
+                    ]);
+                }
+
+                //删除
+                DB::table('newtable3')
+                    -> where('name', $vo -> name)
+                    -> delete();
+
+            }
+        }else{
+            echo 'nonumber';
+        }
+    }
+
+
 
 
 

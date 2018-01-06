@@ -42,11 +42,21 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/updateDeviceData', 'ApiController@updateDeviceData');
     Route::get('/getDeviceData', 'ApiController@getDeviceData');
 
+    //table3
+    Route::get('/addNumberTable3', 'ApiController@addNumberTable3');
+
+
     //table4
     Route::get('/addNumberTable4', 'ApiController@addNumberTable4');
     Route::get('/deleteNumberTable4', 'ApiController@deleteNumberTable4');
     Route::get('/updateNumberTable4', 'ApiController@updateNumberTable4');
     Route::get('/getNumberTable4', 'ApiController@getNumberTable4');
+
+
+
+
+    //auto
+    Route::get('/autoRunTable3', 'ApiController@autoRunTable3');
 });
 
 
