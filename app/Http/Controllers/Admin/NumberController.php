@@ -56,7 +56,7 @@ class NumberController extends Controller
 
         foreach($res as $k => $vo){
             $res[$k] -> area = $areas[$vo -> area];
-            $res[$k] -> map = $maps[$vo -> map];
+            $res[$k] -> map = $maps[$vo -> map]['name'];
             $res[$k] -> mode = $modes[$vo -> mode];
             $res[$k] -> status = $statuss[$vo -> status];
         }

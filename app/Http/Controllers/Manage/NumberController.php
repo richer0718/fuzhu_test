@@ -75,18 +75,12 @@ class NumberController extends Controller
         //dd($res);
         foreach($res as $k => $vo){
             $res[$k] -> area_name = $areas[$vo -> area];
-            $res[$k] -> map = $maps[$vo -> map];
+            $res[$k] -> map = $maps[$vo -> map]['name'];
             $res[$k] -> mode = $modes[$vo -> mode];
             $res[$k] -> status = $statuss[$vo -> status];
         }
-
         //返回价格列表
-        $price = DB::table('xishu') -> get();
-        $price_str = '';
-        foreach($price as $vo){
-            $price_str .= $vo -> remark.':'.$vo -> number.'  ';
-        }
-
+        $price_str = htmlspecialchars_decode(config('setting.remarks'));
         //查找此代理的信息
         $userinfo = DB::table('daili') -> where([
             'username' => session('username')
@@ -142,7 +136,7 @@ class NumberController extends Controller
 
 
     public function addNumber(){
-        $xishus = DB::table('xishu') -> get();
+        $xishus = config('setting.prices');
         $info = null;
         if(session('info')){
             $info = session('info');
@@ -173,11 +167,11 @@ class NumberController extends Controller
 
         //该代理账号的“总点数”大于或等于“刷图次数*系数”
         //根据大区，获取系数
-        $xishus = DB::table('xishu') -> where([
-            'code' => $request -> input('area')
-        ]) -> where('map','like','%'.$request -> input('map') .'%') ->  first();
-        //用户选择的系数
-        $xishu = $xishus -> number;
+
+        $xishus = config('setting.prices');
+        $maps = config('setting.maps');
+        $xishu = $xishus[$request -> input('area').$maps[$request -> input('map')]['pre']];
+
         $userinfo = DB::table('daili') -> where([
             'username' => session('username')
         ]) -> first();
@@ -446,11 +440,10 @@ class NumberController extends Controller
         ]) -> first();
 
         //找出他的系数
-        $xishus = DB::table('xishu') -> where([
-            'code' => $number_info -> area
-        ]) -> first();
-        //单价
-        $danjia = $xishus -> number;
+
+        $xishus = config('setting.prices');
+        $maps = config('setting.maps');
+        $danjia = $xishus[$number_info->area.$maps[$number_info->map]['pre']];
         //总共返还的点数
         $price_all = intval($danjia) * intval($number_info -> save_time);
 

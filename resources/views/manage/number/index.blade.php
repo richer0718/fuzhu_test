@@ -15,7 +15,7 @@
         <h1 style="font-size:26px;color:purple;">{!! $note_res !!}</h1>
         <h1 class="page-header">总点数：{{ $userinfo -> point_all }}<br>剩余点数：{{ $userinfo -> point }}</h1>
 
-            <h1 class="page-header"> 代挂费用：{{ $price_str }}</h1>
+            <h1 class="page-header"> 代挂费用：{!! $price_str !!}</h1>
 
         <form method="post">
         <table class="table">
@@ -41,7 +41,7 @@
                     <select name="map">
                         <option value="">请选择</option>
                         @foreach($maps as $k => $vo)
-                            <option value="{{ $k }}">{{ $vo }}</option>
+                            <option value="{{ $k }}">{{ $vo['name'] }}</option>
                         @endforeach
 
                     </select>

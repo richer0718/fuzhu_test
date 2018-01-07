@@ -33,7 +33,7 @@
                         <select name="map">
                             <option value="">请选择</option>
                             @foreach($maps as $k => $vo)
-                                <option value="{{ $k }}">{{ $vo }}</option>
+                                <option value="{{ $k }}">{{ $vo['name'] }}</option>
                             @endforeach
 
                         </select>

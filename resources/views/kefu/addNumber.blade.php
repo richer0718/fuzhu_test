@@ -68,7 +68,7 @@
                             <td>
                                 <select name="map" id="map_select">
                                     @foreach($maps as $k => $vo)
-                                        <option value="{{ $k }}" @if(isset($info))  @if( $info -> area == $k) selected @endif @endif  @if( old('area') == $k) selected @endif >{{ $vo }}</option>
+                                        <option data="{{ $vo['pre'] }}" value="{{ $k }}" @if(isset($info))  @if( $info -> area == $k) selected @endif @endif  @if( old('area') == $k) selected @endif >{{ $vo['name'] }}</option>
                                     @endforeach
                                 </select>
                             </td>
@@ -264,8 +264,8 @@
 
     <!-- 系数存储 -->
     @if($xishus)
-        @foreach($xishus as $vo)
-            <input type="hidden" id="{{ $vo -> code }}" value="{{ $vo -> number }}" />
+        @foreach($xishus as $k=>$vo)
+            <input type="hidden" id="{{ $k }}" value="{{ $vo }}" />
         @endforeach
     @endif
 
@@ -400,11 +400,11 @@
             var number_input = $('input[name=number]').val();
             var pass_input = $('input[name=pass]').val();
 
-            if(number_input.indexOf(',')>=0 || number_input.indexOf('，')>=0 ||  number_input.indexOf('。')>=0||  number_input.indexOf('！')>=0){
+            if(number_input.indexOf('？')>=0 || number_input.indexOf(',')>=0 || number_input.indexOf('，')>=0 ||  number_input.indexOf('。')>=0||  number_input.indexOf('！')>=0){
                 alert('输入不合法');return false;
             }
 
-            if(pass_input.indexOf(',')>=0 || pass_input.indexOf('，')>=0 || pass_input.indexOf('。')>=0||  pass_input.indexOf('！')>=0){
+            if(number_input.indexOf('？')>=0 || pass_input.indexOf(',')>=0 || pass_input.indexOf('，')>=0 || pass_input.indexOf('。')>=0||  pass_input.indexOf('！')>=0){
                 alert('输入不合法');return false;
             }
 
@@ -442,9 +442,11 @@
 
             //消耗点数赋值
             var area_val = $('#area_select option:selected').val();
+            //选中的前缀
+            var pre = $('#map_select option:selected').attr('data');
 
             var cishu = parseInt($('input[name=save_time]').val());
-            var xishu = parseInt($('#'+area_val).val());
+            var xishu = parseInt($('#'+area_val+pre).val());
 
             $('#show_zong').val(cishu*xishu);
 
