@@ -44,12 +44,14 @@ class NumberController extends Controller
             $note_res .= '安卓：'.$note -> url2.'个';
         }
 
-
+        //配置
+        $maps = config('setting.maps');
 
         return view('kefu/addNumber') -> with([
             'info' => $info,
             'xishus' => $xishus,
-            'note_res' => $note_res
+            'note_res' => $note_res,
+            'maps' => $maps
         ]);
     }
 
@@ -159,18 +161,10 @@ class NumberController extends Controller
             //记录扣除日志
             $log = new Log();
             //将字符串转换成中文
-            switch ($request -> input('area')){
-                case 'AZQQ':$temp_area = '安卓QQ';break;
-                case 'AZVX':$temp_area = '安卓微信';break;
-                case 'IOSQQ':$temp_area = '苹果QQ';break;
-                case 'IOSVX':$temp_area = '苹果微信';break;
-            }
-
-            switch ($request -> input('map')){
-                case 'DS':$temp_map = '大师';break;
-                case 'JY':$temp_map = '精英';break;
-                case 'PT':$temp_map = '普通';break;
-            }
+            $areas = config('setting.areas');
+            $temp_area = $areas[$request -> input('area')];
+            $maps = config('setting.maps');
+            $temp_map = $maps[$request -> input('map')];
             $log -> write(session('username'),'挂机',$point_cut,$request -> input('number'),'',$temp_area.','.$request -> input('xiaoqu').','.$temp_map.','.$request -> input('save_time').'次,'.$request -> input('order_id'),session('kefuusername'));
 
             if($isset){

@@ -40,9 +40,9 @@
                         <td>刷图选择：</td>
                         <td>
                             <select name="map" id="map_select">
-                                <option value="DS" @if(isset($info))  @if( $info -> map == 'DS') selected @endif @endif @if( old('map') == 'DS') selected @endif >大师魔女的回忆</option>
-                                <option value="JY" @if(isset($info)) @if( $info -> map == 'JY') selected @endif @endif  @if( old('map') == 'JY') selected @endif >精英魔女的回忆</option>
-                                <option value="PT" @if(isset($info)) @if( $info -> map == 'PT') selected @endif @endif  @if( old('map') == 'PT') selected @endif >普通魔女的回忆</option>
+                                <option value="DS" @if(isset($info))  @if( $info -> map == 'DS') selected @endif @endif @if( old('map') == 'DS') selected @endif >王者荣耀_大师魔女</option>
+                                <option value="JY" @if(isset($info)) @if( $info -> map == 'JY') selected @endif @endif  @if( old('map') == 'JY') selected @endif >王者荣耀_精英魔女</option>
+                                <option value="QQFC" @if(isset($info)) @if( $info -> map == 'QQFC') selected @endif @endif  @if( old('map') == 'QQFC') selected @endif >QQ飞车_金币/经验</option>
 
 
                             </select>

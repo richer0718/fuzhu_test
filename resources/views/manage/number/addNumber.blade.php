@@ -53,10 +53,9 @@
                             <td>大区：</td>
                             <td>
                                 <select name="area" id="area_select">
-                                    <option value="AZQQ" @if(isset($info))  @if( $info -> area == 'AZQQ') selected @endif @endif  @if( old('area') == 'AZQQ') selected @endif >安卓QQ</option>
-                                    <option value="AZVX" @if(isset($info))  @if( $info -> area == 'AZVX') selected @endif @endif  @if( old('area') == 'AZVX') selected @endif >安卓微信</option>
-                                    <option value="IOSQQ" @if(isset($info))  @if( $info -> area == 'IOSQQ') selected @endif @endif @if( old('area') == 'IOSQQ') selected @endif >苹果QQ</option>
-                                    <option value="IOSVX" @if(isset($info))  @if( $info -> area == 'IOSVX') selected @endif @endif  @if( old('area') == 'IOSVX') selected @endif >苹果微信</option>
+                                    @foreach($maps as $k => $vo)
+                                        <option value="{{ $k }}" @if(isset($info))  @if( $info -> area == $k) selected @endif @endif  @if( old('area') == $k) selected @endif >{{ $vo }}</option>
+                                    @endforeach
                                 </select>
                             </td>
                         </tr>
@@ -68,9 +67,9 @@
                             <td>刷图选择：</td>
                             <td>
                                 <select name="map" id="map_select">
-                                    <option value="DS" @if(isset($info))  @if( $info -> map == 'DS') selected @endif @endif @if( old('map') == 'DS') selected @endif >大师魔女的回忆</option>
-                                    <option value="JY" @if(isset($info)) @if( $info -> map == 'JY') selected @endif @endif  @if( old('map') == 'JY') selected @endif >精英魔女的回忆</option>
-                                    <option value="PT" @if(isset($info)) @if( $info -> map == 'PT') selected @endif @endif  @if( old('map') == 'PT') selected @endif >普通魔女的回忆</option>
+                                    <option value="DS" @if(isset($info))  @if( $info -> map == 'DS') selected @endif @endif @if( old('map') == 'DS') selected @endif >王者荣耀_大师魔女</option>
+                                    <option value="JY" @if(isset($info)) @if( $info -> map == 'JY') selected @endif @endif  @if( old('map') == 'JY') selected @endif >王者荣耀_精英魔女</option>
+                                    <option value="QQFC" @if(isset($info)) @if( $info -> map == 'QQFC') selected @endif @endif  @if( old('map') == 'QQFC') selected @endif >QQ飞车_金币/经验</option>
 
 
                                 </select>
