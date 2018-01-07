@@ -200,10 +200,12 @@ class NumberController extends Controller
                 $endstr = 2;
                 $jiaji = 0;
             }
+
+            $maps = config('setting.maps');
             if($string == 'AZ'){
-                $youxi = $userinfo -> upload.'AZWZRY-'.$endstr;
+                $youxi = $userinfo -> upload.'AZ'.$maps[$request->input('map')]['jiaji'].'-'.$endstr;
             }else{
-                $youxi = $userinfo -> upload.'IOSWZRY-'.$endstr;
+                $youxi = $userinfo -> upload.'IOS'.$maps[$request->input('map')]['jiaji'].'-'.$endstr;
             }
 
             //（当前时间+上号时间*60）*1000'

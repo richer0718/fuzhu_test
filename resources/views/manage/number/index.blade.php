@@ -91,6 +91,7 @@
                             <input type="button" value="取消" id="quxiao"/><br>
                             @if($url_status)<input type="button" value="删除" id="shanchu" /><br>@endif
                             <input type="button" value="导出" id="daochu"/>
+                            <input type="button" value="上传" id="upload"/>
                         </span></th>
                     <th><span class="glyphicon glyphicon-th-large"></span> <span class="visible-lg">ID</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">订单编号</span></th>
@@ -488,6 +489,25 @@
                     $('#shuju').val(data);
                     $('#myExportFileForm').submit();
                 }
+
+
+
+            })
+
+            //批量上传
+            $('#daochu').click(function(){
+                var length = $('input[name=numbers_check]:checked').length;
+                var data = '';
+                if(!length){
+                    alert('请至少选择一个');return false;
+                }
+                for(var i = 0 ; i < length;i++ ){
+                    //data += $('input[name=numbers_check]:checked').eq(i).val()+',';
+                    data = $('input[name=numbers_check]:checked').eq(i).val();
+
+                }
+
+
 
 
 

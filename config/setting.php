@@ -10,15 +10,18 @@ return [
     'maps' => [
         'DS' => [
             'name'=>'王者荣耀_大师魔女',
-            'pre' => 'WZ'
+            'pre' => 'WZ',
+            'jiaji' => 'WZRY' //加急标记
         ],
         'JY' => [
             'name' => '王者荣耀_精英魔女',
-            'pre' => 'WZ'
+            'pre' => 'WZ',
+            'jiaji' => 'WZRY' //加急标记
         ],
         'QQFC' => [
             'name' => 'QQ飞车_金币/经验',
-            'pre' => 'FC'
+            'pre' => 'FC',
+            'jiaji' => 'FC' //加急标记
         ],
     ],
     'modes' => [
