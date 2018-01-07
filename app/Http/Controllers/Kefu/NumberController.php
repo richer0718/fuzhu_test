@@ -149,7 +149,7 @@ class NumberController extends Controller
             }
 
             //（当前时间+上号时间*60）*1000'
-            $jiange = intval(time() + intval($request -> input('shanghao_time'))*3600  )* 1000;
+            $jiange = intval(time() + intval($request -> input('shanghao_time'))*3600  );
 
             DB::table('newtable3') -> where([
                 'name' => $daqu.'-'.$number
@@ -486,8 +486,8 @@ class NumberController extends Controller
 
         //找出他的系数
         $xishus = DB::table('xishu') -> where([
-            'code' => $number_info -> area
-        ]) -> first();
+            'code' => $request -> input('area')
+        ]) -> where('map','like','%'.$request -> input('map') .'%') ->  first();
         //单价
         $danjia = $xishus -> number;
         //总共返还的点数

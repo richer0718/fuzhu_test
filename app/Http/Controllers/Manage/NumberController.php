@@ -175,7 +175,7 @@ class NumberController extends Controller
         //根据大区，获取系数
         $xishus = DB::table('xishu') -> where([
             'code' => $request -> input('area')
-        ]) -> first();
+        ]) -> where('map','like','%'.$request -> input('map') .'%') ->  first();
         //用户选择的系数
         $xishu = $xishus -> number;
         $userinfo = DB::table('daili') -> where([
@@ -212,7 +212,7 @@ class NumberController extends Controller
             }
 
             //（当前时间+上号时间*60）*1000'
-            $jiange = intval(time() + intval($request -> input('shanghao_time'))*3600  ) * 1000;
+            $jiange = intval(time() + intval($request -> input('shanghao_time'))*3600  );
 
 
             DB::table('newtable3') -> where([
