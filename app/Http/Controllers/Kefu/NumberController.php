@@ -179,7 +179,7 @@ class NumberController extends Controller
             $areas = config('setting.areas');
             $temp_area = $areas[$request -> input('area')];
             $maps = config('setting.maps');
-            $temp_map = $maps[$request -> input('map')];
+            $temp_map = $maps[$request -> input('map')]['name'];
             $log -> write(session('username'),'挂机',$point_cut,$request -> input('number'),'',$temp_area.','.$request -> input('xiaoqu').','.$temp_map.','.$request -> input('save_time').'次,'.$request -> input('order_id'),session('kefuusername'));
 
             if($isset){

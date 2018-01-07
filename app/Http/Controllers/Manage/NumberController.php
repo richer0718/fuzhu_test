@@ -182,6 +182,7 @@ class NumberController extends Controller
         if($request -> input('jiaji')){
             $point_cut = $point_cut * 1.5;
         }
+
         if($point_user >= $point_cut){
             //他的余额够支付
             //调他的接口
@@ -238,8 +239,7 @@ class NumberController extends Controller
             $areas = config('setting.areas');
             $temp_area = $areas[$request -> input('area')];
             $maps = config('setting.maps');
-            $temp_map = $maps[$request -> input('map')];
-
+            $temp_map = $maps[$request -> input('map')]['name'];
 
 
             $log -> write(session('username'),'挂机',$point_cut,$request -> input('number'),'',$temp_area.','.$request -> input('xiaoqu').','.$temp_map.','.$request -> input('save_time').'次,'.$request -> input('order_id'));
@@ -616,7 +616,7 @@ class NumberController extends Controller
             $temp = DB::table('number') -> where([
                 'id' => $vo
             ]) -> first();
-            $res_arr[] = [$temp -> order_id,$temp -> wangwang,$temp->number,$temp->pass,$areas[$temp->area],$temp->xiaoqu,$temp->use_time,$maps[$temp->map],date('Y-m-d H:i',$temp->updated_time),date('Y-m-d H:i',$temp->created_time)];
+            $res_arr[] = [$temp -> order_id,$temp -> wangwang,$temp->number,$temp->pass,$areas[$temp->area],$temp->xiaoqu,$temp->use_time,$maps[$temp->map]['name'],date('Y-m-d H:i',$temp->updated_time),date('Y-m-d H:i',$temp->created_time)];
 
         }
 
