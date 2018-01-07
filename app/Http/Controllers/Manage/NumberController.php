@@ -616,7 +616,7 @@ class NumberController extends Controller
             $temp = DB::table('number') -> where([
                 'id' => $vo
             ]) -> first();
-            $res_arr[] = [$temp -> order_id,$temp -> wangwang,$temp->number,$temp->pass,$areas[$temp->area],$temp->xiaoqu,$temp->use_time,$maps[$temp->map]['name'],date('Y-m-d H:i',$temp->updated_time),date('Y-m-d H:i',$temp->created_time)];
+            $res_arr[] = ["'".(string)$temp -> order_id,$temp -> wangwang,$temp->number,$temp->pass,$areas[$temp->area],$temp->xiaoqu,$temp->use_time,$maps[$temp->map]['name'],date('Y-m-d H:i',$temp->updated_time),date('Y-m-d H:i',$temp->created_time)];
 
         }
 
