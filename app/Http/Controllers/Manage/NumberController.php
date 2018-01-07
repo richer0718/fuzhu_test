@@ -523,6 +523,9 @@ class NumberController extends Controller
     }
 
     public function delete_number($id){
+        if(!$_GET['url_status']){
+            $_GET['url_status'] = 3;
+        }
         $res = DB::table('number') -> where([
             'id' => $id,
             'add_user' => session('username'),
@@ -535,9 +538,9 @@ class NumberController extends Controller
                 'username' => session('username')
             ]) -> decrement('number_all');
 
-            return redirect('manage/number/3') -> with('delete_number','success');
+            return redirect('manage/number/'.$_GET['url_status']) -> with('delete_number','success');
         }else{
-            return redirect('manage/number/3') -> with('delete_number','error');
+            return redirect('manage/number/'.$_GET['url_status']) -> with('delete_number','error');
         }
     }
 

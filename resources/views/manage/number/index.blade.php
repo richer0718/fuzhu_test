@@ -554,7 +554,7 @@
             $('.delete_number').click(function(){
                 var id  = $(this).attr('data');
                 if(confirm('您确定要删除么')){
-                    location.href="{{ url('manage/delete_number') }}"+'/'+id;
+                    location.href="{{ url('manage/delete_number') }}"+'/'+id+'?url_status='+'{{ $url_status }}';
                 }
             })
 

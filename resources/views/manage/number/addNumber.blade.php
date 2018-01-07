@@ -99,7 +99,7 @@
                             <td>截止时间：</td>
                             <td>
                                 <div class="input-group">
-                                    <input type="text" id="end_date" name="end_date"  value="" class="form-control" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})"  />
+                                    <input type="text" id="end_date" name="end_date"  value="@if(isset($info)){{ $info -> end_date }}@endif" class="form-control" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})"  />
                                     <span class="input-group-addon">23:59:59</span>
                                 </div>
 
