@@ -92,26 +92,40 @@ class NumberController extends Controller
             'username' => session('username')
         ]) -> first();
 
-
-        //看服务器返回值
-        $note = DB::table('note') -> where([
-            'id' => 1
-        ]) -> first();
         $note_res = '目前排队账号:';
         $note_res .= '</br>';
-        if($note -> url1 == '99999'){
-            $note_res .= '苹果：服务器异常';
-            $note_res .= '<br>';
-        }else{
-            $note_res .= '苹果：'.$note -> url1.'个';
-            $note_res .= '<br>';
-        }
 
-        if($note -> url2 == '99999'){
-            $note_res .= '安卓：服务器异常';
-        }else{
-            $note_res .= '安卓：'.$note -> url2.'个';
-        }
+        //统计newtable
+        //IOSWZRY-2
+        $result1 = DB::table('newtable') -> where([
+            'info' => 'IOSWZRY-2',
+            'mark' => NULL
+        ]) -> count();
+
+        $result2 = DB::table('newtable') -> where([
+            'info' => 'AZWZRY-2',
+            'mark' => NULL
+        ]) -> count();
+
+        $result3 = DB::table('newtable') -> where([
+            'info' => 'AZQQFC-2',
+            'mark' => NULL
+        ]) -> count();
+
+        $result4 = DB::table('newtable') -> where([
+            'info' => 'IOSQQFC-2',
+            'mark' => NULL
+        ]) -> count();
+        $note_res .= '王者荣耀-苹果：'.$result1.'个';
+        $note_res .= '<br>';
+        $note_res .= '王者荣耀-安卓：'.$result2.'个';
+        $note_res .= '<br>';
+        $note_res .= 'QQ飞车-安卓：'.$result3.'个';
+        $note_res .= '<br>';
+        $note_res .= 'QQ飞车-苹果：'.$result4.'个';
+        $note_res .= '<br>';
+
+
         return view('manage/number/index') -> with([
             'res' => $res,
             'url_status' => $url_status,
@@ -199,21 +213,23 @@ class NumberController extends Controller
 
             //（当前时间+上号时间*60）*1000'
             $jiange = intval(time() + intval($request -> input('shanghao_time'))*3600  ) * 1000;
-            $pass = 'aaaa';
-            $url = 'http://222.185.25.254:8088/jsp1/input3.jsp?name='.$daqu.'-'.$number.'&passwd='.$pass.'&info='.$youxi.'&jiange='.$jiange;
-            $url2 = 'http://222.185.25.254:8088/jsp1/delete3.jsp?name='.$daqu.'-'.$number;
-            //var_dump($url);
-            //var_dump($url2);exit;
-            $result = file_get_contents($url);
-            if(!strstr($result,'添加成功')){
-                $result2 = file_get_contents($url2);
 
-                //删除之后 再调用
-                $result = file_get_contents($url);
-                if(!strstr($result,'添加成功')){
-                    //添加失败
-                    return redirect('manage/number') -> with('isset','上传失败，联系QQ：972102275');
-                }
+
+            DB::table('newtable3') -> where([
+                'name' => $daqu.'-'.$number
+            ]) -> delete();
+            //插入
+            $res = DB::table('newtable3') -> insert([
+                'name' => $daqu.'-'.$number,
+                'passwd' => $pass,
+                'info' => $youxi,
+                'jiange2' => $jiange,
+            ]);
+            if($res){
+                //echo 'success';
+            }else{
+                //添加失败
+                return redirect('manage/number') -> with('isset','上传失败，联系QQ：972102275');
             }
 
             //添加成功后
