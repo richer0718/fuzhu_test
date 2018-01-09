@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Input;
 
 class ApiController extends Controller
 {
@@ -315,6 +317,26 @@ class ApiController extends Controller
             echo 'error';
         }
     }
+
+    public function uploadImg(Request $request){
+        if(!$request->hasFile('file')){
+            echo 'error';exit;
+        }
+
+        $file = $request->file('file');
+        //判断文件上传过程中是否出错
+        if(!$file->isValid()){
+            exit('文件上传出错！');
+        }
+
+
+        $newFileName = $file -> getClientOriginalName();
+        //dd($newFileName);exit;
+        \Intervention\Image\Facades\Image::make(file_get_contents($file->getRealPath()))->save(public_path().'/images/'.$newFileName,100 );
+
+    }
+
+
 /*
 * * * * * /usr/bin/curl http://feifeifuzhu.com/fuzhu_test/public/api/autoRunTable3
 * * * * * sleep 10; /usr/bin/curl http://feifeifuzhu.com/fuzhu_test/public/api/autoRunTable3

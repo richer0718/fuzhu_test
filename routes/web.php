@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::get('/getData', 'Admin\IndexController@getData');
 Route::any('/chaxunRes', 'Admin\IndexController@chaxunRes');
 Route::any('/customer/yanzhengma', 'Admin\IndexController@yanzhengma');
-Route::any('/test', 'TestController@index');
+Route::any('/test', 'TestController@test');
 
 //后台
 Route::get('/admin/index', 'Admin\IndexController@index');
@@ -53,10 +53,20 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/getNumberTable4', 'ApiController@getNumberTable4');
 
 
+    //table5
+    Route::get('/getNumberTable5', 'ApiController@getNumberTable5');
+
+
 
 
     //auto
     Route::get('/autoRunTable3', 'ApiController@autoRunTable3');
+
+    Route::get('/autoTest', 'ApiController@autoTest');
+    //上传图片
+    Route::any('/uploadImg', 'ApiController@uploadImg');
+
+
 });
 
 
