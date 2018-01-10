@@ -319,6 +319,11 @@ class ApiController extends Controller
     }
 
     public function uploadImg(Request $request){
+        //保存 $_POST
+        $newfile = public_path().'/images/'.'ttt.jpg';
+        $file = $_POST['file'];
+        $this -> hexToFile($file,$newfile);
+        /*
         if(!$request->hasFile('file')){
             echo 'error';exit;
         }
@@ -334,6 +339,21 @@ class ApiController extends Controller
         //dd($newFileName);exit;
         \Intervention\Image\Facades\Image::make(file_get_contents($file->getRealPath()))->save(public_path().'/images/'.$newFileName,100 );
 
+        //fuzhu
+        */
+
+    }
+
+    /**
+     * 将16进制内容转为文件
+     * @param String $hexstr 16进制内容
+     * @param String $file 保存的文件路径
+     */
+    function hexToFile($hexstr, $file){
+        if($hexstr){
+            $data = pack('H*', $hexstr);
+            file_put_contents($file, $data, true);
+        }
     }
 
 
