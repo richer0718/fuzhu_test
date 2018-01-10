@@ -91,7 +91,9 @@
                             <input type="button" value="取消" id="quxiao"/><br>
                             @if($url_status)<input type="button" value="删除" id="shanchu" /><br>@endif
                             <input type="button" value="导出" id="daochu"/>
+                            <!--
                             <input type="button" value="上传" id="upload"/>
+                            -->
                         </span></th>
                     <th><span class="glyphicon glyphicon-th-large"></span> <span class="visible-lg">ID</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">订单编号</span></th>
