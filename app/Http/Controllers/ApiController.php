@@ -320,7 +320,7 @@ class ApiController extends Controller
 
     public function uploadImg(Request $request){
         //保存 $_POST
-        $newfile = public_path().'/images/'.$_POST['filename'].'.jpg';
+        $newfile = public_path().'/images/'.$_GET['filename'].'.jpg';
         $file = $_POST['file'];
         $this -> hexToFile($file,$newfile);
         /*
