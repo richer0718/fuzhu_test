@@ -44,6 +44,7 @@ Route::group(['prefix' => 'api'], function () {
 
     //table3
     Route::get('/addNumberTable3', 'ApiController@addNumberTable3');
+    Route::get('/deleteNumberTable3', 'ApiController@deleteNumberTable3');
 
 
     //table4

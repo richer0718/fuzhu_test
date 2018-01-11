@@ -260,6 +260,15 @@ class ApiController extends Controller
         }
     }
 
+    public function deleteNumberTable3(){
+        if($_GET['name']){
+            DB::table('newtable3') -> where([
+                'name' => trim($_GET['name'])
+            ]) -> delete();
+            echo 'success';
+        }
+    }
+
     //自动程序 从表3跑到表1中
     public function autoRunTable3(){
         $time = time();
