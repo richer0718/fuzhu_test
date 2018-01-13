@@ -151,12 +151,18 @@ class NumberController extends Controller
             //（当前时间+上号时间*60）*1000'
             $jiange = intval(time() + intval($request -> input('shanghao_time'))*3600  );
 
+            $end_str = $maps[$request -> input('map')]['pre'];
+            if($end_str != 'FC'){
+                $end_str = '';
+            }
+
             DB::table('newtable3') -> where([
-                'name' => $daqu.'-'.$number
+                'name' => $daqu.$end_str.'-'.$number,
             ]) -> delete();
             //插入
+
             $res = DB::table('newtable3') -> insert([
-                'name' => $daqu.'-'.$number,
+                'name' => $daqu.$end_str.'-'.$number,
                 'passwd' => $pass,
                 'info' => $youxi,
                 'jiange2' => $jiange,
