@@ -69,7 +69,7 @@
                             <td>
                                 <select name="map" id="map_select">
                                     @foreach($maps as $k => $vo)
-                                        <option data="{{ $vo['pre'] }}" value="{{ $k }}" @if(isset($info))  @if( $info -> area == $k) selected @endif @endif  @if( old('area') == $k) selected @endif >{{ $vo['name'] }}</option>
+                                        <option data="{{ $vo['pre'] }}" value="{{ $k }}" @if(isset($info))  @if( $info -> map == $k) selected @endif @endif   >{{ $vo['name'] }}</option>
                                     @endforeach
                                 </select>
                             </td>

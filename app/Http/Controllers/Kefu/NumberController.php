@@ -40,12 +40,12 @@ class NumberController extends Controller
         ]) -> count();
 
         $result3 = DB::table('newtable') -> where([
-            'info' => 'AZQQFC-2',
+            'info' => 'AZFC-2',
             'mark' => NULL
         ]) -> count();
 
         $result4 = DB::table('newtable') -> where([
-            'info' => 'IOSQQFC-2',
+            'info' => 'IOSFC-2',
             'mark' => NULL
         ]) -> count();
         $note_res .= '王者荣耀-苹果：'.$result1.'个';

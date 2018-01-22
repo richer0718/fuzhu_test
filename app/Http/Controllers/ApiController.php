@@ -274,6 +274,7 @@ class ApiController extends Controller
         $time = time();
         $numbers = DB::table('newtable3')
             -> where('jiange2', '<=', $time)
+            -> orderBy('id','desc')
             -> get();
         //把这些号全放到1表
         if($numbers){
