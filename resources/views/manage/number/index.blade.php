@@ -90,7 +90,7 @@
                             <input type="button" value="全选" id="quanxuan"/><br>
                             <input type="button" value="取消" id="quxiao"/><br>
                             @if($url_status)<input type="button" value="删除" id="shanchu" /><br>@endif
-                            <input type="button" value="导出" id="daochu"/>
+                            <input type="button" value="导出" id="daochu"/><br>
 
                             <input type="button" value="上传" id="upload"/>
 
@@ -141,7 +141,7 @@
                             </td>
                             <td>{{$vo -> number }}</td>
                             <td>{{$vo -> pass }}</td>
-                            <td>{{$vo -> area_name }}</td>
+                            <td>{{ mb_substr($vo -> area_name,0,4)  }}</td>
                             <td>{{$vo -> xiaoqu }}</td>
                             <td>{{$vo -> use_time}}</td>
                             <td>{{$vo -> save_time}}</td>

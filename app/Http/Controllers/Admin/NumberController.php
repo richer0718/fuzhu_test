@@ -34,13 +34,28 @@ class NumberController extends Controller
             $count_point_all += $vo -> point_all;
         }
 
+
         $status_name = '';
         if($url_status == '1'){
             $status_name = '完成订单';
+            //检测时间，新的在上面
+            $order = 'updated_time';
+            $desc = 'asc';
         }elseif($url_status == '3'){
             $status_name = '问题订单';
+            //检测时间，新的在上面
+            $order = 'updated_time';
+            $desc = 'asc';
+        }elseif($url_status == '2'){
+            $status_name = '长期账号';
+            $order = 'updated_time';
+            $desc = 'asc';
         }else{
-            $status_name = '挂机账号';
+            $status_name = '所有账号';
+            //检测时间，老的在上面
+            $order = 'updated_time';
+            $desc = 'desc';
+
         }
 
 
@@ -64,6 +79,7 @@ class NumberController extends Controller
             }
 
 
+
             if($url_status == '1'){
                 //历史账号 -> 完成订单 0
                 $query -> whereIn('status',[0,-1]);
@@ -71,11 +87,20 @@ class NumberController extends Controller
             }elseif($url_status == '3'){
                 //问题订单  -1
                 $query -> where('status','<',-1);
+            }elseif($url_status == '2'){
+                //长期账号
+                $query -> where('mode','>',0);
+                //$query -> where('status','>=',0);
+            }else{
+                //挂机 检测时间 asc
+                $order1 = '';
+                //$query -> where('mode','=',0);
+                $query -> where('status','>',0);
             }
 
 
 
-        }) ->  orderBy('save_time','desc') -> paginate(3000);
+        }) ->  orderBy($order,$desc) -> paginate(3000);
 
         foreach($res as $k => $vo){
             $res[$k] -> area = $areas[$vo -> area];
@@ -87,19 +112,28 @@ class NumberController extends Controller
         //挂机中的数量
         $count_guaji = DB::table('number') -> where('status','>',0) -> count();
         $count_paidui = DB::table('number') -> where('status','=',0) -> count();
+        //ios挂机
+        $count_guaji_ios = DB::table('newtable2') -> where('info2','like','%IOS%') -> count();
+        //安卓挂机
+        $count_guaji_az = DB::table('newtable2') -> where('info2','like','%JAY%') -> count();
+
         return view('admin/number/index') -> with([
             'res' => $res,
             'count_guaji'=>$count_guaji,
+            'count_guaji_ios'=>$count_guaji_ios,
+            'count_guaji_az'=>$count_guaji_az,
             'count_paidui'=>$count_paidui,
             'areas'=>$areas,
             'maps' => $maps,
             'statuss' => $statuss,
-            'count_guaji_daili' => $count_guaji,
             'count_lishi' => $count_lishi,
             'count_all' => $count_all,
             'count_point' => $count_point,
             'count_point_all' => $count_point_all,
             'status_name' => $status_name
         ]);
+
+
+
     }
 }

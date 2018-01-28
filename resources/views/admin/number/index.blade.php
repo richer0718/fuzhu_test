@@ -7,7 +7,8 @@
     </style>
     <script src="{{ asset('js/laydate/laydate.js') }}"></script>
     <ol class="breadcrumb" style="margin-left:10%;">
-        <li><a data-toggle="modal" href="{{ url('admin/number') }}">挂机账号</a></li>
+        <li><a data-toggle="modal" href="{{ url('admin/number') }}">所有账号</a></li>
+        <li><a data-toggle="modal" href="{{ url('admin/number/2') }}">挂机账号</a></li>
         <li><a data-toggle="modal" href="{{ url('admin/number/1') }}">完成订单</a></li>
         <li><a data-toggle="modal" href="{{ url('admin/number/3') }}">问题订单</a></li>
     </ol>
@@ -79,6 +80,8 @@
 
         <ol class="breadcrumb">
             <li>正在挂机数量：{{$count_guaji}}个</li>
+            <li>IOS挂机数量：{{$count_guaji_ios}}个</li>
+            <li>安卓挂机数量：{{$count_guaji_az}}个</li>
             <!--
             <li>历史挂机数量：{{$count_lishi}}个</li>
             <li>总账号数量：{{$count_all}}个</li>
@@ -99,18 +102,20 @@
                 <thead>
                 <tr>
                     <th><span class="glyphicon glyphicon-th-large"></span> <span class="visible-lg">ID</span></th>
-                    <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg" >游戏账号</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg" >所属代理</span></th>
+                    <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg" >游戏账号</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">游戏密码</span></th>
                     <th><span class="glyphicon glyphicon-signal"></span> <span class="visible-lg">大区</span></th>
+                    <th><span class="glyphicon glyphicon-signal"></span> <span class="visible-lg">小区</span></th>
                     <th><span class="glyphicon glyphicon-camera"></span> <span class="visible-lg">代挂次数</span></th>
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">剩余次数</span></th>
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">代挂地图</span></th>
-                    <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">养号模式</span></th>
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">挂机状态</span></th>
+
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">挂机设备</span></th>
 
                     <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">检测时间</span></th>
+                    <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">操作时间</span></th>
 
                 </tr>
                 </thead>
@@ -119,18 +124,20 @@
                     @foreach($res as $k => $vo)
                         <tr>
                             <td>{{ $k + 1 }}</td>
-                            <td>{{$vo -> number }}</td>
                             <td>{{$vo -> add_user }}</td>
+                            <td>{{$vo -> number }}</td>
                             <td>{{$vo -> pass }}</td>
                             <td>{{$vo -> area }}</td>
+                            <td>{{$vo -> xiaoqu }}</td>
                             <td>{{$vo -> use_time}}</td>
                             <td>{{$vo -> save_time}}</td>
                             <td>{{$vo -> map}}</td>
-                            <td>{{$vo -> mode}}</td>
                             <td>{{$vo -> status}}</td>
+
                             <td>{{$vo -> device}}</td>
 
                             <td>{{ date('Y-m-d H:i',$vo -> updated_time) }}</td>
+                            <td>{{ date('Y-m-d H:i',$vo -> created_time) }}</td>
 
                         </tr>
                     @endforeach

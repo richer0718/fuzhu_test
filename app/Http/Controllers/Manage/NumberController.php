@@ -26,10 +26,24 @@ class NumberController extends Controller
         $status_name = '';
         if($url_status == '1'){
             $status_name = '完成订单';
+            //检测时间，新的在上面
+            $order = 'updated_time';
+            $desc = 'asc';
         }elseif($url_status == '3'){
             $status_name = '问题订单';
+            //检测时间，新的在上面
+            $order = 'updated_time';
+            $desc = 'asc';
         }elseif($url_status == '2'){
             $status_name = '长期账号';
+            $order = 'updated_time';
+            $desc = 'asc';
+        }else{
+            $status_name = '挂机账号';
+            //检测时间，老的在上面
+            $order = 'updated_time';
+            $desc = 'desc';
+
         }
         $add_user = session('username');
         $res = DB::table('number') -> where(function($query) use($url_status,$add_user,$request){
@@ -72,7 +86,7 @@ class NumberController extends Controller
 
 
 
-        })  -> orderBy('updated_time','desc') -> paginate(3000);
+        })  -> orderBy($order,$desc) -> paginate(3000);
         //dd($res);
         foreach($res as $k => $vo){
             $res[$k] -> area_name = $areas[$vo -> area];

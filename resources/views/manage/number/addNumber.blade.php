@@ -11,6 +11,9 @@
     </style>
     <script src="{{ asset('js/laydate/laydate.js') }}"></script>
     <div style="height:100%;width:100%;position:fixed;z-index:0;" id="superdiv"></div>
+    @foreach($maps as $k => $vo)
+        <input type="hidden" class="selects" value="{{ $vo['name'] }}"  />
+    @endforeach
     <form id="myForm" method="post" action="{{ url('manage/addNumberRes') }}" onsubmit="return chekform()">
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main" >
         <div class="row">
@@ -145,7 +148,8 @@
                         密码：123123123</br>
                         大区：安卓QQ</br>
                         小区：123</br>
-                        代刷：经验</br>
+                        选图：王者荣耀_金币/经验</br>
+                        次数：500</br>
                         QQ，旺旺，二选一，不用全填，也可全都不填。
                     </p>
                 </div>
@@ -283,6 +287,7 @@
                 var pre = '';
                 var string = '';
                 var value = '';
+                var temp_str = '';
                 arr.map(function(vo,key){
                     //识别
                     vo = $.trim(vo);
@@ -331,14 +336,21 @@
                             $('#area_select').val(value);
                             value='';
                             break;
-                        case '代刷':
-                            if(string == '金币'){
-                                $('input[name=save_time]').val(220);
-                            }
-                            if(string == '经验'){
-                                $('input[name=save_time]').val(1220);
+
+
+                        case '次数':
+                            //将这个字符串添加到对应位置
+                            $('input[name=save_time]').val(string);
+                            break;
+                        case '选图':
+                            for(var i= 0;i<$('.selects').length;i++){
+                                temp_str = $('.selects').eq(i).val();
+                                if(string == temp_str){
+                                    $('#map_select option').eq(i).attr('selected','');
+                                }
                             }
                             break;
+
                     }
                 })
 
@@ -367,7 +379,7 @@
                 alert('您的点数，不足以支付本次代刷的费用，请充值后，再上传！');
             @endif
             @if(session('isset'))
-                alert('上传失败，请联系代理');
+                alert('该账号有剩余代刷次数没有回收，请回收后，再上传！如有疑问，请联系QQ：972102275');
             @endif
             @if(session('spareRes'))
                 alert('备用成功');
