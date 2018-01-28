@@ -6,6 +6,12 @@
         }
     </style>
     <script src="{{ asset('js/laydate/laydate.js') }}"></script>
+    <ol class="breadcrumb" style="margin-left:10%;">
+        <li><a data-toggle="modal" href="{{ url('admin/number') }}">挂机账号</a></li>
+        <li><a data-toggle="modal" href="{{ url('admin/number/1') }}">完成订单</a></li>
+        <li><a data-toggle="modal" href="{{ url('admin/number/3') }}">问题订单</a></li>
+    </ol>
+    <h1 class="page-header" style="margin-left:10%;" >{{ $status_name }}</h1>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main" style="max-height:800px;overflow: scroll;" >
 
 

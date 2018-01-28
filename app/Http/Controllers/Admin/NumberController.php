@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\DB;
 class NumberController extends Controller
 {
     //
-    public function index(Request $request){
+    public function index($url_status = null,Request $request){
         //配置
-        $areas = config('setting.areas');
+        $areas = config('setting.showareas');
         $maps = config('setting.maps');
         $modes = config('setting.modes');
         $statuss = config('setting.statuss');
@@ -34,7 +34,17 @@ class NumberController extends Controller
             $count_point_all += $vo -> point_all;
         }
 
-        $res = DB::table('number') -> where(function($query) use($request){
+        $status_name = '';
+        if($url_status == '1'){
+            $status_name = '完成订单';
+        }elseif($url_status == '3'){
+            $status_name = '问题订单';
+        }else{
+            $status_name = '挂机账号';
+        }
+
+
+        $res = DB::table('number') -> where(function($query) use($url_status,$request){
             if($request -> input('number')){
                 $query -> where('number','like','%'.trim($request -> input('number')).'%' );
                 //dd($request -> input('number'));
@@ -52,6 +62,19 @@ class NumberController extends Controller
             if($request -> input('status')){
                 $query -> where('status',trim($request -> input('status')));
             }
+
+
+            if($url_status == '1'){
+                //历史账号 -> 完成订单 0
+                $query -> whereIn('status',[0,-1]);
+
+            }elseif($url_status == '3'){
+                //问题订单  -1
+                $query -> where('status','<',-1);
+            }
+
+
+
         }) ->  orderBy('save_time','desc') -> paginate(3000);
 
         foreach($res as $k => $vo){
@@ -76,6 +99,7 @@ class NumberController extends Controller
             'count_all' => $count_all,
             'count_point' => $count_point,
             'count_point_all' => $count_point_all,
+            'status_name' => $status_name
         ]);
     }
 }

@@ -69,7 +69,7 @@
                             <td>
                                 <select name="map" id="map_select">
                                     @foreach($maps as $k => $vo)
-                                        <option data="{{ $vo['pre'] }}" value="{{ $k }}" @if(isset($info))  @if( $info -> map == $k) selected @endif @endif   >{{ $vo['name'] }}</option>
+                                        <option data="{{ $vo['pre'] }}"  number="{{ $vo['time'] }}" value="{{ $k }}" @if(isset($info))  @if( $info -> map == $k) selected @endif @endif   >{{ $vo['name'] }}</option>
                                     @endforeach
                                 </select>
                             </td>
@@ -78,8 +78,8 @@
                             <td><a style="color:red;">*</a>刷图次数：</td>
                             <td>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" name="save_time" min="30" max="1300" @if(isset($info) || old('save_time')) value="{{ $info -> use_time or old('save_time') }}" @else value="250" @endif required/>
-                                    <span class="input-group-addon">次(30~1300)</span>
+                                    <input type="number" class="form-control" name="save_time" min="30" max="10000" @if(isset($info) || old('save_time')) value="{{ $info -> use_time or old('save_time') }}" @else  @endif required/>
+                                    <span class="input-group-addon">次(30~10000)</span>
                                 </div>
                             </td>
                         </tr>
@@ -121,10 +121,11 @@
                                 <input type="text"  class="form-control show_login_time"  disabled/>
                             </td>
                         </tr>
-
+                        <input type="hidden" name="spare"  value="0" />
                         <tr>
                             <td colspan="2">
-                                <button class="btn btn-success" type="submit" id="addButton">添加</button>
+                                <input  class="btn btn-success" type="submit" id="addButton" value="添加"/>
+                                <input class="btn btn-primary" type="submit" id="spare"   value="备用" />
                                 <button class="btn btn-default" type="button" id="rest">重置</button>
                             </td>
                         </tr>
@@ -241,7 +242,7 @@
                                 <td>
                                     <div class="input-group">
                                         <input type="text"  class="form-control" id="show_shanghaotime" disabled/>
-                                        <span class="input-group-addon">分钟后开始排队</span>
+                                        <span class="input-group-addon">小时后开始排队</span>
                                     </div>
                                 </td>
                             </tr>
@@ -272,6 +273,10 @@
 
     <script>
         $(function(){
+            var map_select_number = $('#map_select option:selected').attr('number');
+            $('input[name=save_time]').val(map_select_number);
+
+
             $('#daoru').click(function(){
                 var text = $("#textarea").val();//获取id为ta的textarea的全部内容
                 var arr = text.split("\n");//以换行符为分隔符将内容分割成数组
@@ -364,9 +369,22 @@
             @if(session('isset'))
                 alert('上传失败，请联系代理');
             @endif
+            @if(session('spareRes'))
+                alert('备用成功');
+            @endif
+
 
 
         })
+
+        $('#addButton').click(function(){
+            $('input[name=spare]').val(0);
+        })
+        $('#spare').click(function(){
+            $('input[name=spare]').val('beiyong');
+        })
+
+
         function chekform(){
             //如果是第二次确认，则返回true
             var is_true = $('#queren').css('display');
@@ -461,6 +479,11 @@
         function checkStr(){
 
         }
+
+        $('#map_select').change(function(){
+            var pre = $('#map_select option:selected').attr('number');
+            $('input[name=save_time]').val(pre);
+        })
     </script>
     <script>
         function p(s) {

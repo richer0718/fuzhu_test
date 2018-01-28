@@ -51,7 +51,7 @@
     </script>
     <ul class="nav nav-sidebar">
 
-        <li @if(Route::currentRouteName() == 'admin_number' )class="active" @endif ><a href="{{ url('admin/number') }}"   >账号总览</a></li>
+        <li @if(Route::currentRouteName() == 'admin_number' )class="active" @endif ><a href="{{ url('admin/number') }}"   >挂机账号</a></li>
         <li @if(Route::currentRouteName() == 'notice' )class="active" @endif ><a href="{{ url('admin/notice') }}"   >公告管理</a></li>
         <li @if(Route::currentRouteName() == 'daili' )class="active" @endif ><a class="dropdown-toggle-d" id="number"   >代理管理</a>
             <ul class="dropdown-menu-new @if(Route::currentRouteName() == 'daili' ) show @endif "  >

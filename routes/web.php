@@ -76,7 +76,21 @@ Route::group(['prefix' => 'api'], function () {
 
 Route::group(['as' => 'admin_number','middleware' => ['checkadminlogin']], function () {
     Route::any('/admin/number', 'Admin\NumberController@index');
+    Route::any('/admin/number/{url_status}', 'Admin\NumberController@index');
 });
+
+//后台新增begin
+
+Route::group(['as' => 'admin_number_1','middleware' => ['checkadminlogin']], function () {
+    Route::any('/admin/number/{url_statuss}', 'Admin\NumberController@index') -> where('url_statuss','1');
+});
+Route::group(['as' => 'admin_number_3','middleware' => ['checkadminlogin']], function () {
+    Route::any('/admin/number/{url_statuss}', 'Admin\NumberController@index') -> where('url_statuss','3');
+});
+
+//后台新增end
+
+
 Route::group(['as' => 'daili','middleware' => ['checkadminlogin']], function () {
     Route::any('/admin/daili', 'Admin\DaiLiController@index');
     Route::any('/admin/remark', 'Admin\DaiLiController@remark');
@@ -115,9 +129,6 @@ Route::group(['prefix' => 'api'], function () {
 
 
 //代理
-
-
-
 Route::get('/manage/login', 'Manage\IndexController@login');
 Route::any('/manage/loginRes', 'Manage\IndexController@loginRes');
 Route::any('/manage/loginout', 'Manage\IndexController@loginout');
@@ -157,6 +168,7 @@ Route::group(['as' => 'number_history','middleware' => ['checklogin']], function
     Route::any('/manage/number/{url_statuss}', 'Manage\NumberController@index') -> where('url_statuss','1');
     Route::any('/manage/number/{url_statusss}', 'Manage\NumberController@index') -> where('url_statusss','3');
     Route::any('/manage/uploadNumber/{id}', 'Manage\NumberController@uploadNumber');
+    Route::any('/manage/uploadNumbers', 'Manage\NumberController@uploadNumbers');
 });
 //长期账号
 Route::group(['as' => 'number_long','middleware' => ['checklogin']], function () {

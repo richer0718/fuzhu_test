@@ -89,7 +89,8 @@ class ApiController extends Controller
                     DB::table('newtable') -> where([
                         'id' => $number -> id
                     ]) -> update([
-                        'mark' => 1
+                        'mark' => 1,
+                        'time' => time()
                     ]);
                     echo $number->name.','.$number -> passwd;
                 }else{
@@ -290,7 +291,8 @@ class ApiController extends Controller
                     ])->update([
                         'passwd' => $vo -> passwd,
                         'info' => $vo -> info,
-                        'mark' => NULL
+                        'mark' => NULL,
+                        'time' => time()
                     ]);
                 }else{
                     //插入
@@ -298,6 +300,7 @@ class ApiController extends Controller
                         'name' => $vo -> name,
                         'passwd' => $vo -> passwd,
                         'info' => $vo -> info,
+                        'time' => time()
                     ]);
                 }
 

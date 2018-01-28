@@ -183,7 +183,7 @@ class NumberController extends Controller
             //记录扣除日志
             $log = new Log();
             //将字符串转换成中文
-            $areas = config('setting.areas');
+            $areas = config('setting.showareas');
             $temp_area = $areas[$request -> input('area')];
             $maps = config('setting.maps');
             $temp_map = $maps[$request -> input('map')]['name'];
@@ -209,7 +209,7 @@ class NumberController extends Controller
                 'xiaoqu' => $request -> input('xiaoqu'),
                 'number' => $request -> input('number'),
                 'pass' => $request -> input('pass'),
-                'area' => $request -> input('area'),
+                'area' => $request -> input('area').$maps[$request -> input('map')]['pre'],
                 'map' => $request -> input('map'),
                 'save_time' => $request -> input('save_time'),
                 'use_time' => $request -> input('save_time'),
@@ -246,7 +246,7 @@ class NumberController extends Controller
             return redirect('kefu/login');
         }
         //配置
-        $areas = config('setting.areas');
+        $areas = config('setting.showareas');
         $maps = config('setting.maps');
         $modes = config('setting.modes');
         $statuss = config('setting.statuss');
@@ -325,7 +325,7 @@ class NumberController extends Controller
         }
 
         //配置
-        $areas = config('setting.areas');
+        $areas = config('setting.showareas');
         $maps = config('setting.maps');
         $modes = config('setting.modes');
         $statuss = config('setting.statuss');
@@ -375,7 +375,7 @@ class NumberController extends Controller
         //dd($res);
         foreach($res as $k => $vo){
             $res[$k] -> area_name = $areas[$vo -> area];
-            $res[$k] -> map = $maps[$vo -> map]['name'];
+            $res[$k] -> map = $maps[$vo -> map]['show'];
             $res[$k] -> mode = $modes[$vo -> mode];
             $res[$k] -> status = $statuss[$vo -> status];
         }
@@ -403,7 +403,7 @@ class NumberController extends Controller
             return redirect('kefu/login');
         }
         //配置
-        $areas = config('setting.areas');
+        $areas = config('setting.showareas');
         $maps = config('setting.maps');
         $modes = config('setting.modes');
         $statuss = config('setting.statuss');

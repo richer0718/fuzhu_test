@@ -140,6 +140,7 @@
 
 
 <!--提示模态框-->
+<!--
 <div class="modal fade user-select" id="areDeveloping" tabindex="-1" role="dialog" aria-labelledby="areDevelopingModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -156,6 +157,7 @@
         </div>
     </div>
 </div>
+-->
 <!--右键菜单列表-->
 <div id="rightClickMenu">
     <ul class="list-group rightClickMenuList">

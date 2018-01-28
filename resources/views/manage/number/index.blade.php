@@ -91,12 +91,13 @@
                             <input type="button" value="取消" id="quxiao"/><br>
                             @if($url_status)<input type="button" value="删除" id="shanchu" /><br>@endif
                             <input type="button" value="导出" id="daochu"/>
-                            <!--
+
                             <input type="button" value="上传" id="upload"/>
-                            -->
+
                         </span></th>
                     <th><span class="glyphicon glyphicon-th-large"></span> <span class="visible-lg">ID</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">订单编号</span></th>
+                    <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">备注</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">旺旺/QQ</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">游戏账号</span></th>
                     <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">游戏密码</span></th>
@@ -125,8 +126,10 @@
                         <tr>
                             <td><label><input type="checkbox"  name="numbers_check" class="numbers_check" value="{{ $vo -> id }}" /></label></td>
                             <td><label>{{ $k + 1  }}</label></td>
-                            <td>@if($vo -> is_jiaji == 1)<a style="color:red;">【急】</a>@endif @if($vo -> is_mark == 1)<a style="color:green;">【标】</a>@endif<a>{{$vo -> order_id }}</a><a style="color:red;" class="gai" wangwang ="{{$vo -> wangwang}}" wangwang_type = "{{ $vo -> wangwang_type }}" order_id = "{{$vo -> order_id }}" number="{{ $vo -> number }}" is_mark="{{ $vo -> is_mark }}" > 【改】</a></td>
-
+                            <td>@if($vo -> is_jiaji == 1)<a style="color:red;">【急】</a>@endif
+                                @if($vo -> is_mark == 1)<a style="color:green;">【标】</a>@endif
+                                <a style="color:red;" class="gai" wangwang ="{{$vo -> wangwang}}" wangwang_type = "{{ $vo -> wangwang_type }}" order_id = "{{$vo -> order_id }}" number="{{ $vo -> number }}" is_mark="{{ $vo -> is_mark }}" remark="{{ $vo -> remark }}" > @if($vo -> order_id) {{ $vo -> order_id }} @else【改】@endif</a></td>
+                            <td>{{ $vo -> remark }}</td>
                             <td>
                                 @if($vo -> wangwang)
                                     @if($vo -> wangwang_type == 1)
@@ -142,7 +145,7 @@
                             <td>{{$vo -> xiaoqu }}</td>
                             <td>{{$vo -> use_time}}</td>
                             <td>{{$vo -> save_time}}</td>
-                            <td>{{mb_substr($vo -> map,0,4,'utf-8')}}</td>
+                            <td>{{$vo -> map}}</td>
                             <!--
                             <td>{{$vo -> mode}}</td>
                             -->
@@ -368,6 +371,11 @@
                                 <td style="width:120px;">旺旺/QQ：</td>
                                 <td><input type="text"  class="form-control"  name="wangwang" id="show_wangwang"   /></td>
                             </tr>
+                            <tr>
+                                <td style="width:120px;">备注：</td>
+                                <td><input type="text"  class="form-control"  name="remark" id="show_remark"   /></td>
+                            </tr>
+                            <input type="hidden" name="url_status" value="{{ $url_status }}" />
                             <input name="show_number" type="hidden" />
                             <tr>
                                 <td style="width:120px;">游戏账号：</td>
@@ -497,15 +505,54 @@
             })
 
             //批量上传
-            $('#daochu').click(function(){
+            $('#upload').click(function(){
                 var length = $('input[name=numbers_check]:checked').length;
                 var data = '';
                 if(!length){
                     alert('请至少选择一个');return false;
                 }
+                var url = '{{ url('manage/uploadNumbers') }}';
+                var url2 = '{{ url('manage/addNumberRes') }}';
+
                 for(var i = 0 ; i < length;i++ ){
                     //data += $('input[name=numbers_check]:checked').eq(i).val()+',';
                     data = $('input[name=numbers_check]:checked').eq(i).val();
+
+
+                    $.post(url,{id:data},function(res){
+                        //console.info(res);
+                        if(res){
+                            $.post(url2,{
+                                'order_id':res.order_id,
+                                'jiaji':res.jiaji,
+                                'remark':res.remark,
+                                'wangwang_type':res.wangwang_type,
+                                'wangwang':res.wangwang,
+                                'number':res.number,
+                                'pass':res.pass,
+                                'area':res.area,
+                                'xiaoqu':res.xiaoqu,
+                                'map':res.map,
+                                'save_time':res.use_time,
+                                'mode':res.mode,
+                                'end_date':res.end_date,
+                                'shanghao_time':0,
+                                'spare':0,
+                                'methods':'batch'
+                            },function(res2){
+                                if(res2 == 'success'){
+                                    alert(res.number+' 上传成功');
+                                }else if(res2 == 'nomoney'){
+                                    alert('余额不足');return false;
+                                }else if(res2 == 'error'){
+                                    alert('上传失败');
+                                }
+                            })
+                        }
+
+                    });
+
+
 
                 }
 
@@ -525,11 +572,13 @@
                 var order_id = $(this).attr('order_id');
                 var number = $(this).attr('number');
                 var is_mark = $(this).attr('is_mark');
+                var remark = $(this).attr('remark');
                 //alert(is_mark);return false;
                 $('#show_order_id').val(order_id);
                 $('#show_number').val(number);
                 $('input[name=show_number]').val(number);
                 $('#show_wangwang').val(wangwang);
+                $('#show_remark').val(remark);
                 if(is_mark == 1){
                     $('#show_is_mark').attr("checked","true");
                 }else{

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Log;
+use GuzzleHttp\Client;
 use Illuminate\Contracts\Database\ModelIdentifier;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,7 +18,7 @@ class NumberController extends Controller
         //var_dump($url_status);exit;
 
         //配置
-        $areas = config('setting.areas');
+        $areas = config('setting.showareas');
         $maps = config('setting.maps');
         $modes = config('setting.modes');
         $statuss = config('setting.statuss');
@@ -71,11 +72,11 @@ class NumberController extends Controller
 
 
 
-        })  -> orderBy('created_time','desc') -> paginate(3000);
+        })  -> orderBy('updated_time','desc') -> paginate(3000);
         //dd($res);
         foreach($res as $k => $vo){
             $res[$k] -> area_name = $areas[$vo -> area];
-            $res[$k] -> map = $maps[$vo -> map]['name'];
+            $res[$k] -> map = $maps[$vo -> map]['show'];
             $res[$k] -> mode = $modes[$vo -> mode];
             $res[$k] -> status = $statuss[$vo -> status];
         }
@@ -152,24 +153,87 @@ class NumberController extends Controller
     }
 
     public function addNumberRes(Request $request){
+
         //判断必填
         if(!$request -> input('number') || !$request -> input('pass') || !$request -> input('area') || !$request -> input('map') || !$request -> input('save_time')){
             return false;
         }
+        //dd($request);
+        //return $request -> input('number');
+
+
        //先判断下此账号是否存在与此系统中
         $isset = DB::table('number') -> where([
             'number' => $request -> input('number')
         ]) -> first();
         if($isset && $isset -> 	save_time > 0){
+            if($request -> input('methods') == 'batch'){
+                return 'error';
+            }
             return redirect('manage/number') -> with('isset','该账号有剩余代刷次数没有回收，请回收后，再上传！如有疑问，请联系QQ：972102275');
         }
 
-
-        //该代理账号的“总点数”大于或等于“刷图次数*系数”
         //根据大区，获取系数
 
         $xishus = config('setting.prices');
         $maps = config('setting.maps');
+
+        //不存在 直接新增
+        if($request -> input('mark')){
+            $mark = 1;
+        }else{
+            $mark = 0;
+        }
+
+        if($request -> input('jiaji')){
+            $jiaji = 1;
+            $endstr = 3;
+        }else{
+            $endstr = 2;
+            $jiaji = 0;
+        }
+
+        //（当前时间+上号时间*60）*1000'
+        $jiange = intval(time() + intval($request -> input('shanghao_time'))*3600  );
+
+        //如果是点击备用
+        if($request -> input('spare') == 'beiyong'){
+            if($isset){
+                return redirect('manage/addNumber') -> with('isset','该账号有剩余代刷次数没有回收，请回收后，再上传！如有疑问，请联系QQ：972102275');
+            }
+            $res = DB::table('number') -> insert([
+                'is_jiaji' => $jiaji,
+                'is_mark' => $mark,
+                'order_id' => $request -> input('order_id'),
+                'wangwang' => $request -> input('wangwang'),
+                'xiaoqu' => $request -> input('xiaoqu'),
+                'number' => $request -> input('number'),
+                'pass' => $request -> input('pass'),
+                'area' => $request -> input('area').$maps[$request -> input('map')]['pre'],
+                'map' => $request -> input('map'),
+                'save_time' => $request -> input('save_time'),
+                'use_time' => $request -> input('save_time'),
+                'mode' => $request -> input('mode'),
+                'shanghao_time' => intval($request -> input('shanghao_time')) * 3600,
+                'end_date' => $request -> input('end_date'),
+                'wangwang_type' => $request -> input('wangwang_type'),
+                'remark' => $request -> input('remark'),
+                'created_time' => time(),
+                'updated_time' => $jiange,
+                'add_user' => session('username'),
+                'status' => -22
+            ]);
+
+            //添加成功后直接返回success
+            if($res){
+                return redirect('manage/addNumber') -> with('spareRes','备用成功');
+            }
+
+        }
+
+
+        //该代理账号的“总点数”大于或等于“刷图次数*系数”
+
         $xishu = $xishus[$request -> input('area').$maps[$request -> input('map')]['pre']];
 
         $userinfo = DB::table('daili') -> where([
@@ -193,13 +257,7 @@ class NumberController extends Controller
             //IOSWZRY-2  IOSWZRY-2
             $string = substr($request -> input('area'),0,2);
 
-            if($request -> input('jiaji')){
-                $jiaji = 1;
-                $endstr = 3;
-            }else{
-                $endstr = 2;
-                $jiaji = 0;
-            }
+
 
             $maps = config('setting.maps');
             if($string == 'AZ'){
@@ -207,8 +265,8 @@ class NumberController extends Controller
             }else{
                 $youxi = $userinfo -> upload.'IOS'.$maps[$request->input('map')]['jiaji'].'-'.$endstr;
             }
-            //（当前时间+上号时间*60）*1000'
-            $jiange = intval(time() + intval($request -> input('shanghao_time'))*3600  );
+            //dump($youxi);exit;
+
             $end_str = $maps[$request -> input('map')]['pre'];
             if($end_str != 'FC'){
                 $end_str = '';
@@ -227,6 +285,10 @@ class NumberController extends Controller
             if($res){
                 //echo 'success';
             }else{
+                if($request -> input('methods') == 'batch'){
+                    return 'error';
+                }
+
                 //添加失败
                 return redirect('manage/number') -> with('isset','上传失败，联系QQ：972102275');
             }
@@ -254,12 +316,8 @@ class NumberController extends Controller
                     'id' => $isset -> id
                 ]) -> delete();
             }
-            //不存在 直接新增
-            if($request -> input('mark')){
-                $mark = 1;
-            }else{
-                $mark = 0;
-            }
+
+            //dump($request -> input('area').$maps[$request -> input('map')]['pre']);exit;
             $res = DB::table('number') -> insert([
                 'is_jiaji' => $jiaji,
                 'is_mark' => $mark,
@@ -268,7 +326,7 @@ class NumberController extends Controller
                 'xiaoqu' => $request -> input('xiaoqu'),
                 'number' => $request -> input('number'),
                 'pass' => $request -> input('pass'),
-                'area' => $request -> input('area'),
+                'area' => $request -> input('area').$maps[$request -> input('map')]['pre'],
                 'map' => $request -> input('map'),
                 'save_time' => $request -> input('save_time'),
                 'use_time' => $request -> input('save_time'),
@@ -278,8 +336,9 @@ class NumberController extends Controller
                 'wangwang_type' => $request -> input('wangwang_type'),
                 'remark' => $request -> input('remark'),
                 'created_time' => time(),
-                'updated_time' => time(),
+                'updated_time' => $jiange,
                 'add_user' => session('username'),
+                'status' => 1
             ]);
 
             //挂机中数量加一 总账号数量+1
@@ -291,9 +350,17 @@ class NumberController extends Controller
                 'username' => session('username')
             ]) -> increment('number_all');
 
+            if($request -> input('methods') == 'batch'){
+                return 'success';
+            }
+
             return redirect('manage/number') -> with('insertres','yes');
 
         }else{
+            if($request -> input('methods') == 'batch'){
+                return 'nomoney';
+            }
+
             //不够支付，返回
             return redirect('manage/addNumber')->withInput($request->flash());
         }
@@ -526,6 +593,27 @@ class NumberController extends Controller
         //把此账号的信息带过去
         return redirect('manage/addNumber') -> with('info',$res);
     }
+    //批量上传
+    public function uploadNumbers(){
+        $id = $_POST['id'];
+        $res = DB::table('number') -> where([
+            'id' => $id
+        ]) -> first();
+        $post_arr = (array)$res;
+        //var_dump($post_arr);exit;
+        //先转换了大区 再去上传 去那边再转换一遍
+        $setting  = config('setting.areastoarea');
+        $post_arr['area'] = $setting[$post_arr['area']];
+        return $post_arr;
+        //请求添加
+        /*
+        $http = new Client();
+        $url = url('manage/addNumberRes');
+        $response = $http->post($url,$post_arr);
+        var_dump($response->getBody());
+        */
+    }
+
 
     public function delete_number($id){
         if(!$_GET['url_status']){
@@ -585,10 +673,15 @@ class NumberController extends Controller
             'order_id' => $request -> input('order_id'),
             'wangwang_type' => $request -> input('wangwang_type'),
             'wangwang' => $request -> input('wangwang'),
+            'remark' => $request -> input('remark'),
             'is_mark' => $is_mark
         ]);
+        if($request -> input('url_status')){
+            return redirect('manage/number/'.$request -> input('url_status'));
+        }else{
+            return redirect('manage/number');
+        }
 
-        return redirect('manage/number/1');
 
 
     }
