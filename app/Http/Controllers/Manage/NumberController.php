@@ -514,7 +514,7 @@ class NumberController extends Controller
 
         $xishus = config('setting.prices');
         $maps = config('setting.maps');
-        $danjia = $xishus[$number_info->area.$maps[$number_info->map]['pre']];
+        $danjia = $xishus[$number_info->area];
         //总共返还的点数
         $price_all = intval($danjia) * intval($number_info -> save_time);
 
