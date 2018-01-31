@@ -32,7 +32,7 @@ Route::get('/captcha', 'CodeController@index');
 
 Route::get('/clearSession', 'CodeController@clear');
 
-//api
+//api  --这些没用 转移到了 fuzhu_api
 Route::group(['prefix' => 'api'], function () {
     //table1
     Route::get('/uploadNumber', 'ApiController@uploadNumber');

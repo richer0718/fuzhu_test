@@ -152,9 +152,11 @@ class NumberController extends Controller
             $jiange = intval(time() + intval($request -> input('shanghao_time'))*3600  );
 
             $end_str = $maps[$request -> input('map')]['pre'];
+            /*
             if($end_str != 'FC'){
                 $end_str = '';
             }
+            */
 
             DB::table('newtable3') -> where([
                 'name' => $daqu.$end_str.'-'.$number,

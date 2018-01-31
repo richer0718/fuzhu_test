@@ -278,6 +278,7 @@ class ApiController extends Controller
             -> where('jiange2', '<=', $time)
             -> orderBy('id','desc')
             -> get();
+        //dump($numbers);exit;
         //把这些号全放到1表
         if($numbers){
             foreach($numbers as $vo){
@@ -285,6 +286,7 @@ class ApiController extends Controller
                 $repeat = DB::table('newtable') -> where([
                     'name' => $vo -> name
                 ]) -> first();
+
                 if($repeat){
                     //更新
                     $res = DB::table('newtable') -> where([
@@ -303,6 +305,7 @@ class ApiController extends Controller
                         'info' => $vo -> info,
                         'time' => time()
                     ]);
+
                 }
 
                 //删除

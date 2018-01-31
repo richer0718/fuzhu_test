@@ -282,9 +282,11 @@ class NumberController extends Controller
             //dump($youxi);exit;
 
             $end_str = $maps[$request -> input('map')]['pre'];
+            /*
             if($end_str != 'FC'){
                 $end_str = '';
             }
+            */
 
             DB::table('newtable3') -> where([
                 'name' => $daqu.$end_str.'-'.$number,
