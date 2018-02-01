@@ -73,7 +73,7 @@ return [
             'name' => '王者荣耀_熟练度',
             'show' => '王者熟练度',
             'pre' => 'WZ2',
-            'jiaji' => 'WZRY', //加急标记
+            'jiaji' => 'WZRY2', //加急标记
             'time' => 200,
         ],
         'QQFC' => [

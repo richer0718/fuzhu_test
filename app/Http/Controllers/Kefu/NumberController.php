@@ -30,14 +30,19 @@ class NumberController extends Controller
         //统计newtable
         //IOSWZRY-2
         $result1 = DB::table('newtable') -> where([
-            'info' => 'IOSWZRY-2',
+            //'info' => 'IOSWZRY-2',
             'mark' => NULL
+        ])->whereIn('info',[
+            'IOSWZRY-2',
+            'IOSWZRY2-2'
         ]) -> count();
 
         $result2 = DB::table('newtable') -> where([
-            'info' => 'AZWZRY-2',
             'mark' => NULL
-        ]) -> count();
+        ]) ->whereIn('info',[
+            'AZWZRY-2',
+            'AZWZRY2-2'
+        ])-> count();
 
         $result3 = DB::table('newtable') -> where([
             'info' => 'AZFC-2',
