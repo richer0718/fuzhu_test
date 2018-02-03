@@ -297,6 +297,7 @@ class NumberController extends Controller
         //dd($res);
         foreach($res as $k => $vo){
             $res[$k] -> area_name = $areas[$vo -> area];
+            $res[$k] -> truemap = $vo -> map;
             $res[$k] -> map = $maps[$vo -> map]['name'];
             $res[$k] -> mode = $modes[$vo -> mode];
             $res[$k] -> status = $statuss[$vo -> status];
@@ -382,6 +383,7 @@ class NumberController extends Controller
         //dd($res);
         foreach($res as $k => $vo){
             $res[$k] -> area_name = $areas[$vo -> area];
+            $res[$k] -> truemap = $vo -> map;
             $res[$k] -> map = $maps[$vo -> map]['show'];
             $res[$k] -> mode = $modes[$vo -> mode];
             $res[$k] -> status = $statuss[$vo -> status];
