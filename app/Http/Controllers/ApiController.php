@@ -381,12 +381,17 @@ class ApiController extends Controller
             'info' => 'IOSWZRY-2'
         ]) -> get();
         foreach($datas as $vo){
-            dump($vo);
+            //dump($vo);
             //解析name
             $temp = explode('-',$vo -> name);
-            dump($temp);
+            //dump($temp);
             $temp[0] = $temp[0].'WZ';
-            dump($temp);exit;
+            //dump($temp);exit;
+            DB::table('newtable2') -> where([
+                'id' => $vo -> id
+            ]) -> update([
+                'name' => implode('-',$temp)
+            ]);
 
         }
     }
