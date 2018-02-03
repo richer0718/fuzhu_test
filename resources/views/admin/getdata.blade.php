@@ -105,7 +105,7 @@
                             <tr>
                                 <td>账号状态</td>
                                 <td>
-                                    @if(session('res') -> status_name == '微信二维码') <a href="{{ 'http://feisushouyou.com/fuzhu/public/images/'.session('res')->area.'-'.session('res')->number.'.jpg' }}" target="_blank" style="color:red;">扫描微信二维码</a>
+                                    @if(session('res') -> status_name == '微信二维码') <a href="{{ 'http://feisushouyou.com/fuzhu/public/images/'.session('res')->area.$maps[session('res') -> map]['game'].'-'.session('res')->number.'.jpg' }}" target="_blank" style="color:red;">扫描微信二维码</a>
                                     @elseif(session('res') -> status_name == '手机验证码' )  <a class="yanzhengma" data="{{ session('res') -> id }}" style="color:red;">输入验证码</a>
                                     @else
                                         {{ session('res') -> status_name }}
@@ -152,7 +152,7 @@
                         @if(session('res') && session('res') != '123')
                         <tr>
                             <td colspan="2">
-                                <img src="{{ 'http://feisushouyou.com/fuzhu/public/images/'.session('res') -> area .'-'.session('res') -> number.'.jpg' }}" style="width:100%;height:80px;"  />
+                                <img src="{{ 'http://feisushouyou.com/fuzhu/public/images/'.session('res') -> area.$maps[session('res') -> map]['game'] .'-'.session('res') -> number.'.jpg' }}" style="width:100%;height:80px;"  />
                             </td>
                         </tr>
                         @endif

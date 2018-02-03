@@ -61,6 +61,7 @@ class IndexController extends Controller
         if(Cookie::has('customer_area')){
             $customer_area = Cookie::get('customer_area');
         }
+        $maps = config('setting.maps');
 
         $areas = [
             'AZQQ' => '安卓QQ',
@@ -71,7 +72,8 @@ class IndexController extends Controller
         return view('admin/getdata') -> with([
             'areas' => $areas,
             'customer_number' => $customer_number,
-            'customer_area' => $customer_area
+            'customer_area' => $customer_area,
+            'maps' => $maps
         ]);
     }
 
@@ -124,6 +126,8 @@ class IndexController extends Controller
         ]) -> update([
             'yanzhengma' => $request -> input('yanzhengma')
         ]);
+
+
         if($res){
             echo 'success';
         }else{

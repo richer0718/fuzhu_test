@@ -68,6 +68,7 @@ return [
             'pre' => 'WZ',
             'jiaji' => 'WZRY', //加急标记
             'time' => 250, //默认刷图次数
+            'game' => 'WZ'
         ],
         'JY' => [
             'name' => '王者荣耀_熟练度',
@@ -75,6 +76,7 @@ return [
             'pre' => 'WZ2',
             'jiaji' => 'WZRY2', //加急标记
             'time' => 200,
+            'game' => 'WZ'
         ],
         'QQFC' => [
             'name' => 'QQ飞车_金币/经验',
@@ -82,6 +84,7 @@ return [
             'pre' => 'FC',
             'jiaji' => 'FC', //加急标记
             'time' => 600,
+            'game' => 'FC'
         ],
     ],
     //新增账号导入 刷图选择索引
