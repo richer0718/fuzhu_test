@@ -380,7 +380,9 @@ class ApiController extends Controller
         ]) -> orWhere([
             'info' => 'IOSWZRY-2'
         ]) -> get();
-        dd($datas);
+        foreach($datas as $vo){
+            dd($vo);
+        }
     }
 
 
