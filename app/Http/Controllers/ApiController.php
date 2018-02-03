@@ -381,7 +381,13 @@ class ApiController extends Controller
             'info' => 'IOSWZRY-2'
         ]) -> get();
         foreach($datas as $vo){
-            dd($vo);
+            dump($vo);
+            //解析name
+            $temp = explode('-',$vo -> name);
+            dump($temp);
+            $temp[0] = $temp[0].'WZ';
+            dump($temp);exit;
+
         }
     }
 
