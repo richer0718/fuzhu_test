@@ -374,6 +374,16 @@ class ApiController extends Controller
     }
 
 
+    function updateDataBase(){
+        $datas = DB::table('newtable2') -> where([
+            'info' => 'AZWZRY-2'
+        ]) -> orWhere([
+            'info' => 'IOSWZRY-2'
+        ]) -> get();
+        dd($datas);
+    }
+
+
 /*
 * * * * * /usr/bin/curl http://feifeifuzhu.com/fuzhu_test/public/api/autoRunTable3
 * * * * * sleep 10; /usr/bin/curl http://feifeifuzhu.com/fuzhu_test/public/api/autoRunTable3

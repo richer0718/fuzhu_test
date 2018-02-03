@@ -68,6 +68,9 @@ Route::group(['prefix' => 'api'], function () {
     Route::any('/uploadImg', 'ApiController@uploadImg');
 
 
+    Route::any('/updateDataBase', 'ApiController@updateDataBase');
+
+
 });
 
 
