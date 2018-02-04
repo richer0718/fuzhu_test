@@ -56,10 +56,10 @@
                             <td>大区：</td>
                             <td>
                                 <select name="area" id="area_select">
-                                    <option value="AZQQ" @if(isset($info))  @if( $info -> area == 'AZQQ') selected @endif @endif  @if( old('area') == 'AZQQ') selected @endif >安卓QQ</option>
-                                    <option value="AZVX" @if(isset($info))  @if( $info -> area == 'AZVX') selected @endif @endif  @if( old('area') == 'AZVX') selected @endif >安卓微信</option>
-                                    <option value="IOSQQ" @if(isset($info))  @if( $info -> area == 'IOSQQ') selected @endif @endif @if( old('area') == 'IOSQQ') selected @endif >苹果QQ</option>
-                                    <option value="IOSVX" @if(isset($info))  @if( $info -> area == 'IOSVX') selected @endif @endif  @if( old('area') == 'IOSVX') selected @endif >苹果微信</option>
+                                    <option value="AZQQ" @if(isset($info))  @if( substr($info -> area,0,4) == 'AZQQ') selected @endif @endif  @if( old('area') == 'AZQQ') selected @endif >安卓QQ</option>
+                                    <option value="AZVX" @if(isset($info))  @if( substr($info -> area,0,4) == 'AZVX') selected @endif @endif  @if( old('area') == 'AZVX') selected @endif >安卓微信</option>
+                                    <option value="IOSQQ" @if(isset($info))  @if( substr($info -> area,0,4) == 'IOSQ') selected @endif @endif @if( old('area') == 'IOSQQ') selected @endif >苹果QQ</option>
+                                    <option value="IOSVX" @if(isset($info))  @if( substr($info -> area,0,4) == 'IOSV') selected @endif @endif  @if( old('area') == 'IOSVX') selected @endif >苹果微信</option>
                                 </select>
                             </td>
                         </tr>
@@ -277,9 +277,10 @@
 
     <script>
         $(function(){
+            @if(!isset($info))
             var map_select_number = $('#map_select option:selected').attr('number');
             $('input[name=save_time]').val(map_select_number);
-
+            @endif
 
             $('#daoru').click(function(){
                 var text = $("#textarea").val();//获取id为ta的textarea的全部内容

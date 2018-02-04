@@ -41,8 +41,8 @@ class NumberController extends Controller
         }else{
             $status_name = '挂机账号';
             //检测时间，老的在上面
-            $order = 'updated_time';
-            $desc = 'asc';
+            $order = 'created_time';
+            $desc = 'desc';
 
         }
         $add_user = session('username');
