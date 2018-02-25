@@ -128,7 +128,9 @@
                         <tr>
                             <td colspan="2">
                                 <input  class="btn btn-success" type="submit" id="addButton" value="添加"/>
+                                <!--
                                 <input class="btn btn-primary" type="submit" id="spare"   value="备用" />
+                                -->
                                 <button class="btn btn-default" type="button" id="rest">重置</button>
                             </td>
                         </tr>
