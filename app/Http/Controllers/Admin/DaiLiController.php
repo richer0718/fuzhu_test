@@ -135,7 +135,10 @@ class DaiLiController extends Controller
             if(!empty($request -> createtime_left)){
                 $query -> where('created_at','>',strtotime($request -> createtime_left));
             }
-
+            if(!empty($request -> number)){
+                $query -> where('zhanghao',$request -> input('number'));
+            }
+//zhanghao
             if(!empty($request -> createtime_right)){
                 $query -> where('created_at','<',strtotime($request -> createtime_right));
             }

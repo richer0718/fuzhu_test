@@ -18,11 +18,15 @@
         <div class="row">
                 <div class="col-md-12">
                     <form method="post">
-                        <table class="table" style="width:800px;" >
+                        <table class="table" style="width:1000px;" >
                             <tr>
                                 <td>代理账号：</td>
                                 <td style="width:150px;">
                                     <input type="text" name="zhanghao"  class="form-control" value="@if(!empty($_POST['zhanghao'])){{ $_POST['zhanghao'] }}@endif"/>
+                                </td>
+                                <td>游戏账号：</td>
+                                <td style="width:150px;">
+                                    <input type="text" name="number"  class="form-control" value="@if(!empty($_POST['number'])){{ $_POST['number'] }}@endif"/>
                                 </td>
 
                                 <td>类型</td>

@@ -46,11 +46,11 @@
 
                         <tr>
                             <td style="width:120px;"><a style="color:red;">*</a>游戏账号：</td>
-                            <td><input type="text"  class="form-control"  name="number" @if(isset($info) || old('number') ) value="{{ $info -> number or old('number')  }}" @endif required  /></td>
+                            <td><input type="text"  class="form-control"  name="number" @if(isset($info) || old('number') ) value="{{ $info -> number or old('number')  }}" @endif required  oninput="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'');" /></td>
                         </tr>
                         <tr>
                             <td><a style="color:red;">*</a>游戏密码：</td>
-                            <td><input type="text"  placeholder="游戏密码"  class="form-control" name="pass" @if(isset($info) || old('pass') ) value="{{ $info -> pass or old('pass') }}" @endif required /></td>
+                            <td><input type="text"  placeholder="游戏密码"  class="form-control" name="pass" @if(isset($info) || old('pass') ) value="{{ $info -> pass or old('pass') }}" @endif required oninput="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'');" /></td>
                         </tr>
                         <tr>
                             <td>大区：</td>

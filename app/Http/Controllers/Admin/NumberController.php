@@ -40,20 +40,21 @@ class NumberController extends Controller
             $status_name = '完成订单';
             //检测时间，新的在上面
             $order = 'updated_time';
-            $desc = 'asc';
+            $desc = 'desc';
         }elseif($url_status == '3'){
             $status_name = '问题订单';
             //检测时间，新的在上面
             $order = 'updated_time';
-            $desc = 'asc';
+            $desc = 'desc';
         }elseif($url_status == '2'){
-            $status_name = '长期账号';
+            $status_name = '挂机账号';
+            //检测时间新的在下面
             $order = 'updated_time';
             $desc = 'asc';
         }else{
             $status_name = '所有账号';
-            //检测时间，老的在上面
-            $order = 'updated_time';
+            //剩余次数多的在上面
+            $order = 'save_time';
             $desc = 'desc';
 
         }
@@ -113,9 +114,9 @@ class NumberController extends Controller
         $count_guaji = DB::table('number') -> where('status','>',0) -> count();
         $count_paidui = DB::table('number') -> where('status','=',0) -> count();
         //ios挂机
-        $count_guaji_ios = DB::table('newtable2') -> where('info2','like','%IOS%') -> count();
+        $count_guaji_ios = DB::table('newtable2') -> where('info2','like','IOS%') -> count();
         //安卓挂机
-        $count_guaji_az = DB::table('newtable2') -> where('info2','like','%JAY%') -> count();
+        $count_guaji_az = DB::table('newtable2') -> where('info2','like','JAY%') -> count();
 
         return view('admin/number/index') -> with([
             'res' => $res,
