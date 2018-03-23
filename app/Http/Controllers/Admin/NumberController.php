@@ -48,9 +48,9 @@ class NumberController extends Controller
             $desc = 'desc';
         }elseif($url_status == '2'){
             $status_name = '所有账号';
-            //检测时间新的在下面
-            $order = 'updated_time';
-            $desc = 'asc';
+            //剩余次数多的在上
+            $order = 'save_time';
+            $desc = 'desc';
         }else{
             $status_name = '挂机账号';
             //检测时间，老的在上面
