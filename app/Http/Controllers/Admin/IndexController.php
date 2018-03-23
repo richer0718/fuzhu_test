@@ -83,7 +83,7 @@ class IndexController extends Controller
             'number' => $request -> input('number'),
             'area' => $request -> input('area'),
         ]) -> first();
-        //dd($res);
+        dd($res);
         if($res){
             $res -> status_name = $statuss[$res -> status];
         }else{
