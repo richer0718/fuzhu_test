@@ -731,7 +731,8 @@ class NumberController extends Controller
         //大区
         $areas = config('setting.areas');
         //地图
-        $maps = config('setting.maps');
+        //$maps = config('setting.maps');
+        $maps = config('setting.showareas');
 
         $res_arr[] = ['订单编号','旺旺/QQ','游戏账号','游戏密码','大区','小区','代挂次数','代挂地图','检测时间','操作时间'];
         foreach($data as $k => $vo){
