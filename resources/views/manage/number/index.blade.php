@@ -155,7 +155,7 @@
                                 @elseif($vo -> status == '代练完成' ) <a href="{{ 'http://feisushouyou.com/fuzhu/public/images/'.$vo->area.$maps[$vo -> truemap]['game'].'-'.$vo->number.'-wc.jpg' }}" target="_blank" style="color:red;">代练完成</a>
                                 @elseif($vo -> status == '区不存在' ) <a href="{{ 'http://feisushouyou.com/fuzhu/public/images/'.$vo->area.$maps[$vo -> truemap]['game'].'-'.$vo->number.'-xq.jpg' }}" target="_blank" style="color:red;">区不存在</a>
                                 @elseif($vo -> status == '代练中' ) <a href="{{ 'http://feisushouyou.com/fuzhu/public/images/'.$vo->area.$maps[$vo -> truemap]['game'].'-'.$vo->number.'-ks.jpg' }}" target="_blank" style="color:red;">代练中</a>
-                                @elseif($vo -> status == '代练完成' ) <a href="{{ 'http://feisushouyou.com/fuzhu/public/images/'.$vo->area.$maps[$vo -> truemap]['game'].'-'.$vo->number.'-ks.jpg' }}" target="_blank" style="color:red;">代练完成</a>
+                                @elseif($vo -> status == '代练完成' ) <a href="{{ 'http://feisushouyou.com/fuzhu/public/images/'.$vo->area.$maps[$vo -> truemap]['game'].'-'.$vo->number.'-ks.jpg' }}" target="_blank" style="color:red;">代练完成1</a> <a href="{{ 'http://feisushouyou.com/fuzhu/public/images/'.$vo->area.$maps[$vo -> truemap]['game'].'-'.$vo->number.'-wc.jpg' }}" target="_blank" style="color:red;"> 2</a>
                                 @else{{$vo -> status}}
                                 @endif
                             </td>
