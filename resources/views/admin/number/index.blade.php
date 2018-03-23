@@ -7,8 +7,8 @@
     </style>
     <script src="{{ asset('js/laydate/laydate.js') }}"></script>
     <ol class="breadcrumb" style="margin-left:10%;">
-        <li><a data-toggle="modal" href="{{ url('admin/number') }}">所有账号</a></li>
-        <li><a data-toggle="modal" href="{{ url('admin/number/2') }}">挂机账号</a></li>
+        <li><a data-toggle="modal" href="{{ url('admin/number/2') }}">所有账号</a></li>
+        <li><a data-toggle="modal" href="{{ url('admin/number') }}" >挂机账号</a></li>
         <li><a data-toggle="modal" href="{{ url('admin/number/1') }}">完成订单</a></li>
         <li><a data-toggle="modal" href="{{ url('admin/number/3') }}">问题订单</a></li>
     </ol>
