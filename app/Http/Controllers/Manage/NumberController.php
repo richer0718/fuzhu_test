@@ -131,13 +131,30 @@ class NumberController extends Controller
             'info' => 'IOSFC-2',
             'mark' => NULL
         ]) -> count();
-        $note_res .= '王者荣耀-苹果：'.$result1.'个';
-        $note_res .= '<br>';
+        
+        $result3 = DB::table('newtable') -> where([
+            'info' => 'AZXW-2',
+            'mark' => NULL
+        ]) -> count();
+
+        $result4 = DB::table('newtable') -> where([
+            'info' => 'IOSXW-2',
+            'mark' => NULL
+        ]) -> count();
+        
+        
+        $note_res .= '王者荣耀-苹果：'.$result1.'个，';
+        //$note_res .= '<br>';
         $note_res .= '王者荣耀-安卓：'.$result2.'个';
         $note_res .= '<br>';
-        $note_res .= 'QQ飞车-安卓：'.$result3.'个';
-        $note_res .= '<br>';
+        $note_res .= 'QQ飞车-安卓：'.$result3.'个，';
+        //$note_res .= '<br>';
         $note_res .= 'QQ飞车-苹果：'.$result4.'个';
+        $note_res .= '<br>';
+        
+         $note_res .= 'QQ炫舞-安卓：'.$result5.'个，';
+        //$note_res .= '<br>';
+        $note_res .= 'QQ炫舞-苹果：'.$result6.'个';
         $note_res .= '<br>';
 
 
