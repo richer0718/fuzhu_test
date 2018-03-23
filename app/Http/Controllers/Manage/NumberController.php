@@ -132,12 +132,12 @@ class NumberController extends Controller
             'mark' => NULL
         ]) -> count();
         
-        $result3 = DB::table('newtable') -> where([
+        $result5 = DB::table('newtable') -> where([
             'info' => 'AZXW-2',
             'mark' => NULL
         ]) -> count();
 
-        $result4 = DB::table('newtable') -> where([
+        $result6 = DB::table('newtable') -> where([
             'info' => 'IOSXW-2',
             'mark' => NULL
         ]) -> count();
