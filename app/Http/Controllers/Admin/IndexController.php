@@ -80,10 +80,9 @@ class IndexController extends Controller
     public function chaxunRes(Request $request){
         $statuss = config('setting.statuss');
         $res = DB::table('number') -> where([
-            'number' => $request -> input('number'),
-            'area' => $request -> input('area'),
-        ]) -> first();
-        dd($res);
+            'number' => $request -> input('number')
+        ]) -> where('area','like',$request -> input('area').'%') -> first();
+        
         if($res){
             $res -> status_name = $statuss[$res -> status];
         }else{
