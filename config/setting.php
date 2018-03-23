@@ -32,31 +32,31 @@ return [
     ],
     //每个大区的价格
     'prices' => [
-        'AZVXWZ' => 5, //安卓微信
+        'AZVXWZ' => 4, //安卓微信
         'AZQQWZ' => 4, //安卓QQ
         'IOSVXWZ' => 5, //IOS微信
-        'IOSQQWZ' => 4, //IOSQQ
+        'IOSQQWZ' => 5, //IOSQQ
 
         'AZVXWZ2' => 50, //安卓微信
         'AZQQWZ2' => 50, //安卓QQ
-        'IOSVXWZ2' => 50, //IOS微信
-        'IOSQQWZ2' => 50, //IOSQQ
+        'IOSVXWZ2' => 60, //IOS微信
+        'IOSQQWZ2' => 60, //IOSQQ
 
-        'AZVXFC' => 18, //安卓微信 飞车
-        'AZQQFC' => 15, //安卓QQ 飞车
-        'IOSVXFC' => 18, //IOS微信 飞车
-        'IOSQQFC' => 15, //IOSQQ 飞车
+        'AZVXFC' => 25, //安卓微信 飞车
+        'AZQQFC' => 25, //安卓QQ 飞车
+        'IOSVXFC' => 30, //IOS微信 飞车
+        'IOSQQFC' => 30, //IOSQQ 飞车
         
-        'AZVXXW' => 25,
+        'AZVXXW' => 20,
         'AZQQXW' => 20, 
         'IOSVXXW' => 25,
-        'IOSQQXW' => 20,
+        'IOSQQXW' => 25,
         
     ],
     //代理后台显示价格
     'remarks' => "<br>".'王者荣耀_金币/经验：安卓：4点/次，苹果：5点/次，'
-        ."<br>".'王者荣耀_熟练度：安卓：50点/次，苹果：50点/次'
-        ."<br>".'QQ飞车_金币/经验：安卓：15点/次，苹果：18点/次'
+        ."<br>".'王者荣耀_熟练度：安卓：50点/次，苹果：60点/次'
+        ."<br>".'QQ飞车_金币/经验：安卓：25点/次，苹果：30点/次'
         ."<br>".'QQ炫舞_金币/经验：安卓：20点/次，苹果：25点/次',
 
     //大区转换关系
