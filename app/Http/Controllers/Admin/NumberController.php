@@ -47,14 +47,14 @@ class NumberController extends Controller
             $order = 'updated_time';
             $desc = 'desc';
         }elseif($url_status == '2'){
-            $status_name = '挂机账号';
+            $status_name = '所有账号';
             //检测时间新的在下面
             $order = 'updated_time';
             $desc = 'asc';
         }else{
-            $status_name = '所有账号';
-            //剩余次数多的在上面
-            $order = 'save_time';
+            $status_name = '挂机账号';
+            //检测时间，老的在上面
+            $order = 'created_time';
             $desc = 'desc';
 
         }
@@ -89,12 +89,13 @@ class NumberController extends Controller
                 //问题订单  -1
                 $query -> where('status','<',-1);
             }elseif($url_status == '2'){
-                //长期账号
-                $query -> where('mode','>',0);
+                //所有账号
+                //$query -> where('mode','>',0);
+                $query -> where('status','>=',-1);
                 //$query -> where('status','>=',0);
             }else{
                 //挂机 检测时间 asc
-                $order1 = '';
+                //$order1 = '';
                 //$query -> where('mode','=',0);
                 $query -> where('status','>',0);
             }
