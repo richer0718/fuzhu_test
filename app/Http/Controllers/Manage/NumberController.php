@@ -522,6 +522,7 @@ class NumberController extends Controller
                 $query -> where('created_at','<',strtotime($request -> createtime_right));
             }
         }) -> orderBy('created_at','desc') -> paginate(1000);
+        dd($logs);
 
         $count_point = 0;
         foreach($logs as $vo){
