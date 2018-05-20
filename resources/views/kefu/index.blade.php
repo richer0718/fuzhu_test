@@ -90,10 +90,10 @@
                             <td>{{$vo -> map}}</td>
                             <td>{{$vo -> mode}}</td>
                             <td>
-                                @if($vo -> status == '微信二维码') <a href="{{ 'http://feisushouyou.com/fuzhu/public/images/'.$vo->area.$maps[$vo -> truemap]['game'].'-'.$vo->number.'.jpg' }}" target="_blank" style="color:red;">扫描微信二维码</a>
-                                @elseif($vo -> status == '手机验证码' )  <a class="yanzhengma" data="{{ $vo -> id }}" style="color:red;">输入验证码</a> <a href="{{ 'http://feisushouyou.com/fuzhu/public/images/'.$vo->area.$maps[$vo -> truemap]['game'].'-'.$vo->number.'.jpg' }}" target="_blank" style="color:red;">查看图片</a>
-                                @elseif($vo -> status == '代练完成' ) <a href="{{ 'http://feisushouyou.com/fuzhu/public/images/'.$vo->area.$maps[$vo -> truemap]['game'].'-'.$vo->number.'-wc.jpg' }}" target="_blank" style="color:red;">代练完成</a>
-                                @elseif($vo -> status == '区不存在' ) <a href="{{ 'http://feisushouyou.com/fuzhu/public/images/'.$vo->area.$maps[$vo -> truemap]['game'].'-'.$vo->number.'-xq.jpg' }}" target="_blank" style="color:red;">区不存在</a>
+                                @if($vo -> status == '微信二维码') <a href="{{ 'http://feifeifuzhu.com/fuzhu/public/images/'.$vo->area.$maps[$vo -> truemap]['game'].'-'.$vo->number.'.jpg' }}" target="_blank" style="color:red;">扫描微信二维码</a>
+                                @elseif($vo -> status == '手机验证码' )  <a class="yanzhengma" data="{{ $vo -> id }}" style="color:red;">输入验证码</a> <a href="{{ 'http://feifeifuzhu.com/fuzhu/public/images/'.$vo->area.$maps[$vo -> truemap]['game'].'-'.$vo->number.'.jpg' }}" target="_blank" style="color:red;">查看图片</a>
+                                @elseif($vo -> status == '代练完成' ) <a href="{{ 'http://feifeifuzhu.com/fuzhu/public/images/'.$vo->area.$maps[$vo -> truemap]['game'].'-'.$vo->number.'-wc.jpg' }}" target="_blank" style="color:red;">代练完成</a>
+                                @elseif($vo -> status == '区不存在' ) <a href="{{ 'http://feifeifuzhu.com/fuzhu/public/images/'.$vo->area.$maps[$vo -> truemap]['game'].'-'.$vo->number.'-xq.jpg' }}" target="_blank" style="color:red;">区不存在</a>
                                 @else{{$vo -> status}}
                                 @endif
                             </td>
